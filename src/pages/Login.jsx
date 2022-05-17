@@ -15,7 +15,7 @@ function Login({ username, setUsername, password, setPassword }) {
       password: password,
     };
 
-    fetch("http://localhost:3000/login", {
+    fetch("https://backend-phase-5-project.herokuapp.com/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
