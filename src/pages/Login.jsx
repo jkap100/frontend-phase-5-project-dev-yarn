@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
+// "proxy": "https://backend-phase-5-project.herokuapp.com/",
+
 function Login({ username, setUsername, password, setPassword }) {
   const navigate = useNavigate();
 
@@ -15,7 +17,7 @@ function Login({ username, setUsername, password, setPassword }) {
       password: password,
     };
 
-    fetch("https://backend-phase-5-project.herokuapp.com/login", {
+    fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
