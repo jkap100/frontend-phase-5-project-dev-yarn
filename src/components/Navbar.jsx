@@ -33,7 +33,7 @@ function Navbar() {
 
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <Link to="/home">
+            <Link to="/">
               <div className="mt-2 has-text-white navbar-item">Home</div>
             </Link>
             <Link to="Crust"></Link>

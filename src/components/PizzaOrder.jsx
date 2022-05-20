@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -41,7 +42,13 @@ const buttonVariants = {
   },
 };
 
-function PizzaOrder({ crustOrder, pizza }) {
+function PizzaOrder({ crustOrder, setCrustOrder, pizza }) {
+  const navigate = useNavigate();
+
+  const startOver = () => {
+    setCrustOrder([]);
+    navigate("/crust");
+  };
   return (
     <motion.div
       className="base container"
@@ -99,17 +106,15 @@ function PizzaOrder({ crustOrder, pizza }) {
         })}
       </ul>
       <motion.div className="next" variants={nextVariants}>
-        <Link to="/toppings">
-          <div className="mt-4">
-            <motion.button
-              variants={buttonVariants}
-              whileHover="hover"
-              onClick=""
-            >
-              Start Over
-            </motion.button>
-          </div>
-        </Link>
+        <div className="mt-4">
+          <motion.button
+            variants={buttonVariants}
+            whileHover="hover"
+            onClick={startOver}
+          >
+            Start Over
+          </motion.button>
+        </div>
       </motion.div>
     </motion.div>
   );

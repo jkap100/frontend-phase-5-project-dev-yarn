@@ -148,7 +148,11 @@ function Crust({
           >
             <h3 className="subtitle has-text-white">Your Pizza</h3>
             <div className="ml-6">
-              <PizzaOrder crustOrder={crustOrder} pizza={pizza} />
+              <PizzaOrder
+                crustOrder={crustOrder}
+                setCrustOrder={setCrustOrder}
+                pizza={pizza}
+              />
             </div>
           </motion.div>
           {/* <motion.div className="next" variants={nextVariants}>
