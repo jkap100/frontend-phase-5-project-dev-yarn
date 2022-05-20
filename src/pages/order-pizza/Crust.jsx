@@ -155,19 +155,6 @@ function Crust({
               />
             </div>
           </motion.div>
-          {/* <motion.div className="next" variants={nextVariants}>
-            <Link to="/toppings">
-              <div className="mt-4">
-                <motion.button
-                  variants={buttonVariants}
-                  whileHover="hover"
-                  onClick=""
-                >
-                  Start Over
-                </motion.button>
-              </div>
-            </Link>
-          </motion.div> */}
         </div>
       </div>
     </div>

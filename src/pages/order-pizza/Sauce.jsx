@@ -117,7 +117,7 @@ function Sauce({
 
                     {sauceOrder.name && (
                       <motion.div className="next" variants={nextVariants}>
-                        <Link to="/toppings">
+                        <Link to="/meats">
                           <div className="mt-4 ml-6">
                             <motion.button
                               variants={buttonVariants}

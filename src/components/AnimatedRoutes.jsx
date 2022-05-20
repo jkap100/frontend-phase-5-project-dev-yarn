@@ -14,6 +14,7 @@ import Login from "../pages/Login";
 import Home from "../pages/Home";
 import Crust from "../pages/order-pizza/Crust";
 import Sauce from "../pages/order-pizza/Sauce";
+import Meats from "../pages/order-pizza/Meats";
 import PizzaOrder from "./PizzaOrder";
 
 function AnimatedRoutes() {
@@ -81,6 +82,23 @@ function AnimatedRoutes() {
             path="/sauce"
             element={
               <Sauce
+                sauces={sauces}
+                setSauces={setSauces}
+                // addSauce={addSauce}
+                pizza={pizza}
+                spanClass={spanClass}
+                setSpanClass={setSpanClass}
+                sauceOrder={sauceOrder}
+                setSauceOrder={setSauceOrder}
+                crustOrder={crustOrder}
+                setCrustOrder={setCrustOrder}
+              />
+            }
+          />
+          <Route
+            path="/meats"
+            element={
+              <Meats
                 sauces={sauces}
                 setSauces={setSauces}
                 // addSauce={addSauce}
