@@ -10,13 +10,13 @@ function Navbar() {
         aria-label="main navigation"
       >
         <div className="navbar-brand">
-          <a className="navbar-item" href="https://bulma.io">
+          {/* <a className="navbar-item" href="https://bulma.io">
             <img
               src="https://bulma.io/images/bulma-logo.png"
               width="112"
               height="28"
             ></img>
-          </a>
+          </a> */}
 
           <a
             role="button"
@@ -34,11 +34,28 @@ function Navbar() {
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
             <Link to="/">
-              <div className="mt-2 has-text-white navbar-item">Home</div>
+              <div className="mt-2 ml-6 has-text-white navbar-item">Home</div>
             </Link>
-            <Link to="Crust"></Link>
-            <a className="navbar-item">Documentation</a>
-
+            <Link to="/crust">
+              <div className="mt-2 ml-2 has-text-white navbar-item navbar-item">
+                Crust
+              </div>
+            </Link>
+            <Link to="/sauce">
+              <div className="mt-2 ml-2 has-text-white navbar-item navbar-item">
+                Sauce
+              </div>
+            </Link>
+            <Link to="/meats">
+              <div className="mt-2 ml-2 has-text-white navbar-item navbar-item">
+                Meat
+              </div>
+            </Link>
+            <Link to="/veggies">
+              <div className="mt-2 ml-2 has-text-white navbar-item navbar-item">
+                Veggies
+              </div>
+            </Link>
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link">More</a>
 

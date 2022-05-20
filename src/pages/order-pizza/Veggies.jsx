@@ -44,13 +44,14 @@ const buttonVariants = {
 };
 
 function Veggies({
-  pizza,
-  spanClass,
-  setSpanClass,
-  sauceOrder,
-  setSauceOrder,
+  crusts,
+  setCrusts,
   crustOrder,
   setCrustOrder,
+  sauces,
+  setSauces,
+  sauceOrder,
+  setSauceOrder,
   meats,
   setMeats,
   meatsOrder,
@@ -60,60 +61,6 @@ function Veggies({
   veggiesOrder,
   setVeggiesOrder,
 }) {
-  const navigate = useNavigate();
-  const crustName = !crustOrder ? "" : crustOrder.name;
-  const sauceName = !sauceOrder ? "" : sauceOrder.name;
-
-  const meatNames =
-    meatsOrder === undefined || meatsOrder.length == 0 ? (
-      <li>Select Meats</li>
-    ) : (
-      meatsOrder.map((meat) => {
-        return (
-          <motion.li
-            key={meat.id}
-            whileHover={{
-              scale: 1.3,
-              originX: 0,
-              color: "#f8e112",
-            }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            {meat.name}
-          </motion.li>
-        );
-      })
-    );
-
-  const veggieNames =
-    veggiesOrder === undefined || veggiesOrder.length == 0 ? (
-      <li>Select Veggies</li>
-    ) : (
-      veggiesOrder.map((veggie) => {
-        return (
-          <motion.li
-            key={veggie.id}
-            whileHover={{
-              scale: 1.3,
-              originX: 0,
-              color: "#f8e112",
-            }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            {veggie.name}
-          </motion.li>
-        );
-      })
-    );
-
-  const startOver = () => {
-    navigate("/crust");
-    setCrustOrder([]);
-    setSauceOrder([]);
-    setMeatsOrder([]);
-    setVeggiesOrder([]);
-  };
-
   useEffect(() => {
     fetch("http://localhost:3000/veggies").then((r) => {
       if (r.ok) {
@@ -127,11 +74,11 @@ function Veggies({
   }, []);
 
   const onAddVeggies = (veggie) => {
-    if (meatsOrder.includes(veggie)) {
+    if (veggiesOrder.includes(veggie)) {
       alert(`${veggie.name} has already been added`);
     } else {
       console.log(veggie);
-      setSpanClass("active");
+
       setVeggiesOrder([...veggiesOrder, veggie]);
     }
   };
@@ -173,7 +120,7 @@ function Veggies({
                                 }}
                                 transition={{ type: "spring", stiffness: 300 }}
                               >
-                                <span className={spanClass}>{veggie.name}</span>
+                                <span className="">{veggie.name}</span>
                               </motion.li>
                             );
                           })}
@@ -227,7 +174,6 @@ function Veggies({
               setMeatsOrder={setMeatsOrder}
               veggiesOrder={veggiesOrder}
               setVeggiesOrder={setVeggiesOrder}
-              pizza={pizza}
             />
           </div>
         </div>

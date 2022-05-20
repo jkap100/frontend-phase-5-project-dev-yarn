@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -51,9 +51,12 @@ function PizzaOrder({
   setMeatsOrder,
   veggiesOrder,
   setVeggiesOrder,
-  pizza,
+  veggies,
+  setVeggies,
 }) {
   const navigate = useNavigate();
+
+  const [orderNumber, setOrderNumber] = useState("");
 
   const crustName = !crustOrder ? "" : crustOrder.name;
   const sauceName = !sauceOrder ? "" : sauceOrder.name;
@@ -106,6 +109,58 @@ function PizzaOrder({
     setSauceOrder([]);
     setMeatsOrder([]);
     setVeggiesOrder([]);
+  };
+
+  const addToCart = () => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.token}`,
+    };
+
+    const body = {
+      user_id: localStorage.getItem("currentUserId"),
+      address_id: 1,
+      store_id: 1,
+      crust_id: crustOrder.id,
+      sauce_id: sauceOrder.id,
+    };
+
+    console.log(body);
+
+    fetch(`http://localhost:3000/pizza_orders`, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.error) {
+          console.error(result.error);
+        } else {
+          setOrderNumber(result);
+          for (let i = 0; i < meatsOrder.length; i++) {
+            const mToppings = {
+              topping_id: meatsOrder[i].id,
+              order_id: orderNumber,
+            };
+            fetch(`http://localhost:3000/pizza_order_toppings`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.token}`,
+              },
+              body: JSON.stringify(mToppings),
+            })
+              .then((response) => response.json())
+              .then((result) => {
+                if (result.error) {
+                  console.error(result.error);
+                } else {
+                }
+              });
+          }
+        }
+      });
   };
 
   return (
@@ -168,7 +223,20 @@ function PizzaOrder({
               <li className="">
                 <strong className="underline has-text-white">Veggies:</strong>
               </li>
-              {veggieNames}
+              <div>{veggieNames}</div>
+              <motion.div className="next" variants={nextVariants}>
+                <div className="mt-4">
+                  <Link to="/cart">
+                    <motion.button
+                      variants={buttonVariants}
+                      whileHover="hover"
+                      onClick={addToCart}
+                    >
+                      Add To Cart
+                    </motion.button>
+                  </Link>
+                </div>
+              </motion.div>
             </ul>
           </div>
         </div>

@@ -43,15 +43,22 @@ const buttonVariants = {
   },
 };
 function Sauce({
-  sauces,
-  setSauces,
-  pizza,
-  spanClass,
-  setSpanClass,
-  sauceOrder,
-  setSauceOrder,
+  crusts,
+  setCrusts,
   crustOrder,
   setCrustOrder,
+  sauces,
+  setSauces,
+  sauceOrder,
+  setSauceOrder,
+  meats,
+  setMeats,
+  meatsOrder,
+  setMeatsOrder,
+  veggies,
+  setVeggies,
+  veggiesOrder,
+  setVeggiesOrder,
 }) {
   const navigate = useNavigate();
 
@@ -68,7 +75,6 @@ function Sauce({
   }, []);
 
   const onAddSauce = (sauce) => {
-    setSpanClass("active");
     setSauceOrder(sauce);
   };
 
@@ -95,8 +101,6 @@ function Sauce({
                     <div className="ml-6">
                       <ul>
                         {sauces.map((sauce) => {
-                          let spanClass = pizza.sauce === sauce ? "active" : "";
-
                           return (
                             <motion.li
                               key={sauce.id}
@@ -108,7 +112,7 @@ function Sauce({
                               }}
                               transition={{ type: "spring", stiffness: 300 }}
                             >
-                              <span className={spanClass}>{sauce.name}</span>
+                              <span className="">{sauce.name}</span>
                             </motion.li>
                           );
                         })}
@@ -152,7 +156,10 @@ function Sauce({
                 setSauceOrder={setSauceOrder}
                 crustOrder={crustOrder}
                 setCrustOrder={setCrustOrder}
-                pizza={pizza}
+                meatsOrder={meatsOrder}
+                setMeatsOrder={setMeatsOrder}
+                veggiesOrder={veggiesOrder}
+                setVeggiesOrder={setVeggiesOrder}
               />
             </div>
           </motion.div>

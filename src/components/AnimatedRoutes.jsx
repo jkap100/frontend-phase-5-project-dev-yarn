@@ -17,6 +17,8 @@ import Sauce from "../pages/order-pizza/Sauce";
 import Meats from "../pages/order-pizza/Meats";
 import Veggies from "../pages/order-pizza/Veggies";
 import PizzaOrder from "./PizzaOrder";
+import Cart from "../pages/Cart";
+import Map from "../pages/Map";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -31,7 +33,6 @@ function AnimatedRoutes() {
     sauce: "Red",
     toppings: ["pepperoni", "ham", "cats"],
   });
-  const [spanClass, setSpanClass] = useState("");
 
   //CRUST
   const [crusts, setCrusts] = useState([]);
@@ -78,67 +79,12 @@ function AnimatedRoutes() {
               <Crust
                 crusts={crusts}
                 setCrusts={setCrusts}
-                addCrust={addCrust}
-                pizza={pizza}
-                spanClass={spanClass}
-                setSpanClass={setSpanClass}
                 crustOrder={crustOrder}
                 setCrustOrder={setCrustOrder}
-              />
-            }
-          />
-          <Route
-            path="/sauce"
-            element={
-              <Sauce
                 sauces={sauces}
                 setSauces={setSauces}
-                // addSauce={addSauce}
-                pizza={pizza}
-                spanClass={spanClass}
-                setSpanClass={setSpanClass}
                 sauceOrder={sauceOrder}
                 setSauceOrder={setSauceOrder}
-                crustOrder={crustOrder}
-                setCrustOrder={setCrustOrder}
-              />
-            }
-          />
-          <Route
-            path="/meats"
-            element={
-              <Meats
-                sauces={sauces}
-                setSauces={setSauces}
-                // addSauce={addSauce}
-                pizza={pizza}
-                spanClass={spanClass}
-                setSpanClass={setSpanClass}
-                sauceOrder={sauceOrder}
-                setSauceOrder={setSauceOrder}
-                crustOrder={crustOrder}
-                setCrustOrder={setCrustOrder}
-                meats={meats}
-                setMeats={setMeats}
-                meatsOrder={meatsOrder}
-                setMeatsOrder={setMeatsOrder}
-              />
-            }
-          />
-          <Route
-            path="/veggies"
-            element={
-              <Veggies
-                sauces={sauces}
-                setSauces={setSauces}
-                // addSauce={addSauce}
-                pizza={pizza}
-                spanClass={spanClass}
-                setSpanClass={setSpanClass}
-                sauceOrder={sauceOrder}
-                setSauceOrder={setSauceOrder}
-                crustOrder={crustOrder}
-                setCrustOrder={setCrustOrder}
                 meats={meats}
                 setMeats={setMeats}
                 meatsOrder={meatsOrder}
@@ -150,6 +96,77 @@ function AnimatedRoutes() {
               />
             }
           />
+          <Route
+            path="/sauce"
+            element={
+              <Sauce
+                crusts={crusts}
+                setCrusts={setCrusts}
+                crustOrder={crustOrder}
+                setCrustOrder={setCrustOrder}
+                sauces={sauces}
+                setSauces={setSauces}
+                sauceOrder={sauceOrder}
+                setSauceOrder={setSauceOrder}
+                meats={meats}
+                setMeats={setMeats}
+                meatsOrder={meatsOrder}
+                setMeatsOrder={setMeatsOrder}
+                veggies={veggies}
+                setVeggies={setVeggies}
+                veggiesOrder={veggiesOrder}
+                setVeggiesOrder={setVeggiesOrder}
+              />
+            }
+          />
+          <Route
+            path="/meats"
+            element={
+              <Meats
+                crusts={crusts}
+                setCrusts={setCrusts}
+                crustOrder={crustOrder}
+                setCrustOrder={setCrustOrder}
+                sauces={sauces}
+                setSauces={setSauces}
+                sauceOrder={sauceOrder}
+                setSauceOrder={setSauceOrder}
+                meats={meats}
+                setMeats={setMeats}
+                meatsOrder={meatsOrder}
+                setMeatsOrder={setMeatsOrder}
+                veggies={veggies}
+                setVeggies={setVeggies}
+                veggiesOrder={veggiesOrder}
+                setVeggiesOrder={setVeggiesOrder}
+              />
+            }
+          />
+          <Route
+            path="/veggies"
+            element={
+              <Veggies
+                crusts={crusts}
+                setCrusts={setCrusts}
+                crustOrder={crustOrder}
+                setCrustOrder={setCrustOrder}
+                sauces={sauces}
+                setSauces={setSauces}
+                sauceOrder={sauceOrder}
+                setSauceOrder={setSauceOrder}
+                meats={meats}
+                setMeats={setMeats}
+                meatsOrder={meatsOrder}
+                setMeatsOrder={setMeatsOrder}
+                veggies={veggies}
+                setVeggies={setVeggies}
+                veggiesOrder={veggiesOrder}
+                setVeggiesOrder={setVeggiesOrder}
+              />
+            }
+          />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/map" element={<Map />} />
         </Routes>
       </AnimatePresence>
       <NavbarBottom />

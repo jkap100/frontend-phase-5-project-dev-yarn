@@ -32,7 +32,7 @@ function Login({ username, setUsername, password, setPassword }) {
         } else {
           console.log("token", result.token);
 
-          navigate("/home");
+          navigate("/login");
           localStorage.setItem("token", result.token);
 
           if (result.message === "Invalid username or password") {
@@ -62,7 +62,7 @@ function Login({ username, setUsername, password, setPassword }) {
       <div className="columns is-centered">
         <form onSubmit={handleLogin}>
           <div className="field">
-            <label className="label">Username</label>
+            <label className="label has-text-white">Username</label>
             <p className="control has-icons-left has-icons-right">
               <input
                 className="input"
@@ -81,7 +81,7 @@ function Login({ username, setUsername, password, setPassword }) {
             </p>
           </div>
           <div className="field">
-            <label className="label">Password</label>
+            <label className="label has-text-white">Password</label>
             <p className="control has-icons-left has-icons-right">
               <input
                 className="input"

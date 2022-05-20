@@ -46,12 +46,20 @@ const buttonVariants = {
 function Crust({
   crusts,
   setCrusts,
-  addCrust,
-  pizza,
-  spanClass,
-  setSpanClass,
   crustOrder,
   setCrustOrder,
+  sauces,
+  setSauces,
+  sauceOrder,
+  setSauceOrder,
+  meats,
+  setMeats,
+  meatsOrder,
+  setMeatsOrder,
+  veggies,
+  setVeggies,
+  veggiesOrder,
+  setVeggiesOrder,
 }) {
   const navigate = useNavigate();
 
@@ -69,7 +77,6 @@ function Crust({
   //   console.log(pizza.crust);
 
   const onAddCrust = (crust) => {
-    setSpanClass("active");
     setCrustOrder(crust);
   };
 
@@ -96,8 +103,6 @@ function Crust({
                     <div className="ml-6">
                       <ul>
                         {crusts.map((crust) => {
-                          let spanClass = pizza.crust === crust ? "active" : "";
-                          //   console.log(crust);
                           return (
                             <motion.li
                               key={crust.id}
@@ -109,7 +114,7 @@ function Crust({
                               }}
                               transition={{ type: "spring", stiffness: 300 }}
                             >
-                              <span className={spanClass}>{crust.name}</span>
+                              <span className="">{crust.name}</span>
                             </motion.li>
                           );
                         })}
@@ -149,9 +154,14 @@ function Crust({
             <h3 className="subtitle has-text-white">Your Pizza</h3>
             <div className="ml-6">
               <PizzaOrder
+                sauceOrder={sauceOrder}
+                setSauceOrder={setSauceOrder}
                 crustOrder={crustOrder}
                 setCrustOrder={setCrustOrder}
-                pizza={pizza}
+                meatsOrder={meatsOrder}
+                setMeatsOrder={setMeatsOrder}
+                veggiesOrder={veggiesOrder}
+                setVeggiesOrder={setVeggiesOrder}
               />
             </div>
           </motion.div>

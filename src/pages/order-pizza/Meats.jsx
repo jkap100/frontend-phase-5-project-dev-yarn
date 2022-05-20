@@ -43,19 +43,22 @@ const buttonVariants = {
   },
 };
 function Meats({
-  sauces,
-  setSauces,
-  pizza,
-  spanClass,
-  setSpanClass,
-  sauceOrder,
-  setSauceOrder,
+  crusts,
+  setCrusts,
   crustOrder,
   setCrustOrder,
+  sauces,
+  setSauces,
+  sauceOrder,
+  setSauceOrder,
   meats,
   setMeats,
   meatsOrder,
   setMeatsOrder,
+  veggies,
+  setVeggies,
+  veggiesOrder,
+  setVeggiesOrder,
 }) {
   const navigate = useNavigate();
 
@@ -76,7 +79,7 @@ function Meats({
       alert(`${meat.name} has already been added`);
     } else {
       console.log(meat);
-      setSpanClass("active");
+
       setMeatsOrder([...meatsOrder, meat]);
     }
   };
@@ -103,8 +106,6 @@ function Meats({
                     <div className="ml-6">
                       <ul>
                         {meats.map((meat) => {
-                          //   let spanClass = pizza.sauce === sauce ? "active" : "";
-
                           return (
                             <motion.li
                               key={meat.id}
@@ -116,7 +117,7 @@ function Meats({
                               }}
                               transition={{ type: "spring", stiffness: 300 }}
                             >
-                              <span className={spanClass}>{meat.name}</span>
+                              <span className="">{meat.name}</span>
                             </motion.li>
                           );
                         })}
@@ -162,7 +163,8 @@ function Meats({
                 setCrustOrder={setCrustOrder}
                 meatsOrder={meatsOrder}
                 setMeatsOrder={setMeatsOrder}
-                pizza={pizza}
+                veggiesOrder={veggiesOrder}
+                setVeggiesOrder={setVeggiesOrder}
               />
             </div>
           </motion.div>
