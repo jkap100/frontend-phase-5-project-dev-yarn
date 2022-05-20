@@ -1,41 +1,81 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import Loader from "../components/Loader";
 
-const svgVariants = {
-  hidden: { rotate: -180 },
-  visible: {
-    rotate: 0,
-    transition: { duration: 1 },
-  },
-};
-
-const pathVariants = {
-  hidden: {
-    opacity: 0,
-    pathLength: 0,
-  },
-  visible: {
-    opacity: 1,
-    pathLength: 1,
+const buttonVariants = {
+  hover: {
+    scale: 1.1,
+    textShadow: "0px 0px 8px rgb(255,255,255)",
+    boxShadow: "0px 0px 8px rgb(255,255,255)",
     transition: {
-      duration: 2,
-      ease: "easeInOut",
+      duration: 0.3,
+      repeat: Infinity,
+      repeatType: "reverse",
     },
   },
 };
 
-function Home({ setLoading }) {
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: { delay: 1.5, duration: 1.5 },
+  },
+  exit: {
+    x: "-100vh",
+    transition: { ease: "easeInOut" },
+  },
+};
+
+const startOrder = () => {
+  console.log("order");
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.token}`,
+  };
+
+  const body = {
+    user_id: "",
+    address_id: "",
+  };
+
+  fetch("http://localhost:3000/pizza_orders", {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(body),
+  }).then((r) => {
+    if (r.ok) {
+      alert("Added to cart");
+    } else {
+      r.json().then((err) => console.log(err.errors));
+    }
+  });
+};
+
+function Home() {
   return (
-    <div className="body">
-      {/* <section className="hero ">
-        <div className="hero-body">
-          <div className="container">
-            <h1 className="title">JKAPS PIZZA SHOP</h1>
-            <h2 className="subtitle">Hover over Blog</h2>
-          </div>
-        </div>
-      </section> */}
-    </div>
+    <motion.div
+      className="home container"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
+      <h2>Welcome and Enjoy</h2>
+      <Link to="/crust">
+        <motion.button
+          variants={buttonVariants}
+          whileHover="hover"
+          onClick={startOrder}
+        >
+          Create Your Pizza
+        </motion.button>
+      </Link>
+    </motion.div>
   );
 }
 

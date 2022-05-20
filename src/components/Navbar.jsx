@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -32,8 +33,10 @@ function Navbar() {
 
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <a className="navbar-item">Home</a>
-
+            <Link to="/home">
+              <div className="mt-2 has-text-white navbar-item">Home</div>
+            </Link>
+            <Link to="Crust"></Link>
             <a className="navbar-item">Documentation</a>
 
             <div className="navbar-item has-dropdown is-hoverable">

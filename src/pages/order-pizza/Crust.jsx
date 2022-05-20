@@ -37,7 +37,8 @@ const buttonVariants = {
     boxShadow: "0px 0px 8px rgb(255,255,255)",
     transition: {
       duration: 0.3,
-      yoyo: Infinity,
+      repeat: Infinity,
+      repeatType: "reverse",
     },
   },
 };
@@ -49,6 +50,8 @@ function Crust({
   pizza,
   spanClass,
   setSpanClass,
+  crustOrder,
+  setCrustOrder,
 }) {
   const navigate = useNavigate();
 
@@ -67,10 +70,10 @@ function Crust({
 
   const onAddCrust = (crust) => {
     setSpanClass("active");
-    addCrust(crust);
+    setCrustOrder(crust);
   };
-  const map = pizza.toppings.map((topping) => topping);
-  console.log(map);
+
+  const startOrder = () => {};
 
   return (
     <div className="container">
@@ -98,7 +101,7 @@ function Crust({
                           return (
                             <motion.li
                               key={crust.id}
-                              onClick={() => onAddCrust(crust.name)}
+                              onClick={() => onAddCrust(crust)}
                               whileHover={{
                                 scale: 1.3,
                                 originX: 0,
@@ -113,13 +116,14 @@ function Crust({
                       </ul>
                     </div>
 
-                    {pizza.crust && (
+                    {crustOrder && (
                       <motion.div className="next" variants={nextVariants}>
                         <Link to="/toppings">
                           <div className="mt-4 ml-6">
                             <motion.button
                               variants={buttonVariants}
                               whileHover="hover"
+                              onClick={startOrder}
                             >
                               Next
                             </motion.button>
@@ -135,12 +139,31 @@ function Crust({
         </div>
 
         <div className="column ml-6">
-          <div className="">
+          <motion.div
+            className="base container"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
             <h3 className="subtitle has-text-white">Your Pizza</h3>
             <div className="ml-6">
-              <PizzaOrder pizza={pizza} />
+              <PizzaOrder crustOrder={crustOrder} pizza={pizza} />
             </div>
-          </div>
+          </motion.div>
+          <motion.div className="next" variants={nextVariants}>
+            <Link to="/toppings">
+              <div className="mt-4">
+                <motion.button
+                  variants={buttonVariants}
+                  whileHover="hover"
+                  onClick=""
+                >
+                  Start Over
+                </motion.button>
+              </div>
+            </Link>
+          </motion.div>
         </div>
       </div>
     </div>

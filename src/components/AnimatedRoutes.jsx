@@ -16,6 +16,7 @@ import Crust from "../pages/order-pizza/Crust";
 import PizzaOrder from "./PizzaOrder";
 
 function AnimatedRoutes() {
+  const location = useLocation();
   const [error, setErrors] = useState("");
 
   const [username, setUsername] = useState("");
@@ -31,42 +32,48 @@ function AnimatedRoutes() {
 
   //CRUST
   const [crusts, setCrusts] = useState([]);
+  const [crustOrder, setCrustOrder] = useState([]);
 
   const addCrust = (crust) => {
     setPizza({ ...pizza, crust });
   };
+  // console.log(pizza);
 
   return (
     <>
       <Navbar />
       <Header />
-      <Routes>
-        <Route
-          path="/login"
-          element={
-            <Login
-              username={username}
-              setUsername={setUsername}
-              password={password}
-              setPassword={setPassword}
-            />
-          }
-        />
-        <Route path="/home" element={<Home />} />
-        <Route
-          path="/crust"
-          element={
-            <Crust
-              crusts={crusts}
-              setCrusts={setCrusts}
-              addCrust={addCrust}
-              pizza={pizza}
-              spanClass={spanClass}
-              setSpanClass={setSpanClass}
-            />
-          }
-        />
-      </Routes>
+      <AnimatePresence>
+        <Routes location={location} key={location.pathname}>
+          <Route
+            path="/login"
+            element={
+              <Login
+                username={username}
+                setUsername={setUsername}
+                password={password}
+                setPassword={setPassword}
+              />
+            }
+          />
+          <Route path="/home" element={<Home />} />
+          <Route
+            path="/crust"
+            element={
+              <Crust
+                crusts={crusts}
+                setCrusts={setCrusts}
+                addCrust={addCrust}
+                pizza={pizza}
+                spanClass={spanClass}
+                setSpanClass={setSpanClass}
+                crustOrder={crustOrder}
+                setCrustOrder={setCrustOrder}
+              />
+            }
+          />
+        </Routes>
+      </AnimatePresence>
       <NavbarBottom />
     </>
   );
