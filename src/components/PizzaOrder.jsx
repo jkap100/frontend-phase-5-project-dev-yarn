@@ -42,11 +42,21 @@ const buttonVariants = {
   },
 };
 
-function PizzaOrder({ crustOrder, setCrustOrder, pizza }) {
+function PizzaOrder({
+  crustOrder,
+  setCrustOrder,
+  sauceOrder,
+  setSauceOrder,
+  pizza,
+}) {
   const navigate = useNavigate();
+
+  const crustName = !crustOrder ? "" : crustOrder.name;
+  const sauceName = !sauceOrder ? "" : sauceOrder.name;
 
   const startOver = () => {
     setCrustOrder([]);
+    setSauceOrder([]);
     navigate("/crust");
   };
   return (
@@ -69,7 +79,7 @@ function PizzaOrder({ crustOrder, setCrustOrder, pizza }) {
           }}
           transition={{ type: "spring", stiffness: 300 }}
         >
-          {crustOrder.name}
+          {crustName}
         </motion.li>
         <li>
           <strong className="underline has-text-white">Sauce:</strong>
@@ -82,7 +92,7 @@ function PizzaOrder({ crustOrder, setCrustOrder, pizza }) {
           }}
           transition={{ type: "spring", stiffness: 300 }}
         >
-          {pizza.sauce}
+          {sauceName}
         </motion.li>
         <li className="">
           <strong className="underline has-text-white">Toppings:</strong>

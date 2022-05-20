@@ -13,6 +13,7 @@ import Header from "./Header";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import Crust from "../pages/order-pizza/Crust";
+import Sauce from "../pages/order-pizza/Sauce";
 import PizzaOrder from "./PizzaOrder";
 
 function AnimatedRoutes() {
@@ -33,6 +34,10 @@ function AnimatedRoutes() {
   //CRUST
   const [crusts, setCrusts] = useState([]);
   const [crustOrder, setCrustOrder] = useState([]);
+
+  //SAUCE
+  const [sauces, setSauces] = useState([]);
+  const [sauceOrder, setSauceOrder] = useState([]);
 
   const addCrust = (crust) => {
     setPizza({ ...pizza, crust });
@@ -67,6 +72,23 @@ function AnimatedRoutes() {
                 pizza={pizza}
                 spanClass={spanClass}
                 setSpanClass={setSpanClass}
+                crustOrder={crustOrder}
+                setCrustOrder={setCrustOrder}
+              />
+            }
+          />
+          <Route
+            path="/sauce"
+            element={
+              <Sauce
+                sauces={sauces}
+                setSauces={setSauces}
+                // addSauce={addSauce}
+                pizza={pizza}
+                spanClass={spanClass}
+                setSpanClass={setSpanClass}
+                sauceOrder={sauceOrder}
+                setSauceOrder={setSauceOrder}
                 crustOrder={crustOrder}
                 setCrustOrder={setCrustOrder}
               />

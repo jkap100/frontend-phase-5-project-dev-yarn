@@ -42,23 +42,23 @@ const buttonVariants = {
     },
   },
 };
-
-function Crust({
-  crusts,
-  setCrusts,
-  addCrust,
+function Sauce({
+  sauces,
+  setSauces,
   pizza,
   spanClass,
   setSpanClass,
+  sauceOrder,
+  setSauceOrder,
   crustOrder,
   setCrustOrder,
 }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3000/crusts").then((r) => {
+    fetch("http://localhost:3000/sauces").then((r) => {
       if (r.ok) {
-        r.json().then(setCrusts);
+        r.json().then(setSauces);
       } else {
         r.json().then((error) => console.log(error.errors));
         // navigate("/login");
@@ -66,11 +66,10 @@ function Crust({
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  //   console.log(pizza.crust);
 
-  const onAddCrust = (crust) => {
+  const onAddSauce = (sauce) => {
     setSpanClass("active");
-    setCrustOrder(crust);
+    setSauceOrder(sauce);
   };
 
   const startOrder = () => {};
@@ -91,17 +90,17 @@ function Crust({
                     exit="exit"
                   >
                     <h3 className="subtitle has-text-white">
-                      Step 1: Select Your Crust
+                      Step 1: Select Your Sauce
                     </h3>
                     <div className="ml-6">
                       <ul>
-                        {crusts.map((crust) => {
-                          let spanClass = pizza.crust === crust ? "active" : "";
-                          //   console.log(crust);
+                        {sauces.map((sauce) => {
+                          let spanClass = pizza.sauce === sauce ? "active" : "";
+
                           return (
                             <motion.li
-                              key={crust.id}
-                              onClick={() => onAddCrust(crust)}
+                              key={sauce.id}
+                              onClick={() => onAddSauce(sauce)}
                               whileHover={{
                                 scale: 1.3,
                                 originX: 0,
@@ -109,16 +108,16 @@ function Crust({
                               }}
                               transition={{ type: "spring", stiffness: 300 }}
                             >
-                              <span className={spanClass}>{crust.name}</span>
+                              <span className={spanClass}>{sauce.name}</span>
                             </motion.li>
                           );
                         })}
                       </ul>
                     </div>
 
-                    {crustOrder.name && (
+                    {sauceOrder.name && (
                       <motion.div className="next" variants={nextVariants}>
-                        <Link to="/sauce">
+                        <Link to="/toppings">
                           <div className="mt-4 ml-6">
                             <motion.button
                               variants={buttonVariants}
@@ -149,29 +148,18 @@ function Crust({
             <h3 className="subtitle has-text-white">Your Pizza</h3>
             <div className="ml-6">
               <PizzaOrder
+                sauceOrder={sauceOrder}
+                setSauceOrder={setSauceOrder}
                 crustOrder={crustOrder}
                 setCrustOrder={setCrustOrder}
                 pizza={pizza}
               />
             </div>
           </motion.div>
-          {/* <motion.div className="next" variants={nextVariants}>
-            <Link to="/toppings">
-              <div className="mt-4">
-                <motion.button
-                  variants={buttonVariants}
-                  whileHover="hover"
-                  onClick=""
-                >
-                  Start Over
-                </motion.button>
-              </div>
-            </Link>
-          </motion.div> */}
         </div>
       </div>
     </div>
   );
 }
 
-export default Crust;
+export default Sauce;
