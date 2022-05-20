@@ -116,7 +116,7 @@ function Crust({
                       </ul>
                     </div>
 
-                    {crustOrder && (
+                    {crustOrder.name && (
                       <motion.div className="next" variants={nextVariants}>
                         <Link to="/toppings">
                           <div className="mt-4 ml-6">
@@ -151,7 +151,7 @@ function Crust({
               <PizzaOrder crustOrder={crustOrder} pizza={pizza} />
             </div>
           </motion.div>
-          <motion.div className="next" variants={nextVariants}>
+          {/* <motion.div className="next" variants={nextVariants}>
             <Link to="/toppings">
               <div className="mt-4">
                 <motion.button
@@ -163,7 +163,7 @@ function Crust({
                 </motion.button>
               </div>
             </Link>
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
     </div>

@@ -43,7 +43,13 @@ const buttonVariants = {
 
 function PizzaOrder({ crustOrder, pizza }) {
   return (
-    <div>
+    <motion.div
+      className="base container"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <ul>
         <li>
           <strong className="underline has-text-white">Crust:</strong>
@@ -92,7 +98,20 @@ function PizzaOrder({ crustOrder, pizza }) {
           );
         })}
       </ul>
-    </div>
+      <motion.div className="next" variants={nextVariants}>
+        <Link to="/toppings">
+          <div className="mt-4">
+            <motion.button
+              variants={buttonVariants}
+              whileHover="hover"
+              onClick=""
+            >
+              Start Over
+            </motion.button>
+          </div>
+        </Link>
+      </motion.div>
+    </motion.div>
   );
 }
 
