@@ -13,6 +13,7 @@ import Header from "./Header";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import Crust from "../pages/order-pizza/Crust";
+import PizzaOrder from "./PizzaOrder";
 
 function AnimatedRoutes() {
   const [error, setErrors] = useState("");
@@ -23,6 +24,7 @@ function AnimatedRoutes() {
 
   const [pizza, setPizza] = useState({
     crust: "",
+    sauce: "Red",
     toppings: ["pepperoni", "ham", "cats"],
   });
   const [spanClass, setSpanClass] = useState("");

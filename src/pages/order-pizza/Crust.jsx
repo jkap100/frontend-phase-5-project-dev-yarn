@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import PizzaOrder from "../../components/PizzaOrder";
 
 const containerVariants = {
   hidden: {
@@ -137,26 +138,7 @@ function Crust({
           <div className="">
             <h3 className="subtitle has-text-white">Your Pizza</h3>
             <div className="ml-6">
-              <ul>
-                <li>
-                  <strong className="underline has-text-white">Crust:</strong>
-                </li>
-                <li>{pizza.crust}</li>
-                <li className="">
-                  <strong className="underline has-text-white">
-                    Toppings:
-                  </strong>
-                </li>
-                {pizza.toppings.map((topping) => {
-                  // let spanClass = pizza.topping === crust ? "active" : "";
-                  //   console.log(crust);
-                  return (
-                    <motion.li>
-                      <span className="">{topping}</span>
-                    </motion.li>
-                  );
-                })}
-              </ul>
+              <PizzaOrder pizza={pizza} />
             </div>
           </div>
         </div>

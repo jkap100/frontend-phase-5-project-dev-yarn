@@ -160,4 +160,5 @@ li span.active::before {
 .underline {
   border-bottom: 1px solid white;
   padding-bottom: 3px;
+  font-size: 20px;
 }
