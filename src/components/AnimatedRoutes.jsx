@@ -40,6 +40,10 @@ function AnimatedRoutes() {
   const [sauces, setSauces] = useState([]);
   const [sauceOrder, setSauceOrder] = useState([]);
 
+  //MEATS
+  const [meats, setMeats] = useState([]);
+  const [meatsOrder, setMeatsOrder] = useState([]);
+
   const addCrust = (crust) => {
     setPizza({ ...pizza, crust });
   };
@@ -109,6 +113,10 @@ function AnimatedRoutes() {
                 setSauceOrder={setSauceOrder}
                 crustOrder={crustOrder}
                 setCrustOrder={setCrustOrder}
+                meats={meats}
+                setMeats={setMeats}
+                meatsOrder={meatsOrder}
+                setMeatsOrder={setMeatsOrder}
               />
             }
           />

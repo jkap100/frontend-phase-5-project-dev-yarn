@@ -79,10 +79,10 @@ header .pizza-svg {
 
 /* lists */
 li span.active {
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 li span.active::before {
-  content: ">";
+  /* content: ">"; */
   position: relative;
   top: -2px;
   margin-right: 6px;

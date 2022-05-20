@@ -47,6 +47,8 @@ function PizzaOrder({
   setCrustOrder,
   sauceOrder,
   setSauceOrder,
+  meatsOrder,
+  setMeatsOrder,
   pizza,
 }) {
   const navigate = useNavigate();
@@ -54,11 +56,31 @@ function PizzaOrder({
   const crustName = !crustOrder ? "" : crustOrder.name;
   const sauceName = !sauceOrder ? "" : sauceOrder.name;
 
+  const meatNames =
+    meatsOrder === undefined || meatsOrder.length == 0
+      ? ""
+      : meatsOrder.map((meat) => {
+          return (
+            <motion.li
+              key={meat.id}
+              whileHover={{
+                scale: 1.3,
+                originX: 0,
+                color: "#f8e112",
+              }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              {meat.name}
+            </motion.li>
+          );
+        });
+
   const startOver = () => {
     setCrustOrder([]);
     setSauceOrder([]);
     navigate("/crust");
   };
+
   return (
     <motion.div
       className="base container"
@@ -97,23 +119,7 @@ function PizzaOrder({
         <li className="">
           <strong className="underline has-text-white">Toppings:</strong>
         </li>
-        {pizza.toppings.map((topping) => {
-          // let spanClass = pizza.topping === crust ? "active" : "";
-          //   console.log(crust);
-          return (
-            <motion.li
-              key={topping.id}
-              whileHover={{
-                scale: 1.3,
-                originX: 0,
-                color: "#f8e112",
-              }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <span className="">{topping}</span>
-            </motion.li>
-          );
-        })}
+        {meatNames}
       </ul>
       <motion.div className="next" variants={nextVariants}>
         <div className="mt-4">
