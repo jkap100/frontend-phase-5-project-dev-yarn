@@ -116,54 +116,63 @@ function PizzaOrder({
       animate="visible"
       exit="exit"
     >
-      <ul>
-        <li>
-          <strong className="underline has-text-white">Crust:</strong>
-        </li>
-        <motion.li
-          whileHover={{
-            scale: 1.3,
-            originX: 0,
-            color: "#f8e112",
-          }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          {!crustName ? "Select A Crust" : crustName}
-        </motion.li>
-        <li>
-          <strong className="underline has-text-white">Sauce:</strong>
-        </li>
-        <motion.li
-          whileHover={{
-            scale: 1.3,
-            originX: 0,
-            color: "#f8e112",
-          }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          {!sauceName ? "Select A Sauce" : sauceName}
-        </motion.li>
-        <li className="">
-          <strong className="underline has-text-white">Meats:</strong>
-        </li>
-        {meatNames}
-        <li className="">
-          <strong className="underline has-text-white">Veggies:</strong>
-        </li>
-        {veggieNames}
-      </ul>
-
-      <motion.div className="next" variants={nextVariants}>
-        <div className="mt-4">
-          <motion.button
-            variants={buttonVariants}
-            whileHover="hover"
-            onClick={startOver}
-          >
-            Start Over
-          </motion.button>
+      <div className="columns is-mobile">
+        <div className="column">
+          <ul>
+            <li>
+              <strong className="underline has-text-white">Crust:</strong>
+            </li>
+            <motion.li
+              whileHover={{
+                scale: 1.3,
+                originX: 0,
+                color: "#f8e112",
+              }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              {!crustName ? "Select A Crust" : crustName}
+            </motion.li>
+            <li>
+              <strong className="underline has-text-white">Sauce:</strong>
+            </li>
+            <motion.li
+              whileHover={{
+                scale: 1.3,
+                originX: 0,
+                color: "#f8e112",
+              }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              {!sauceName ? "Select A Sauce" : sauceName}
+            </motion.li>
+            <motion.div className="next" variants={nextVariants}>
+              <div className="mt-4">
+                <motion.button
+                  variants={buttonVariants}
+                  whileHover="hover"
+                  onClick={startOver}
+                >
+                  Start Over
+                </motion.button>
+              </div>
+            </motion.div>
+          </ul>
         </div>
-      </motion.div>
+        <div className="column">
+          <div className="column">
+            <ul>
+              <li className="">
+                <strong className="underline has-text-white">Meats:</strong>
+              </li>
+              {meatNames}
+              <li className="">
+                <strong className="underline has-text-white">Veggies:</strong>
+              </li>
+              {veggieNames}
+            </ul>
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 }
