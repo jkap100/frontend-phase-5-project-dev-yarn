@@ -152,3 +152,12 @@ li span.active::before {
 .head-title {
   font-size: 2em;
 }
+
+.subtitle {
+  font-size: 40px;
+}
+
+.underline {
+  border-bottom: 1px solid white;
+  padding-bottom: 3px;
+}
