@@ -72,9 +72,13 @@ function Meats({
   }, []);
 
   const onAddMeats = (meat) => {
-    console.log(meat);
-    setSpanClass("active");
-    setMeatsOrder([...meatsOrder, meat]);
+    if (meatsOrder.includes(meat)) {
+      alert(`${meat.name} has already been added`);
+    } else {
+      console.log(meat);
+      setSpanClass("active");
+      setMeatsOrder([...meatsOrder, meat]);
+    }
   };
 
   const startOrder = () => {};
