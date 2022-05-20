@@ -15,6 +15,7 @@ import Home from "../pages/Home";
 import Crust from "../pages/order-pizza/Crust";
 import Sauce from "../pages/order-pizza/Sauce";
 import Meats from "../pages/order-pizza/Meats";
+import Veggies from "../pages/order-pizza/Veggies";
 import PizzaOrder from "./PizzaOrder";
 
 function AnimatedRoutes() {
@@ -43,6 +44,10 @@ function AnimatedRoutes() {
   //MEATS
   const [meats, setMeats] = useState([]);
   const [meatsOrder, setMeatsOrder] = useState([]);
+
+  //VEGGIES
+  const [veggies, setVeggies] = useState([]);
+  const [veggiesOrder, setVeggiesOrder] = useState([]);
 
   const addCrust = (crust) => {
     setPizza({ ...pizza, crust });
@@ -117,6 +122,31 @@ function AnimatedRoutes() {
                 setMeats={setMeats}
                 meatsOrder={meatsOrder}
                 setMeatsOrder={setMeatsOrder}
+              />
+            }
+          />
+          <Route
+            path="/veggies"
+            element={
+              <Veggies
+                sauces={sauces}
+                setSauces={setSauces}
+                // addSauce={addSauce}
+                pizza={pizza}
+                spanClass={spanClass}
+                setSpanClass={setSpanClass}
+                sauceOrder={sauceOrder}
+                setSauceOrder={setSauceOrder}
+                crustOrder={crustOrder}
+                setCrustOrder={setCrustOrder}
+                meats={meats}
+                setMeats={setMeats}
+                meatsOrder={meatsOrder}
+                setMeatsOrder={setMeatsOrder}
+                veggies={veggies}
+                setVeggies={setVeggies}
+                veggiesOrder={veggiesOrder}
+                setVeggiesOrder={setVeggiesOrder}
               />
             }
           />

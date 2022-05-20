@@ -49,6 +49,8 @@ function PizzaOrder({
   setSauceOrder,
   meatsOrder,
   setMeatsOrder,
+  veggiesOrder,
+  setVeggiesOrder,
   pizza,
 }) {
   const navigate = useNavigate();
@@ -75,10 +77,31 @@ function PizzaOrder({
           );
         });
 
+  const veggieNames =
+    veggiesOrder === undefined || veggiesOrder.length == 0
+      ? ""
+      : veggiesOrder.map((veggie) => {
+          return (
+            <motion.li
+              key={veggie.id}
+              whileHover={{
+                scale: 1.3,
+                originX: 0,
+                color: "#f8e112",
+              }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              {veggie.name}
+            </motion.li>
+          );
+        });
+
   const startOver = () => {
+    navigate("/crust");
     setCrustOrder([]);
     setSauceOrder([]);
-    navigate("/crust");
+    setMeatsOrder([]);
+    setVeggiesOrder([]);
   };
 
   return (
@@ -117,10 +140,15 @@ function PizzaOrder({
           {sauceName}
         </motion.li>
         <li className="">
-          <strong className="underline has-text-white">Toppings:</strong>
+          <strong className="underline has-text-white">Meats:</strong>
         </li>
         {meatNames}
+        <li className="">
+          <strong className="underline has-text-white">Veggies:</strong>
+        </li>
+        {veggieNames}
       </ul>
+
       <motion.div className="next" variants={nextVariants}>
         <div className="mt-4">
           <motion.button

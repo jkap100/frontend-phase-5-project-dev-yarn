@@ -42,9 +42,8 @@ const buttonVariants = {
     },
   },
 };
-function Meats({
-  sauces,
-  setSauces,
+
+function Veggies({
   pizza,
   spanClass,
   setSpanClass,
@@ -56,13 +55,15 @@ function Meats({
   setMeats,
   meatsOrder,
   setMeatsOrder,
+  veggies,
+  setVeggies,
+  veggiesOrder,
+  setVeggiesOrder,
 }) {
-  const navigate = useNavigate();
-
   useEffect(() => {
-    fetch("http://localhost:3000/meats").then((r) => {
+    fetch("http://localhost:3000/veggies").then((r) => {
       if (r.ok) {
-        r.json().then(setMeats);
+        r.json().then(setVeggies);
       } else {
         r.json().then((error) => console.log(error.errors));
         // navigate("/login");
@@ -71,17 +72,18 @@ function Meats({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onAddMeats = (meat) => {
-    if (meatsOrder.includes(meat)) {
-      alert(`${meat.name} has already been added`);
+  const onAddVeggies = (veggie) => {
+    if (meatsOrder.includes(veggie)) {
+      alert(`${veggie.name} has already been added`);
     } else {
-      console.log(meat);
+      console.log(veggie);
       setSpanClass("active");
-      setMeatsOrder([...meatsOrder, meat]);
+      setVeggiesOrder([...veggiesOrder, veggie]);
     }
   };
 
   const startOrder = () => {};
+
   return (
     <div className="container">
       <div className="columns">
@@ -98,17 +100,17 @@ function Meats({
                     exit="exit"
                   >
                     <h3 className="subtitle has-text-white">
-                      Step 1: Select Your Meats
+                      Step 1: Select Your Veggies
                     </h3>
                     <div className="ml-6">
                       <ul>
-                        {meats.map((meat) => {
+                        {veggies.map((veggie) => {
                           //   let spanClass = pizza.sauce === sauce ? "active" : "";
 
                           return (
                             <motion.li
-                              key={meat.id}
-                              onClick={() => onAddMeats(meat)}
+                              key={veggie.id}
+                              onClick={() => onAddVeggies(veggie)}
                               whileHover={{
                                 scale: 1.3,
                                 originX: 0,
@@ -116,7 +118,7 @@ function Meats({
                               }}
                               transition={{ type: "spring", stiffness: 300 }}
                             >
-                              <span className={spanClass}>{meat.name}</span>
+                              <span className={spanClass}>{veggie.name}</span>
                             </motion.li>
                           );
                         })}
@@ -162,6 +164,8 @@ function Meats({
                 setCrustOrder={setCrustOrder}
                 meatsOrder={meatsOrder}
                 setMeatsOrder={setMeatsOrder}
+                veggiesOrder={veggiesOrder}
+                setVeggiesOrder={setVeggiesOrder}
                 pizza={pizza}
               />
             </div>
@@ -172,4 +176,4 @@ function Meats({
   );
 }
 
-export default Meats;
+export default Veggies;
