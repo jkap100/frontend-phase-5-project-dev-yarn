@@ -1,10 +1,6 @@
-import "bulma/css/bulma.min.css";
 import React from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
-// "proxy": "https://backend-phase-5-project.herokuapp.com/",
 
 const buttonVariants = {
   hover: {
@@ -19,7 +15,14 @@ const buttonVariants = {
   },
 };
 
-function Login({ username, setUsername, password, setPassword }) {
+function Signup({
+  username,
+  setUsername,
+  password,
+  setPassword,
+  email,
+  setEmail,
+}) {
   const navigate = useNavigate();
 
   const handleLogin = (event) => {
@@ -28,9 +31,10 @@ function Login({ username, setUsername, password, setPassword }) {
     const user = {
       username: username,
       password: password,
+      email: email,
     };
 
-    fetch("http://localhost:3000/login", {
+    fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,29 +44,17 @@ function Login({ username, setUsername, password, setPassword }) {
       .then((response) => response.json())
       .then((result) => {
         if (result.error) {
-          navigate("/login");
           console.error(result.error);
         } else {
           console.log("token", result.token);
-
-          navigate("/login");
+          navigate("/");
           localStorage.setItem("token", result.token);
-
-          if (result.message === "Invalid username or password") {
-            console.log(result.message);
-            alert("invalid username or password");
-          } else {
-            localStorage.setItem("currentUserId", result.user.id);
-            localStorage.setItem("isAdmin", result.user.admin);
-            localStorage.setItem("currentUsername", result.user.username);
-            localStorage.setItem("currentEmail", result.user.email);
-            // localStorage.setItem("currentUser", true);
-            console.log(localStorage);
-          }
         }
       });
+
     setUsername("");
     setPassword("");
+    setEmail("");
   };
 
   return (
@@ -112,21 +104,34 @@ function Login({ username, setUsername, password, setPassword }) {
               </span>
             </p>
           </div>
-
+          <div className="field">
+            <label className="label has-text-white">Email</label>
+            <p className="control has-icons-left has-icons-right">
+              <input
+                className="input"
+                type="text"
+                name="email"
+                placeholder="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              ></input>
+              <span className="icon is-small is-left">
+                <i className="fas fa-envelope"></i>
+              </span>
+              <span className="icon is-small is-right">
+                <i className="fas fa-check"></i>
+              </span>
+            </p>
+          </div>
           <div className="field">
             <p className="control">
-              <motion.button variants={buttonVariants} whileHover="hover">
-                Login
+              <motion.button
+                variants={buttonVariants}
+                whileHover="hover"
+                // onClick={startOrder}
+              >
+                Sign Up
               </motion.button>
-              <Link to="/signup">
-                <motion.button
-                  className="ml-3"
-                  variants={buttonVariants}
-                  whileHover="hover"
-                >
-                  Sign Up
-                </motion.button>
-              </Link>
             </p>
           </div>
         </form>
@@ -135,4 +140,4 @@ function Login({ username, setUsername, password, setPassword }) {
   );
 }
 
-export default Login;
+export default Signup;
