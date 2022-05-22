@@ -45,7 +45,7 @@ function Login({ username, setUsername, password, setPassword }) {
         } else {
           console.log("token", result.token);
 
-          navigate("/login");
+          navigate("/home");
           localStorage.setItem("token", result.token);
 
           if (result.message === "Invalid username or password") {

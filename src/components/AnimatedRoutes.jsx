@@ -19,7 +19,7 @@ import Meats from "../pages/order-pizza/Meats";
 import Veggies from "../pages/order-pizza/Veggies";
 import PizzaOrder from "./PizzaOrder";
 import Cart from "../pages/Cart";
-import Map from "../pages/Map";
+import Map from "../pages/Location";
 
 function AnimatedRoutes() {
   const location = useLocation();
