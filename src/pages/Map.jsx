@@ -11,12 +11,12 @@ import "@reach/combobox/styles.css";
 const libraries = ["places"];
 
 const mapContainerStyle = {
-  width: "100vw",
-  height: "100vw",
+  width: "100%",
+  height: "40vw",
 };
 
 const center = {
-  lat: 45.4608182,
+  lat: 45.5008182,
   lng: -122.6683848,
 };
 
@@ -30,12 +30,19 @@ function Map() {
   if (!isLoaded) return "loading maps";
 
   return (
-    <div>
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={12}
-        center={center}
-      ></GoogleMap>
+    <div className="container  mb-6">
+      <div class="columns">
+        <div class="column is-three-quarters">
+          <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            zoom={11}
+            center={center}
+          ></GoogleMap>
+        </div>
+        <div class="column">Second column</div>
+        {/* <div class="column">Third column</div>
+        <div class="column">Fourth column</div> */}
+      </div>
     </div>
   );
 }
