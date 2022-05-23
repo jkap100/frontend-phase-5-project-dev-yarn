@@ -18,6 +18,7 @@ import Sauce from "../pages/order-pizza/Sauce";
 import Meats from "../pages/order-pizza/Meats";
 import Veggies from "../pages/order-pizza/Veggies";
 import PizzaOrder from "./PizzaOrder";
+import OrderType from "../pages/OrderType";
 import Cart from "../pages/Cart";
 // import Map from "../pages/Location";
 import Map from "../pages/Map";
@@ -35,6 +36,9 @@ function AnimatedRoutes() {
     sauce: "Red",
     toppings: ["pepperoni", "ham", "cats"],
   });
+
+  //STORES
+  const [store, setStore] = useState("");
 
   //CRUST
   const [crusts, setCrusts] = useState([]);
@@ -181,7 +185,11 @@ function AnimatedRoutes() {
             }
           />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/map" element={<Map />} />
+          <Route
+            path="/map"
+            element={<Map store={store} setStore={setStore} />}
+          />
+          <Route path="/order_type" element={<OrderType />} />
         </Routes>
       </AnimatePresence>
       <NavbarBottom />

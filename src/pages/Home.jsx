@@ -65,7 +65,7 @@ function Home() {
       exit="exit"
     >
       <h2>Welcome and Enjoy</h2>
-      <Link to="/crust">
+      <Link to="/map">
         <motion.button
           variants={buttonVariants}
           whileHover="hover"

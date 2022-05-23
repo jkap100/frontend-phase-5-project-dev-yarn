@@ -171,4 +171,5 @@ li span.active::before {
 }
 #mapLi {
   padding: 10px;
+  cursor: pointer;
 }

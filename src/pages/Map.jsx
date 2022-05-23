@@ -1,13 +1,24 @@
 /* global google */
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 import {
   GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
+// import usePlacesAutocomplete, {
+//   getGeocode,
+//   getLatLng,
+// } from "use-places-autocomplete";
+// import {
+//   Combobox,
+//   ComboboxInput,
+//   ComboboxPopover,
+//   ComboboxList,
+//   ComboboxOption,
+// } from "@reach/combobox";
 import { formatRelative } from "date-fns";
 import "@reach/combobox/styles.css";
 import MapStyles from "../components/MapStyles";
@@ -70,7 +81,7 @@ const options = {
   zoomControl: true,
 };
 
-export default function Map() {
+export default function Map({ store, setStore }) {
   const [locations, setLocations] = useState([]);
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
@@ -113,16 +124,29 @@ export default function Map() {
     mapRef.current = map;
   }, []);
 
+  const selectStore = (store) => {
+    console.log(store);
+    setStore(store);
+  };
+
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
   return (
-    <div className="ml-6  mb-6">
+    <motion.div
+      className="ml-6  mb-6"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <div className="columns">
         <div
           className="column is-two-thirds
         "
         >
+          {/* <Search /> */}
+
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             zoom={11}
@@ -164,7 +188,12 @@ export default function Map() {
             ))}
 
             {selected ? (
-              <InfoWindow position={{ lat: selected.lat, lng: selected.lng }}>
+              <InfoWindow
+                position={{ lat: selected.lat, lng: selected.lng }}
+                onCloseClick={() => {
+                  setSelected(null);
+                }}
+              >
                 <div className="has-text-center">
                   <h2 className="has-text-black">
                     <strong>{selected.street}</strong>
@@ -187,7 +216,7 @@ export default function Map() {
                   <motion.li
                     key={location.id}
                     id="mapLi"
-                    // onClick={() => onAddCrust(location)}
+                    onClick={() => selectStore(location)}
                     whileHover={{
                       scale: 1.3,
                       originX: 0,
@@ -201,11 +230,26 @@ export default function Map() {
               })}
             </ul>
           </div>
+          <h3 id="container" className="mr-6 has-text-white mt-4">
+            Your Location: {store.name}
+          </h3>
+          {store.name && (
+            <motion.div className="next" variants={nextVariants}>
+              <Link to="/order_type">
+                <div className="mt-4 ml-6">
+                  <motion.button
+                    variants={buttonVariants}
+                    whileHover="hover"
+                    // onClick={startOrder}
+                  >
+                    Next
+                  </motion.button>
+                </div>
+              </Link>
+            </motion.div>
+          )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
-
-// export default Map;
-// sss
