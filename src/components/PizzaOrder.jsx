@@ -173,9 +173,8 @@ function PizzaOrder({
                 <strong className="underline has-text-white">Veggies:</strong>
               </li>
               <div>{veggieNames}</div>
-              <motion.div className="next" variants={nextVariants}>
+              {/* <motion.div className="next" variants={nextVariants}>
                 <div className="mt-4">
-                  {/* <Link to="/cart"> */}
                   <motion.button
                     variants={buttonVariants}
                     whileHover="hover"
@@ -183,9 +182,8 @@ function PizzaOrder({
                   >
                     Add To Cart
                   </motion.button>
-                  {/* </Link> */}
                 </div>
-              </motion.div>
+              </motion.div> */}
             </ul>
           </div>
         </div>

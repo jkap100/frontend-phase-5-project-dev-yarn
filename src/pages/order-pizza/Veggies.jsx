@@ -179,6 +179,19 @@ function Veggies({
               addToCart={addToCart}
             />
           </div>
+          <motion.div className="next" variants={nextVariants}>
+            <div className="mt-4 ml-6">
+              {/* <Link to="/cart"> */}
+              <motion.button
+                variants={buttonVariants}
+                whileHover="hover"
+                onClick={addToCart}
+              >
+                Add To Cart
+              </motion.button>
+              {/* </Link> */}
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>

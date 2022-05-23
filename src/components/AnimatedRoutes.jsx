@@ -112,6 +112,28 @@ function AnimatedRoutes() {
           let orderId = result.id;
 
           for (let i = 0; i < meatsOrder.length; i++) {
+            const vToppings = {
+              topping_id: veggiesOrder[i].id,
+              pizza_order_id: orderId,
+            };
+            fetch(`http://localhost:3000/pizza_order_toppings`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.token}`,
+              },
+              body: JSON.stringify(vToppings),
+            })
+              .then((response) => response.json())
+              .then((result) => {
+                if (result.error) {
+                  console.error(result.error);
+                } else {
+                }
+              });
+          }
+
+          for (let i = 0; i < meatsOrder.length; i++) {
             const mToppings = {
               topping_id: meatsOrder[i].id,
               pizza_order_id: orderId,
@@ -134,6 +156,10 @@ function AnimatedRoutes() {
           }
         }
       });
+    // setCrustOrder([]);
+    // setSauceOrder([]);
+    // setMeatsOrder([]);
+    // setVeggiesOrder([]);
   };
 
   return (
