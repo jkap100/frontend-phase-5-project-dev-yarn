@@ -41,7 +41,21 @@ const buttonVariants = {
   },
 };
 
-function OrderType({ store }) {
+function OrderType({
+  store,
+  firstName,
+  setFirstName,
+  lastName,
+  setLastName,
+  street,
+  setStreet,
+  city,
+  setCity,
+  state,
+  setState,
+  zip,
+  setZip,
+}) {
   console.log(store);
   return (
     <motion.div
@@ -68,17 +82,12 @@ function OrderType({ store }) {
                       whileHover="hover"
                       //   onClick={startOrder}
                     >
-                      Next
+                      Start Take Out
                     </motion.button>
                   </div>
                 </Link>
               </motion.div>
-              <p className="bd-notification is-info">First nested column</p>
             </div>
-
-            {/* <div clasName="column">
-              <p clasName="bd-notification is-info">Second nested column</p>
-            </div> */}
           </div>
         </div>
         <div className="column ml-6">
@@ -96,8 +105,8 @@ function OrderType({ store }) {
                     type="text"
                     name="firstName"
                     placeholder="First Name"
-                    //   value={firstName}
-                    //   onChange={(event) => setFirstName(event.target.value)}
+                    value={firstName}
+                    onChange={(event) => setFirstName(event.target.value)}
                   ></input>
                 </p>
 
@@ -107,8 +116,8 @@ function OrderType({ store }) {
                     type="text"
                     name="lastName"
                     placeholder="Last Name"
-                    //   value={lastName}
-                    //   onChange={(event) => setLastName(event.target.value)}
+                    value={lastName}
+                    onChange={(event) => setLastName(event.target.value)}
                   ></input>
                 </p>
               </div>
@@ -121,8 +130,8 @@ function OrderType({ store }) {
                     type="text"
                     name="address"
                     placeholder="Address"
-                    //   value={address}
-                    //   onChange={(event) => setAddress(event.target.value)}
+                    value={street}
+                    onChange={(event) => setStreet(event.target.value)}
                   ></input>
                 </p>
               </div>
@@ -134,8 +143,8 @@ function OrderType({ store }) {
                     type="text"
                     name="city"
                     placeholder="City"
-                    //   value={city}
-                    //   onChange={(event) => setCity(event.target.value)}
+                    value={city}
+                    onChange={(event) => setCity(event.target.value)}
                   ></input>
                 </p>
 
@@ -145,8 +154,8 @@ function OrderType({ store }) {
                     type="text"
                     name="state"
                     placeholder="State"
-                    //   value={state}
-                    //   onChange={(event) => setState(event.target.value)}
+                    value={state}
+                    onChange={(event) => setState(event.target.value)}
                   ></input>
                 </p>
                 <p className="control">
@@ -155,15 +164,19 @@ function OrderType({ store }) {
                     type="text"
                     name="zip"
                     placeholder="Zip Code"
-                    //   value={zip}
-                    //   onChange={(event) => setZip(event.target.value)}
+                    value={zip}
+                    onChange={(event) => setZip(event.target.value)}
                   ></input>
                 </p>
               </div>
 
               <div className="field ml-3 mb-4">
                 <p className="control">
-                  <button className="button is-black">Submit Order</button>
+                  <Link to="/crust">
+                    <motion.button variants={buttonVariants} whileHover="hover">
+                      Start Delivery
+                    </motion.button>
+                  </Link>
                 </p>
               </div>
             </div>

@@ -24,6 +24,20 @@ import "@reach/combobox/styles.css";
 import MapStyles from "../components/MapStyles";
 import { motion } from "framer-motion";
 
+const mapVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: { delay: 1.5, duration: 1.5 },
+  },
+  exit: {
+    x: "-100vh",
+    transition: { ease: "easeInOut" },
+  },
+};
+
 const containerVariants = {
   hidden: {
     opacity: 0,
@@ -146,64 +160,70 @@ export default function Map({ store, setStore }) {
         "
         >
           {/* <Search /> */}
-
-          <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            zoom={11}
-            center={center}
-            options={options}
-            onLoad={onMapLoad}
-            // onClick={(e) => {
-            //   setMarkers((current) => [
-            //     ...current,
-            //     {
-            //       lat: e.latLng.lat(),
-            //       lng: e.latLng.lng(),
-            //       time: new Date(),
-            //     },
-            //   ]);
-            // }}
-            onClick={onMapClick}
+          <motion.div
+            variants={mapVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
           >
-            {markers.map((marker) => (
-              <Marker
-                key={marker.time.toISOString()}
-                position={{ lat: marker.lat, lng: marker.lng }}
-              />
-            ))}
-            {locations.map((location) => (
-              <Marker
-                key={location.id}
-                position={{ lat: location.lat, lng: location.lng }}
-                icon={{
-                  url: `../pizza.svg`,
-                  origin: new window.google.maps.Point(0, 0),
-                  anchor: new window.google.maps.Point(17, 17),
-                  scaledSize: new window.google.maps.Size(35, 35),
-                }}
-                onClick={() => {
-                  setSelected(location);
-                }}
-              />
-            ))}
+            <GoogleMap
+              mapContainerStyle={mapContainerStyle}
+              zoom={11}
+              center={center}
+              options={options}
+              onLoad={onMapLoad}
+              // onClick={(e) => {
+              //   setMarkers((current) => [
+              //     ...current,
+              //     {
+              //       lat: e.latLng.lat(),
+              //       lng: e.latLng.lng(),
+              //       time: new Date(),
+              //     },
+              //   ]);
+              // }}
+              onClick={onMapClick}
+            >
+              {markers.map((marker) => (
+                <Marker
+                  key={marker.time.toISOString()}
+                  position={{ lat: marker.lat, lng: marker.lng }}
+                />
+              ))}
+              {locations.map((location) => (
+                <Marker
+                  key={location.id}
+                  position={{ lat: location.lat, lng: location.lng }}
+                  icon={{
+                    url: `../pizza.svg`,
+                    origin: new window.google.maps.Point(0, 0),
+                    anchor: new window.google.maps.Point(17, 17),
+                    scaledSize: new window.google.maps.Size(35, 35),
+                  }}
+                  onClick={() => {
+                    setSelected(location);
+                  }}
+                />
+              ))}
 
-            {selected ? (
-              <InfoWindow
-                position={{ lat: selected.lat, lng: selected.lng }}
-                onCloseClick={() => {
-                  setSelected(null);
-                }}
-              >
-                <div className="has-text-center">
-                  <h2 className="has-text-black">
-                    <strong>{selected.street}</strong>
-                  </h2>
-                  <p className="has-text-black">{selected.city}</p>
-                  <p className="has-text-black">{selected.state}</p>
-                </div>
-              </InfoWindow>
-            ) : null}
-          </GoogleMap>
+              {selected ? (
+                <InfoWindow
+                  position={{ lat: selected.lat, lng: selected.lng }}
+                  onCloseClick={() => {
+                    setSelected(null);
+                  }}
+                >
+                  <div className="has-text-center">
+                    <h2 className="has-text-black">
+                      <strong>{selected.street}</strong>
+                    </h2>
+                    <p className="has-text-black">{selected.city}</p>
+                    <p className="has-text-black">{selected.state}</p>
+                  </div>
+                </InfoWindow>
+              ) : null}
+            </GoogleMap>
+          </motion.div>
         </div>
         <div className="column">
           <h3 id="container" className="mr-6 has-text-white">
