@@ -13,12 +13,6 @@ import AnimatedRoutes from "./AnimatedRoutes";
 // import Home from "../pages/Home";
 
 function App() {
-  // const [error, setErrors] = useState("");
-
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [email, setEmail] = useState("");
-
   return (
     <BrowserRouter>
       <AnimatedRoutes />

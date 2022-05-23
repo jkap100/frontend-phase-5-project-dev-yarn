@@ -69,6 +69,56 @@ function AnimatedRoutes() {
   };
   // console.log(pizza);
 
+  const addToCart = () => {
+    console.log("jon");
+    console.log(localStorage.getItem("currentUserId"));
+    console.log(`store id ${store.id}`);
+    console.log(`crust id ${crustOrder.id}`);
+    console.log(`sauce id ${sauceOrder.id}`);
+    console.log(`first name ${firstName}`);
+    console.log(`last name ${lastName}`);
+    console.log(`street ${street}`);
+    console.log(`city ${city}`);
+    console.log(`state ${state}`);
+    console.log(`zip ${zip}`);
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.token}`,
+    };
+
+    const body = {
+      user_id: localStorage.getItem("currentUserId"),
+      store_id: store.id,
+      crust_id: crustOrder.id,
+      sauce_id: sauceOrder.id,
+      due_date: "monday",
+      due_time: 10,
+      status: "open",
+      quantity: 5,
+      first_name: firstName,
+      last_name: lastName,
+      street: street,
+      city: city,
+      state: state,
+      zip: zip,
+    };
+    console.log(body);
+
+    fetch(`http://localhost:3000/pizza_orders`, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.error) {
+          console.error(result.error);
+        } else {
+        }
+      });
+  };
+
   return (
     <>
       <Navbar />
@@ -189,6 +239,7 @@ function AnimatedRoutes() {
                 setVeggies={setVeggies}
                 veggiesOrder={veggiesOrder}
                 setVeggiesOrder={setVeggiesOrder}
+                addToCart={addToCart}
               />
             }
           />

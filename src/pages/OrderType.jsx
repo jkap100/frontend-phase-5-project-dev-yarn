@@ -56,7 +56,6 @@ function OrderType({
   zip,
   setZip,
 }) {
-  console.log(store);
   return (
     <motion.div
       className="container"

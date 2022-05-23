@@ -60,6 +60,7 @@ function Veggies({
   setVeggies,
   veggiesOrder,
   setVeggiesOrder,
+  addToCart,
 }) {
   useEffect(() => {
     fetch("http://localhost:3000/veggies").then((r) => {
@@ -174,6 +175,7 @@ function Veggies({
               setMeatsOrder={setMeatsOrder}
               veggiesOrder={veggiesOrder}
               setVeggiesOrder={setVeggiesOrder}
+              addToCart={addToCart}
             />
           </div>
         </div>
