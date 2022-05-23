@@ -61,6 +61,7 @@ function Veggies({
   veggiesOrder,
   setVeggiesOrder,
   addToCart,
+  pizza,
 }) {
   useEffect(() => {
     fetch("http://localhost:3000/veggies").then((r) => {

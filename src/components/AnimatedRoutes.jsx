@@ -31,12 +31,6 @@ function AnimatedRoutes() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const [pizza, setPizza] = useState({
-    crust: "",
-    sauce: "Red",
-    toppings: ["pepperoni", "ham", "cats"],
-  });
-
   //STORES
   const [store, setStore] = useState("");
 
@@ -64,9 +58,8 @@ function AnimatedRoutes() {
   const [veggies, setVeggies] = useState([]);
   const [veggiesOrder, setVeggiesOrder] = useState([]);
 
-  const addCrust = (crust) => {
-    setPizza({ ...pizza, crust });
-  };
+  const [pizza, setPizza] = useState();
+
   // console.log(pizza);
 
   const addToCart = () => {
@@ -94,7 +87,7 @@ function AnimatedRoutes() {
       sauce_id: sauceOrder.id,
       due_date: "monday",
       due_time: 10,
-      status: "open",
+      status: "Cart",
       quantity: 5,
       first_name: firstName,
       last_name: lastName,
@@ -115,6 +108,30 @@ function AnimatedRoutes() {
         if (result.error) {
           console.error(result.error);
         } else {
+          setPizza(result);
+          let orderId = result.id;
+
+          for (let i = 0; i < meatsOrder.length; i++) {
+            const mToppings = {
+              topping_id: meatsOrder[i].id,
+              pizza_order_id: orderId,
+            };
+            fetch(`http://localhost:3000/pizza_order_toppings`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.token}`,
+              },
+              body: JSON.stringify(mToppings),
+            })
+              .then((response) => response.json())
+              .then((result) => {
+                if (result.error) {
+                  console.error(result.error);
+                } else {
+                }
+              });
+          }
         }
       });
   };
@@ -240,6 +257,7 @@ function AnimatedRoutes() {
                 veggiesOrder={veggiesOrder}
                 setVeggiesOrder={setVeggiesOrder}
                 addToCart={addToCart}
+                pizza={pizza}
               />
             }
           />

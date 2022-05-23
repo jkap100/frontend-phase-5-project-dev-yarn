@@ -112,58 +112,6 @@ function PizzaOrder({
     setVeggiesOrder([]);
   };
 
-  // const addToCart = () => {
-  //   const headers = {
-  //     "Content-Type": "application/json",
-  //     Authorization: `Bearer ${localStorage.token}`,
-  //   };
-
-  //   const body = {
-  //     user_id: localStorage.getItem("currentUserId"),
-  //     address_id: 1,
-  //     store_id: 1,
-  //     crust_id: crustOrder.id,
-  //     sauce_id: sauceOrder.id,
-  //   };
-
-  //   console.log(body);
-
-  //   fetch(`http://localhost:3000/pizza_orders`, {
-  //     method: "POST",
-  //     headers: headers,
-  //     body: JSON.stringify(body),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       if (result.error) {
-  //         console.error(result.error);
-  //       } else {
-  //         setOrderNumber(result);
-  //         for (let i = 0; i < meatsOrder.length; i++) {
-  //           const mToppings = {
-  //             topping_id: meatsOrder[i].id,
-  //             order_id: orderNumber,
-  //           };
-  //           fetch(`http://localhost:3000/pizza_order_toppings`, {
-  //             method: "POST",
-  //             headers: {
-  //               "Content-Type": "application/json",
-  //               Authorization: `Bearer ${localStorage.token}`,
-  //             },
-  //             body: JSON.stringify(mToppings),
-  //           })
-  //             .then((response) => response.json())
-  //             .then((result) => {
-  //               if (result.error) {
-  //                 console.error(result.error);
-  //               } else {
-  //               }
-  //             });
-  //         }
-  //       }
-  //     });
-  // };
-
   return (
     <motion.div
       className="base container"
