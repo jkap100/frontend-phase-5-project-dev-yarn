@@ -184,12 +184,12 @@ export default function Map({ store, setStore }) {
               // }}
               onClick={onMapClick}
             >
-              {markers.map((marker) => (
+              {/* {markers.map((marker) => (
                 <Marker
                   key={marker.time.toISOString()}
                   position={{ lat: marker.lat, lng: marker.lng }}
-                />
-              ))}
+                /> */}
+              {/* ))} */}
               {locations.map((location) => (
                 <Marker
                   key={location.id}
@@ -205,7 +205,6 @@ export default function Map({ store, setStore }) {
                   }}
                 />
               ))}
-
               {selected ? (
                 <InfoWindow
                   position={{ lat: selected.lat, lng: selected.lng }}
@@ -214,11 +213,16 @@ export default function Map({ store, setStore }) {
                   }}
                 >
                   <div className="has-text-center">
-                    <h2 className="has-text-black">
+                    <h1 className="has-text-black">
+                      <strong>{selected.name}</strong>
+                    </h1>
+                    <h4 className="has-text-black">
                       <strong>{selected.street}</strong>
-                    </h2>
+                    </h4>
+
                     <p className="has-text-black">{selected.city}</p>
                     <p className="has-text-black">{selected.state}</p>
+                    <p className="has-text-black">{selected.phone}</p>
                   </div>
                 </InfoWindow>
               ) : null}
