@@ -40,6 +40,11 @@ function AnimatedRoutes() {
   //STORES
   const [store, setStore] = useState("");
 
+  //ADDRESS
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+
   //CRUST
   const [crusts, setCrusts] = useState([]);
   const [crustOrder, setCrustOrder] = useState([]);
@@ -189,7 +194,7 @@ function AnimatedRoutes() {
             path="/map"
             element={<Map store={store} setStore={setStore} />}
           />
-          <Route path="/order_type" element={<OrderType />} />
+          <Route path="/order_type" element={<OrderType store={store} />} />
         </Routes>
       </AnimatePresence>
       <NavbarBottom />

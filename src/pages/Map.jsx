@@ -125,7 +125,7 @@ export default function Map({ store, setStore }) {
   }, []);
 
   const selectStore = (store) => {
-    console.log(store);
+    // console.log(store);
     setStore(store);
   };
 

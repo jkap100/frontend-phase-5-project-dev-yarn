@@ -36,7 +36,7 @@ function Navbar() {
             <Link to="/">
               <div className="mt-2 ml-6 has-text-white navbar-item">Home</div>
             </Link>
-            <Link to="/">
+            <Link to="/map">
               <div className="mt-2 ml-2 has-text-white navbar-item">
                 Locations
               </div>
