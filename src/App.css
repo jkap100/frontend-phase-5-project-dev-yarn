@@ -162,3 +162,10 @@ li span.active::before {
   padding-bottom: 3px;
   font-size: 20px;
 }
+
+#container {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 20px;
+}
