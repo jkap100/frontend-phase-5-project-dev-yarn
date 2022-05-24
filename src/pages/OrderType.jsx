@@ -58,6 +58,8 @@ function OrderType({
   setState,
   zip,
   setZip,
+  orderType,
+  setOrderType,
 }) {
   const navigate = useNavigate();
 
@@ -136,10 +138,16 @@ function OrderType({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (distanceFromStore <= 5) {
+      setOrderType("Delivery");
       navigate("/crust");
     } else {
       alert("Must be within 5 miles for delivery");
     }
+  };
+
+  const takeOut = () => {
+    setOrderType("Take Out");
+    navigate("/crust");
   };
 
   return (
@@ -160,17 +168,16 @@ function OrderType({
           <div className="columns is-mobile">
             <div className="column">
               <motion.div className="next" variants={nextVariants}>
-                <Link to="/sauce">
-                  <div className="mt-4 ml-6">
-                    <motion.button
-                      variants={buttonVariants}
-                      whileHover="hover"
-                      //   onClick={startOrder}
-                    >
-                      Start Take Out
-                    </motion.button>
-                  </div>
-                </Link>
+                <div className="mt-4 ml-6">
+                  <motion.button
+                    variants={buttonVariants}
+                    whileHover="hover"
+                    onClick={takeOut}
+                    //   onClick={startOrder}
+                  >
+                    Start Take Out
+                  </motion.button>
+                </div>
               </motion.div>
             </div>
           </div>

@@ -61,6 +61,7 @@ function AnimatedRoutes() {
 
   const [pizza, setPizza] = useState();
   const [cart, setCart] = useState([]);
+  const [orderType, setOrderType] = useState("");
 
   // console.log(pizza);
 
@@ -90,6 +91,7 @@ function AnimatedRoutes() {
       due_date: "monday",
       due_time: 10,
       status: "Cart",
+      order_type: orderType,
       quantity: 1,
       first_name: firstName,
       last_name: lastName,
@@ -315,6 +317,8 @@ function AnimatedRoutes() {
                 setState={setState}
                 zip={zip}
                 setZip={setZip}
+                orderType={orderType}
+                setOrderType={setOrderType}
               />
             }
           />
