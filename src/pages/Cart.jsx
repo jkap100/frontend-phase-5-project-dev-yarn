@@ -56,6 +56,7 @@ function Cart({ cart, setCart }) {
                   Total
                 </th>
                 <th className="has-text-centered has-text-white">Add</th>
+                <th className="has-text-centered has-text-white">Remove</th>
               </tr>
             </thead>
             {cartItems}

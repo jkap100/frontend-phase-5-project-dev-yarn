@@ -49,6 +49,78 @@ function CartItems({ cartObj, cart, setCart }) {
     });
   };
 
+  const handeleRemoveFromCart = (p) => {
+    console.log(p);
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.token}`,
+    };
+    const body = {
+      quantity: p.quantity - 1,
+    };
+
+    if (p.quantity - 1 <= 0) {
+      fetch(`http://localhost:3000/pizza_orders/${p.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.token}`,
+        },
+      }).then((r) => {
+        if (r.ok) {
+          console.log("ok");
+          fetch(
+            `http://localhost:3000/carts?user_id=${localStorage.getItem(
+              "currentUserId"
+            )}`,
+            {
+              method: "GET",
+              headers: headers,
+            }
+          ).then((r) => {
+            if (r.ok) {
+              r.json().then(setCart);
+            } else {
+              r.json().then((error) => console.log(error.errors));
+              // navigate("/login");
+            }
+          });
+        } else {
+          r.json().then((err) => console.log(err.errors));
+        }
+      });
+    } else {
+      fetch(`http://localhost:3000/pizza_orders/${p.id}`, {
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify(body),
+      }).then((r) => {
+        if (r.ok) {
+          console.log("added");
+          fetch(
+            `http://localhost:3000/carts?user_id=${localStorage.getItem(
+              "currentUserId"
+            )}`,
+            {
+              method: "GET",
+              headers: headers,
+            }
+          ).then((r) => {
+            if (r.ok) {
+              r.json().then(setCart);
+            } else {
+              r.json().then((error) => console.log(error.errors));
+              // navigate("/login");
+            }
+          });
+        } else {
+          r.json().then((err) => console.log(err.errors));
+        }
+      });
+    }
+  };
+
   return (
     <tbody>
       <tr>
@@ -63,6 +135,9 @@ function CartItems({ cartObj, cart, setCart }) {
         </td>
         <td className="has-text-centered is-vcentered">
           <button onClick={() => handleAddToCart(cartObj)}>+</button>
+        </td>
+        <td className="has-text-centered is-vcentered">
+          <button onClick={() => handeleRemoveFromCart(cartObj)}>-</button>
         </td>
       </tr>
     </tbody>
