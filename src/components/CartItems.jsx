@@ -1,4 +1,18 @@
 import React from "react";
+import { motion } from "framer-motion";
+
+const buttonVariants = {
+  hover: {
+    scale: 1.1,
+    textShadow: "0px 0px 8px rgb(255,255,255)",
+    boxShadow: "0px 0px 8px rgb(255,255,255)",
+    transition: {
+      duration: 0.3,
+      repeat: Infinity,
+      repeatType: "reverse",
+    },
+  },
+};
 
 function CartItems({ cartObj, cart, setCart }) {
   //   console.log(cartObj);
@@ -136,10 +150,22 @@ function CartItems({ cartObj, cart, setCart }) {
             ${(price * cartObj.quantity).toLocaleString("en-US")}
           </td>
           <td className="has-text-centered is-vcentered">
-            <button onClick={() => handleAddToCart(cartObj)}>+</button>
+            <motion.button
+              variants={buttonVariants}
+              whileHover="hover"
+              onClick={() => handleAddToCart(cartObj)}
+            >
+              +
+            </motion.button>
           </td>
           <td className="has-text-centered is-vcentered">
-            <button onClick={() => handleRemoveFromCart(cartObj)}>-</button>
+            <motion.button
+              variants={buttonVariants}
+              whileHover="hover"
+              onClick={() => handleRemoveFromCart(cartObj)}
+            >
+              -
+            </motion.button>
           </td>
         </tr>
       </tbody>

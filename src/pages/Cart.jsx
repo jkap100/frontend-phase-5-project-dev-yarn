@@ -1,5 +1,33 @@
 import React, { useEffect } from "react";
 import CartItems from "../components/CartItems";
+import { motion } from "framer-motion";
+
+const buttonVariants = {
+  hover: {
+    scale: 1.1,
+    textShadow: "0px 0px 8px rgb(255,255,255)",
+    boxShadow: "0px 0px 8px rgb(255,255,255)",
+    transition: {
+      duration: 0.3,
+      repeat: Infinity,
+      repeatType: "reverse",
+    },
+  },
+};
+
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: { delay: 1, duration: 1 },
+  },
+  exit: {
+    x: "-100vh",
+    transition: { ease: "easeInOut" },
+  },
+};
 
 function Cart({ cart, setCart }) {
   useEffect(() => {
@@ -36,10 +64,15 @@ function Cart({ cart, setCart }) {
   const pizzaPrice = cart.map((c) => {
     totalPrice = totalPrice + c.price;
   });
-  console.log(totalPrice);
 
   return (
-    <div className="container">
+    <motion.div
+      className="container"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <div className="column">
         <div className="">
           <table id="table-background" className="table is-fullwidth">
@@ -71,7 +104,11 @@ function Cart({ cart, setCart }) {
                 <td className="has-text-white is-vcentered"></td>
                 <td className="has-text-white is-vcentered"></td>
 
-                <td className="has-text-white is-vcentered"></td>
+                <td className="has-text-white is-vcentered">
+                  <motion.button variants={buttonVariants} whileHover="hover">
+                    Check Out
+                  </motion.button>
+                </td>
                 <td className="has-text-white is-vcentered"></td>
                 <td className="has-text-white is-vcentered">Total</td>
                 <td className="has-text-white is-vcentered">
@@ -86,14 +123,9 @@ function Cart({ cart, setCart }) {
               </tr>
             </tfoot>
           </table>
-          <div className="box has-background-black">
-            <h3 className="title is-4 has-text-white">
-              {/* Subtotal - Skis : ${totalSkiPrice.toLocaleString("en-US")} */}
-            </h3>
-          </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
