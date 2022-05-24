@@ -141,10 +141,8 @@ function Cart({
           {isVisible && (
             <div className="columns is-mobile">
               <div className="column">
-                <p className="bd-notification is-info">
-                  {checkOutData.order_type}
-                </p>
-                <ul>
+                <ul className="ml-6">
+                  <li className="">{checkOutData.order_type}</li>
                   <li>
                     {checkOutData.first_name} {checkOutData.last_name}
                   </li>
@@ -156,6 +154,104 @@ function Cart({
               </div>
               <div className="column">
                 <p className="bd-notification is-info">Second nested column</p>
+                <form onSubmit="">
+                  <div className="is-expanded">
+                    <div className="field is-grouped mr-3 ml-3 is-grouped-multiline mb-4">
+                      <p className="control ">
+                        <input
+                          className="input"
+                          type="text"
+                          name="city"
+                          placeholder="City"
+                          // value={city}
+                          // onChange={(event) => setCity(event.target.value)}
+                        ></input>
+                      </p>
+
+                      <p className="control ">
+                        <input
+                          className="input"
+                          type="text"
+                          name="state"
+                          placeholder="State"
+                          // value={state}
+                          // onChange={(event) => setState(event.target.value)}
+                        ></input>
+                      </p>
+                      <p className="control ">
+                        <input
+                          className="input"
+                          type="text"
+                          name="zip"
+                          placeholder="Zip Code"
+                          // value={zip}
+                          // onChange={(event) => setZip(event.target.value)}
+                        ></input>
+                      </p>
+                    </div>
+
+                    <div className="field mr-3 ml-3">
+                      <label className="label has-text-white">
+                        Payment Information
+                      </label>
+                      <p className="control ">
+                        <input
+                          className="input"
+                          type="text"
+                          name="creditCard"
+                          placeholder="Card Number"
+                          // value={cardNumber}
+                          // onChange={(event) => setCardNumber(event.target.value)}
+                        ></input>
+                      </p>
+                    </div>
+
+                    <div className="field is-grouped is-grouped-multiline ml-3 mr-3 mb-4">
+                      <p className="control ">
+                        <input
+                          className="input"
+                          type="text"
+                          name="ccv"
+                          placeholder="CCV"
+                          // value={ccv}
+                          // onChange={(event) => setCCV(event.target.value)}
+                        ></input>
+                      </p>
+
+                      <p className="control ">
+                        <input
+                          className="input"
+                          type="date"
+                          name="expiration"
+                          placeholder="Expiration"
+                          // value={expiration}
+                          // onChange={(event) => setExpiration(event.target.value)}
+                        ></input>
+                      </p>
+                      <p className="control ">
+                        <input
+                          className="input"
+                          type="text"
+                          name="ccZip"
+                          placeholder="Zip Code"
+                          // value={cardZip}
+                          // onChange={(event) => setCardZip(event.target.value)}
+                        ></input>
+                      </p>
+                    </div>
+                    <div className="field ml-3 mb-4">
+                      <p className="control">
+                        <motion.button
+                          className=""
+                          variants={buttonVariants}
+                          whileHover="hover"
+                        >
+                          Submit Order
+                        </motion.button>
+                      </p>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           )}
