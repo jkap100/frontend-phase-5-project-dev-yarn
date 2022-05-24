@@ -82,22 +82,15 @@ function Cart({ cart, setCart }) {
           <table id="table-background" className="table is-fullwidth">
             <thead>
               <tr className="has-text-white">
-                <th className="cart-image has-text-centered has-text-white">
-                  Crust
-                </th>
+                <th className="cart-image has-text-white">Crust</th>
                 <th className="product has-text-white">Sauce</th>
-                <th className="category has-text-centered has-text-white">
-                  Toppings
-                </th>
-                <th className="price has-text-centered has-text-white">
-                  Price
-                </th>
+                <th className="category has-text-white">Toppings</th>
+                <th className="price has-text-white">Order Type</th>
+                <th className="price has-text-white">Price</th>
                 <th className="qty has-text-centered has-text-white">
                   Quantity
                 </th>
-                <th className="Total has-text-centered has-text-white">
-                  Total
-                </th>
+                <th className="Total has-text-white">Total</th>
                 <th className="has-text-centered has-text-white">Add</th>
                 <th className="has-text-centered has-text-white">Remove</th>
               </tr>
@@ -107,7 +100,7 @@ function Cart({ cart, setCart }) {
               <tr>
                 <td className="has-text-white is-vcentered"></td>
                 <td className="has-text-white is-vcentered"></td>
-
+                <td className="has-text-white is-vcentered"></td>
                 <td className="has-text-white is-vcentered">
                   <motion.button
                     variants={buttonVariants}
@@ -117,8 +110,11 @@ function Cart({ cart, setCart }) {
                     Check Out
                   </motion.button>
                 </td>
+
                 <td className="has-text-white is-vcentered"></td>
-                <td className="has-text-white is-vcentered">Total</td>
+                <td className="has-text-white has-text-centered is-vcentered">
+                  Total
+                </td>
                 <td className="has-text-white is-vcentered">
                   ${totalPrice.toLocaleString("en-US")}
                 </td>
