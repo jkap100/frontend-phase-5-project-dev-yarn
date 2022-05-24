@@ -177,3 +177,7 @@ li span.active::before {
 #table-background {
   background-color: rgba(0, 0, 0, 0);
 }
+
+.pointer {
+  cursor: pointer;
+}

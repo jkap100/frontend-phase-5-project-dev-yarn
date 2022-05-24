@@ -139,27 +139,6 @@ export default function Map({ store, setStore }) {
   }, []);
 
   const selectStore = (store) => {
-    // console.log(store);
-    // const headers = {
-    //   "Content-Type": "application/json",
-    //   Authorization: `Bearer ${localStorage.token}`,
-    // };
-    // fetch(
-    //   `http://localhost:3000/carts?user_id=${store.id}`,
-    //   {
-    //     method: "GET",
-    //     headers: headers,
-    //   }
-    // ).then((r) => {
-    //   if (r.ok) {
-    //     r.json().then(setCart);
-
-    //   } else {
-    //     r.json().then((error) => console.log(error.errors));
-    //     // navigate("/login");
-    //   }
-    // });
-
     setStore(store);
   };
 

@@ -1,7 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    localStorage.clear();
+
+    navigate("/");
+    console.log(localStorage);
+  };
+
   return (
     <div>
       <nav
@@ -33,7 +43,7 @@ function Navbar() {
 
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <Link to="/">
+            <Link to="/home">
               <div className="mt-2 ml-6 has-text-white navbar-item">Home</div>
             </Link>
             <Link to="/map">
@@ -81,12 +91,30 @@ function Navbar() {
                   Cart
                 </div>
               </Link>
-              <div className="buttons">
+              <Link to="/">
+                <div className="mt-2 ml-2 has-text-white navbar-item navbar-item">
+                  Log In
+                </div>
+              </Link>
+              <Link to="/signup">
+                <div className="mt-2 ml-2 has-text-white navbar-item navbar-item">
+                  Sign Up
+                </div>
+              </Link>
+
+              <div
+                className="mt-2 ml-2 mr-6 has-text-white navbar-item navbar-item pointer"
+                onClick={logOut}
+              >
+                Log Out
+              </div>
+
+              {/* <div className="buttons">
                 <a className="button is-primary">
                   <strong>Sign up</strong>
                 </a>
                 <a className="button is-light">Log in</a>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
