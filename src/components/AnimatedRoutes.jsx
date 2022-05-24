@@ -89,7 +89,7 @@ function AnimatedRoutes() {
       due_date: "monday",
       due_time: 10,
       status: "Cart",
-      quantity: 5,
+      quantity: 1,
       first_name: firstName,
       last_name: lastName,
       street: street,

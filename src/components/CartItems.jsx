@@ -49,7 +49,7 @@ function CartItems({ cartObj, cart, setCart }) {
     });
   };
 
-  const handeleRemoveFromCart = (p) => {
+  const handleRemoveFromCart = (p) => {
     console.log(p);
 
     const headers = {
@@ -109,6 +109,7 @@ function CartItems({ cartObj, cart, setCart }) {
           ).then((r) => {
             if (r.ok) {
               r.json().then(setCart);
+              console.log(cart);
             } else {
               r.json().then((error) => console.log(error.errors));
               // navigate("/login");
@@ -122,25 +123,46 @@ function CartItems({ cartObj, cart, setCart }) {
   };
 
   return (
-    <tbody>
-      <tr>
-        <td className="has-text-white is-vcentered">{cartObj.crust}</td>
-        <td className="has-text-white is-vcentered">{cartObj.sauce}</td>
+    <>
+      <tbody>
+        <tr>
+          <td className="has-text-white is-vcentered">{cartObj.crust}</td>
+          <td className="has-text-white is-vcentered">{cartObj.sauce}</td>
 
-        <td className="has-text-white is-vcentered">{orderToppings}</td>
-        <td className="has-text-white is-vcentered">${price}</td>
-        <td className="has-text-white is-vcentered">{cartObj.quantity}</td>
-        <td className="has-text-white is-vcentered">
-          ${price * cartObj.quantity}
-        </td>
-        <td className="has-text-centered is-vcentered">
-          <button onClick={() => handleAddToCart(cartObj)}>+</button>
-        </td>
-        <td className="has-text-centered is-vcentered">
-          <button onClick={() => handeleRemoveFromCart(cartObj)}>-</button>
-        </td>
-      </tr>
-    </tbody>
+          <td className="has-text-white is-vcentered">{orderToppings}</td>
+          <td className="has-text-white is-vcentered">${price}</td>
+          <td className="has-text-white is-vcentered">{cartObj.quantity}</td>
+          <td className="has-text-white is-vcentered">
+            ${(price * cartObj.quantity).toLocaleString("en-US")}
+          </td>
+          <td className="has-text-centered is-vcentered">
+            <button onClick={() => handleAddToCart(cartObj)}>+</button>
+          </td>
+          <td className="has-text-centered is-vcentered">
+            <button onClick={() => handleRemoveFromCart(cartObj)}>-</button>
+          </td>
+        </tr>
+      </tbody>
+      {/* <tfoot>
+        <tr>
+          <td className="has-text-white is-vcentered">{cartObj.crust}</td>
+          <td className="has-text-white is-vcentered">{cartObj.sauce}</td>
+
+          <td className="has-text-white is-vcentered">{orderToppings}</td>
+          <td className="has-text-white is-vcentered">${price}</td>
+          <td className="has-text-white is-vcentered">{cartObj.quantity}</td>
+          <td className="has-text-white is-vcentered">
+            ${price * cartObj.quantity}
+          </td>
+          <td className="has-text-centered is-vcentered">
+            <button onClick={() => handleAddToCart(cartObj)}>+</button>
+          </td>
+          <td className="has-text-centered is-vcentered">
+            <button onClick={() => handeleRemoveFromCart(cartObj)}>-</button>
+          </td>
+        </tr>
+      </tfoot> */}
+    </>
   );
 }
 

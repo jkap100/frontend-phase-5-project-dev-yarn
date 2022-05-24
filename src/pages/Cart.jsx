@@ -27,10 +27,16 @@ function Cart({ cart, setCart }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(cart.length);
+  // console.log(cart.length);
   const cartItems = cart.map((c) => (
     <CartItems key={c.id} cartObj={c} cart={cart} setCart={setCart} />
   ));
+
+  let totalPrice = 0;
+  const pizzaPrice = cart.map((c) => {
+    totalPrice = totalPrice + c.price;
+  });
+  console.log(totalPrice);
 
   return (
     <div className="container">
@@ -60,6 +66,25 @@ function Cart({ cart, setCart }) {
               </tr>
             </thead>
             {cartItems}
+            <tfoot>
+              <tr>
+                <td className="has-text-white is-vcentered"></td>
+                <td className="has-text-white is-vcentered"></td>
+
+                <td className="has-text-white is-vcentered"></td>
+                <td className="has-text-white is-vcentered"></td>
+                <td className="has-text-white is-vcentered">Total</td>
+                <td className="has-text-white is-vcentered">
+                  ${totalPrice.toLocaleString("en-US")}
+                </td>
+                <td className="has-text-centered is-vcentered">
+                  {/* <button onClick={() => handleAddToCart(cartObj)}>+</button> */}
+                </td>
+                <td className="has-text-centered is-vcentered">
+                  {/* <button onClick={() => handeleRemoveFromCart(cartObj)}>-</button> */}
+                </td>
+              </tr>
+            </tfoot>
           </table>
           <div className="box has-background-black">
             <h3 className="title is-4 has-text-white">
