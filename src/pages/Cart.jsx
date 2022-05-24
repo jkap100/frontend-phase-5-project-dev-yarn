@@ -65,6 +65,10 @@ function Cart({ cart, setCart }) {
     totalPrice = totalPrice + c.price;
   });
 
+  const checkOut = () => {
+    console.log("check out");
+  };
+
   return (
     <motion.div
       className="container"
@@ -105,7 +109,11 @@ function Cart({ cart, setCart }) {
                 <td className="has-text-white is-vcentered"></td>
 
                 <td className="has-text-white is-vcentered">
-                  <motion.button variants={buttonVariants} whileHover="hover">
+                  <motion.button
+                    variants={buttonVariants}
+                    whileHover="hover"
+                    onClick={checkOut}
+                  >
                     Check Out
                   </motion.button>
                 </td>

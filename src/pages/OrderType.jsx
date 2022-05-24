@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import Geocode from "react-geocode";
 
 const containerVariants = {
   hidden: {
@@ -43,6 +45,7 @@ const buttonVariants = {
 
 function OrderType({
   store,
+  setStore,
   firstName,
   setFirstName,
   lastName,
@@ -56,6 +59,89 @@ function OrderType({
   zip,
   setZip,
 }) {
+  const navigate = useNavigate();
+
+  const [lat1, setLat1] = useState("");
+  const [lat2, setLat2] = useState("");
+  const [lng1, setLng1] = useState("");
+  const [lng2, setLng2] = useState("");
+
+  useEffect(() => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.token}`,
+    };
+
+    fetch(`http://localhost:3000/stores/${store.id}`, {
+      method: "GET",
+      headers: headers,
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((r) => {
+          setLat1(r.lat);
+          setLng1(r.lng);
+        });
+      } else {
+        r.json().then((error) => console.log(error.errors));
+        // navigate("/login");
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  Geocode.setApiKey(process.env.REACT_APP_MAP_API);
+
+  Geocode.fromAddress("10435 SW 63rd Dr Portland OR 97219").then(
+    (response) => {
+      const { lat, lng } = response.results[0].geometry.location;
+      //   console.log(lat, lng);
+      setLat2(lat);
+      setLng2(lng);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+
+  function d3(lat1, lat2, lng1, lng2) {
+    // The math module contains a function
+    // named toRadians which converts from
+    // degrees to radians.
+    lng1 = (lng1 * Math.PI) / 180;
+    lng2 = (lng2 * Math.PI) / 180;
+    lat1 = (lat1 * Math.PI) / 180;
+    lat2 = (lat2 * Math.PI) / 180;
+
+    // Haversine formula
+    let dlon = lng2 - lng1;
+    let dlat = lat2 - lat1;
+    let a =
+      Math.pow(Math.sin(dlat / 2), 2) +
+      Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(dlon / 2), 2);
+
+    let c = 2 * Math.asin(Math.sqrt(a));
+
+    // Radius of earth in kilometers. Use 3956
+    // for miles
+    let r = 3956;
+
+    // calculate the result
+    return c * r;
+  }
+
+  // Driver code
+
+  const distanceFromStore = d3(lat1, lat2, lng1, lng2);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (distanceFromStore <= 5) {
+      navigate("/crust");
+    } else {
+      alert("Must be within 5 miles for delivery");
+    }
+  };
+
   return (
     <motion.div
       className="container"
@@ -94,7 +180,7 @@ function OrderType({
             Order Delivery From: - {store.name} - {store.street}, {store.city}
           </h3>
 
-          <form onSubmit="">
+          <form onSubmit={handleSubmit}>
             <div className="is-expanded">
               <label className="label mr-3 ml-3 has-text-white">Name</label>
               <div className="field is-grouped is-grouped-multiline mb-4 mr-3 ml-3">
@@ -171,11 +257,11 @@ function OrderType({
 
               <div className="field ml-3 mb-4">
                 <p className="control">
-                  <Link to="/crust">
-                    <motion.button variants={buttonVariants} whileHover="hover">
-                      Start Delivery
-                    </motion.button>
-                  </Link>
+                  {/* <Link to="/crust"> */}
+                  <motion.button variants={buttonVariants} whileHover="hover">
+                    Start Delivery
+                  </motion.button>
+                  {/* </Link> */}
                 </p>
               </div>
             </div>

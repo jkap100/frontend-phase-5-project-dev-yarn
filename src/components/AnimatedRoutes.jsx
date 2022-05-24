@@ -22,6 +22,7 @@ import OrderType from "../pages/OrderType";
 import Cart from "../pages/Cart";
 // import Map from "../pages/Location";
 import Map from "../pages/Map";
+import Distance from "./Distance";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -301,6 +302,7 @@ function AnimatedRoutes() {
             element={
               <OrderType
                 store={store}
+                setStore={setStore}
                 firstName={firstName}
                 setFirstName={setFirstName}
                 lastName={lastName}
@@ -315,6 +317,10 @@ function AnimatedRoutes() {
                 setZip={setZip}
               />
             }
+          />
+          <Route
+            path="/distance"
+            element={<Distance store={store} setStore={setStore} />}
           />
         </Routes>
       </AnimatePresence>
