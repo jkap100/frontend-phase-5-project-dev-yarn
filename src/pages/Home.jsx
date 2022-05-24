@@ -65,6 +65,7 @@ function Home() {
       exit="exit"
     >
       <h2>Welcome and Enjoy</h2>
+      <p>All Pizza's are $10 + $1.50 per topping</p>
       <Link to="/map">
         <motion.button
           variants={buttonVariants}

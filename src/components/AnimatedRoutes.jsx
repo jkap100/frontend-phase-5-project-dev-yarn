@@ -59,6 +59,7 @@ function AnimatedRoutes() {
   const [veggiesOrder, setVeggiesOrder] = useState([]);
 
   const [pizza, setPizza] = useState();
+  const [cart, setCart] = useState([]);
 
   // console.log(pizza);
 
@@ -287,7 +288,10 @@ function AnimatedRoutes() {
               />
             }
           />
-          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/cart"
+            element={<Cart cart={cart} setCart={setCart} />}
+          />
           <Route
             path="/map"
             element={<Map store={store} setStore={setStore} />}

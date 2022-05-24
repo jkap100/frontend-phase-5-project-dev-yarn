@@ -76,6 +76,11 @@ function Navbar() {
 
           <div className="navbar-end">
             <div className="navbar-item">
+              <Link to="/cart">
+                <div className="mt-2 ml-2 has-text-white navbar-item navbar-item">
+                  Cart
+                </div>
+              </Link>
               <div className="buttons">
                 <a className="button is-primary">
                   <strong>Sign up</strong>
