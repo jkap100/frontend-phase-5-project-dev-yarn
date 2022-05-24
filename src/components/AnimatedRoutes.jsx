@@ -62,6 +62,9 @@ function AnimatedRoutes() {
   const [pizza, setPizza] = useState();
   const [cart, setCart] = useState([]);
   const [orderType, setOrderType] = useState("");
+  const [checkOutData, setCheckOutData] = useState([]);
+
+  const [isVisible, setIsVisible] = useState(false);
 
   // console.log(pizza);
 
@@ -293,7 +296,16 @@ function AnimatedRoutes() {
           />
           <Route
             path="/cart"
-            element={<Cart cart={cart} setCart={setCart} />}
+            element={
+              <Cart
+                cart={cart}
+                setCart={setCart}
+                checkOutData={checkOutData}
+                setCheckOutData={setCheckOutData}
+                isVisible={isVisible}
+                setIsVisible={setIsVisible}
+              />
+            }
           />
           <Route
             path="/map"

@@ -29,7 +29,14 @@ const containerVariants = {
   },
 };
 
-function Cart({ cart, setCart }) {
+function Cart({
+  cart,
+  setCart,
+  isVisible,
+  setIsVisible,
+  checkOutData,
+  setCheckOutData,
+}) {
   useEffect(() => {
     const headers = {
       "Content-Type": "application/json",
@@ -60,6 +67,9 @@ function Cart({ cart, setCart }) {
     <CartItems key={c.id} cartObj={c} cart={cart} setCart={setCart} />
   ));
 
+  cart.map((c) => setCheckOutData(c));
+  console.log(checkOutData);
+
   let totalPrice = 0;
   const pizzaPrice = cart.map((c) => {
     totalPrice = totalPrice + c.price;
@@ -67,6 +77,7 @@ function Cart({ cart, setCart }) {
 
   const checkOut = () => {
     console.log("check out");
+    setIsVisible(!isVisible);
   };
 
   return (
@@ -127,6 +138,27 @@ function Cart({ cart, setCart }) {
               </tr>
             </tfoot>
           </table>
+          {isVisible && (
+            <div className="columns is-mobile">
+              <div className="column">
+                <p className="bd-notification is-info">
+                  {checkOutData.order_type}
+                </p>
+                <ul>
+                  <li>
+                    {checkOutData.first_name} {checkOutData.last_name}
+                  </li>
+                  <li>{checkOutData.street}</li>
+                  <li>
+                    {checkOutData.city} {checkOutData.state}, {checkOutData.zip}
+                  </li>
+                </ul>
+              </div>
+              <div className="column">
+                <p className="bd-notification is-info">Second nested column</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </motion.div>
