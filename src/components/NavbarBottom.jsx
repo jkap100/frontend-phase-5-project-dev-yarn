@@ -1,6 +1,6 @@
 import React from "react";
 
-function NavbarBottom() {
+function NavbarBottom({ store }) {
   return (
     <div>
       <nav
@@ -9,13 +9,13 @@ function NavbarBottom() {
         aria-label="main navigation"
       >
         <div className="navbar-brand">
-          <a className="navbar-item" href="https://bulma.io">
+          {/* <a className="navbar-item" href="https://bulma.io">
             <img
               src="https://bulma.io/images/bulma-logo.png"
               width="112"
               height="28"
             ></img>
-          </a>
+          </a> */}
 
           <a
             role="button"
@@ -32,12 +32,15 @@ function NavbarBottom() {
 
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <a className="navbar-item">Home</a>
+            <div className="navbar-item has-text-white ml-6">{store.name}</div>
 
-            <a className="navbar-item">Documentation</a>
+            <div className="navbar-item">{store.street}</div>
+            <div className="navbar-item">{store.city}</div>
+            <div className="navbar-item">{store.state}</div>
+            <div className="navbar-item"></div>
 
             <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link">More</a>
+              {/* <a className="navbar-link">More</a> */}
 
               <div className="navbar-dropdown">
                 <a className="navbar-item">About</a>
@@ -51,12 +54,12 @@ function NavbarBottom() {
 
           <div className="navbar-end">
             <div className="navbar-item">
-              <div className="buttons">
+              {/* <div className="buttons">
                 <a className="button is-primary">
                   <strong>Sign up</strong>
                 </a>
                 <a className="button is-light">Log in</a>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

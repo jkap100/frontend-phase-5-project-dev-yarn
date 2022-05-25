@@ -2,11 +2,34 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-function Navbar() {
+function Navbar({
+  setStore,
+  setFirstName,
+  setLastName,
+  setStreet,
+  setCity,
+  setState,
+  setZip,
+  setCrustOrder,
+  setSauceOrder,
+  setMeatsOrder,
+  setVeggiesOrder,
+}) {
   const navigate = useNavigate();
 
   const logOut = () => {
     localStorage.clear();
+    setStore("");
+    setFirstName("");
+    setLastName("");
+    setStreet("");
+    setCity("");
+    setState("");
+    setZip("");
+    setCrustOrder("");
+    setSauceOrder("");
+    setMeatsOrder("");
+    setVeggiesOrder("");
 
     navigate("/");
     console.log(localStorage);

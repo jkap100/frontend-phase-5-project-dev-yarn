@@ -171,7 +171,19 @@ function AnimatedRoutes() {
 
   return (
     <>
-      <Navbar />
+      <Navbar
+        setStore={setStore}
+        setFirstName={setFirstName}
+        setLastName={setLastName}
+        setStreet={setStreet}
+        setCity={setCity}
+        setState={setState}
+        setZip={setZip}
+        setCrustOrder={setCrustOrder}
+        setSauceOrder={setSauceOrder}
+        setMeatsOrder={setMeatsOrder}
+        setVeggiesOrder={setVeggiesOrder}
+      />
       <Header />
       <AnimatePresence>
         <Routes location={location} key={location.pathname}>
@@ -340,7 +352,7 @@ function AnimatedRoutes() {
           />
         </Routes>
       </AnimatePresence>
-      <NavbarBottom />
+      <NavbarBottom store={store} />
     </>
   );
 }
