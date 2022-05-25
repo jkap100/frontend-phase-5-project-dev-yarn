@@ -75,6 +75,8 @@ function AnimatedRoutes() {
   const [storeLocation, setStoreLocation] = useState("");
   const [status, setStatus] = useState("");
 
+  const [orders, setOrders] = useState([]);
+
   // console.log(pizza);
 
   const addToCart = () => {
@@ -394,6 +396,8 @@ function AnimatedRoutes() {
                 setStatus={setStatus}
                 orderType={orderType}
                 setOrderType={setOrderType}
+                orders={orders}
+                setOrders={setOrders}
               />
             }
           />

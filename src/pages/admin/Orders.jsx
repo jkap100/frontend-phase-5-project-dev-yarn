@@ -23,6 +23,8 @@ function Orders({
   setStatus,
   orderType,
   setOrderType,
+  orders,
+  setOrders,
 }) {
   useEffect(() => {
     fetch("http://localhost:3000/stores").then((r) => {
@@ -60,6 +62,7 @@ function Orders({
           console.log(r.error);
         } else {
           console.log(r);
+          setOrders(r);
         }
       });
   };
