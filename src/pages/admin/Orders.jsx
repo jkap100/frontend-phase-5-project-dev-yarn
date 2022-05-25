@@ -13,6 +13,11 @@ const buttonVariants = {
     },
   },
 };
+
+const handleSelect = () => {
+  console.log("select");
+};
+
 function Orders({ locations }) {
   return (
     <div className="container">
@@ -32,18 +37,27 @@ function Orders({ locations }) {
               <label className="is-vcentered ml-4 mr-2">Status</label>
               <p className="control">
                 <select className="input" type="text" name="location">
-                  {locations.map((l) => (
-                    <option>{l.name}</option>
-                  ))}
+                  <option>Cart</option>
+                  <option>Ordered</option>
+                  <option>Filled</option>
                 </select>
               </p>
               <label className="is-vcentered ml-4 mr-2">Order Type</label>
               <p className="control">
                 <select className="input" type="text" name="location">
-                  {locations.map((l) => (
-                    <option>{l.name}</option>
-                  ))}
+                  <option>Take Out</option>
+                  <option>Delivery</option>
                 </select>
+              </p>
+              <p>
+                <motion.button
+                  className="ml-4"
+                  variants={buttonVariants}
+                  whileHover="hover"
+                  onClick={handleSelect}
+                >
+                  Select
+                </motion.button>
               </p>
             </div>
           </form>
