@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter,
-  Navigate,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { Navigate, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./Navbar";
 import NavbarBottom from "./NavbarBottom";
@@ -17,7 +11,6 @@ import Crust from "../pages/order-pizza/Crust";
 import Sauce from "../pages/order-pizza/Sauce";
 import Meats from "../pages/order-pizza/Meats";
 import Veggies from "../pages/order-pizza/Veggies";
-import PizzaOrder from "./PizzaOrder";
 import OrderType from "../pages/OrderType";
 import Cart from "../pages/Cart";
 // import Map from "../pages/Location";
@@ -25,6 +18,7 @@ import Map from "../pages/Map";
 import Distance from "./Distance";
 
 function AnimatedRoutes() {
+  // const navigate = useNavigate();
   const location = useLocation();
   const [error, setErrors] = useState("");
 
@@ -172,10 +166,8 @@ function AnimatedRoutes() {
           }
         }
       });
-    // setCrustOrder([]);
-    // setSauceOrder([]);
-    // setMeatsOrder([]);
-    // setVeggiesOrder([]);
+
+    alert("Added to Cart");
   };
 
   return (
@@ -193,6 +185,13 @@ function AnimatedRoutes() {
         setMeatsOrder={setMeatsOrder}
         setVeggiesOrder={setVeggiesOrder}
         setIsVisible={setIsVisible}
+        setCheckOutData={setCheckOutData}
+        setCardNumber={setCardNumber}
+        setCCV={setCCV}
+        setCCDate={setCCDate}
+        setCCZip={setCCZip}
+        setDueDate={setDueDate}
+        setDueTime={setDueTime}
       />
       <Header />
       <AnimatePresence>

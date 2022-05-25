@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import CartItems from "../components/CartItems";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const buttonVariants = {
   hover: {
@@ -49,6 +50,7 @@ function Cart({
   ccZip,
   setCCZip,
 }) {
+  const navigate = useNavigate();
   useEffect(() => {
     const headers = {
       "Content-Type": "application/json",
@@ -153,6 +155,7 @@ function Cart({
                         console.log(r.error);
                       } else {
                         setCart(r);
+                        navigate("/cart");
                       }
                     });
                   });
@@ -226,11 +229,9 @@ function Cart({
               <div className="column">
                 <ul className="ml-6">
                   <li id="checkout" className="checkout">
-                    {checkOutData.order_type}
+                    {checkOutData.order_type} from {checkOutData.store_name}
                   </li>
-                  <li id="checkout" className="checkout">
-                    {checkOutData.store_name}
-                  </li>
+
                   <li>
                     {checkOutData.first_name} {checkOutData.last_name}
                   </li>

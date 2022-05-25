@@ -15,6 +15,13 @@ function Navbar({
   setMeatsOrder,
   setVeggiesOrder,
   setIsVisible,
+  setCheckOutData,
+  setCardNumber,
+  setCCV,
+  setCCDate,
+  setCCZip,
+  setDueDate,
+  setDueTime,
 }) {
   const navigate = useNavigate();
 
@@ -32,6 +39,13 @@ function Navbar({
     setMeatsOrder("");
     setVeggiesOrder("");
     setIsVisible(false);
+    setCheckOutData([]);
+    setCardNumber("");
+    setCCV("");
+    setCCDate("");
+    setCCZip("");
+    setDueDate("");
+    setDueTime("");
 
     navigate("/");
     console.log(localStorage);
