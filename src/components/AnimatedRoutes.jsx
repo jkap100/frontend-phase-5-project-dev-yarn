@@ -72,6 +72,9 @@ function AnimatedRoutes() {
   const [locations, setLocations] = useState([]);
   const [selected, setSelected] = useState(null);
 
+  const [storeLocation, setStoreLocation] = useState("");
+  const [status, setStatus] = useState("");
+
   // console.log(pizza);
 
   const addToCart = () => {
@@ -379,7 +382,20 @@ function AnimatedRoutes() {
               />
             }
           />
-          <Route path="/orders" element={<Orders locations={locations} />} />
+          <Route
+            path="/orders"
+            element={
+              <Orders
+                locations={locations}
+                storeLocation={storeLocation}
+                setStoreLocation={setStoreLocation}
+                status={status}
+                setStatus={setStatus}
+                orderType={orderType}
+                setOrderType={setOrderType}
+              />
+            }
+          />
         </Routes>
       </AnimatePresence>
       <NavbarBottom store={store} />

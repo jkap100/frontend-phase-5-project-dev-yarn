@@ -14,11 +14,20 @@ const buttonVariants = {
   },
 };
 
-const handleSelect = () => {
+const handleSelect = (e) => {
+  e.preventDefault();
   console.log("select");
 };
 
-function Orders({ locations }) {
+function Orders({
+  locations,
+  storeLocation,
+  setStoreLocation,
+  status,
+  setStatus,
+  orderType,
+  setOrderType,
+}) {
   return (
     <div className="container">
       <div className="columns">
@@ -28,7 +37,14 @@ function Orders({ locations }) {
             <div className="field is-grouped">
               <label className="is-vcentered mr-2">Location</label>
               <p className="control">
-                <select className="input" type="text" name="location">
+                <select
+                  className="input"
+                  type="text"
+                  name="location"
+                  value={storeLocation}
+                  onChange={(e) => setStoreLocation(e.target.value)}
+                >
+                  <option>-</option>
                   {locations.map((l) => (
                     <option>{l.name}</option>
                   ))}
@@ -36,7 +52,14 @@ function Orders({ locations }) {
               </p>
               <label className="is-vcentered ml-4 mr-2">Status</label>
               <p className="control">
-                <select className="input" type="text" name="location">
+                <select
+                  className="input"
+                  type="text"
+                  name="location"
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                >
+                  <option>-</option>
                   <option>Cart</option>
                   <option>Ordered</option>
                   <option>Filled</option>
@@ -44,7 +67,14 @@ function Orders({ locations }) {
               </p>
               <label className="is-vcentered ml-4 mr-2">Order Type</label>
               <p className="control">
-                <select className="input" type="text" name="location">
+                <select
+                  className="input"
+                  type="text"
+                  name="location"
+                  value={orderType}
+                  onChange={(e) => setOrderType(e.target.value)}
+                >
+                  <option>-</option>
                   <option>Take Out</option>
                   <option>Delivery</option>
                 </select>
