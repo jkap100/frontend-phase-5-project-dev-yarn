@@ -15,7 +15,7 @@ import OrderType from "../pages/OrderType";
 import Cart from "../pages/Cart";
 // import Map from "../pages/Location";
 import Map from "../pages/Map";
-import Distance from "./Distance";
+import Orders from "../pages/admin/Orders";
 
 function AnimatedRoutes() {
   // const navigate = useNavigate();
@@ -68,6 +68,9 @@ function AnimatedRoutes() {
 
   const [isVisible, setIsVisible] = useState(false);
   const [orderId, setOrderId] = useState("");
+
+  const [locations, setLocations] = useState([]);
+  const [selected, setSelected] = useState(null);
 
   // console.log(pizza);
 
@@ -342,7 +345,16 @@ function AnimatedRoutes() {
           />
           <Route
             path="/map"
-            element={<Map store={store} setStore={setStore} />}
+            element={
+              <Map
+                store={store}
+                setStore={setStore}
+                locations={locations}
+                setLocations={setLocations}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            }
           />
           <Route
             path="/order_type"
@@ -367,10 +379,7 @@ function AnimatedRoutes() {
               />
             }
           />
-          <Route
-            path="/distance"
-            element={<Distance store={store} setStore={setStore} />}
-          />
+          <Route path="/orders" element={<Orders locations={locations} />} />
         </Routes>
       </AnimatePresence>
       <NavbarBottom store={store} />

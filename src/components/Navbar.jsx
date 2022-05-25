@@ -55,9 +55,9 @@ function Navbar({
     <div className="navbar-item has-dropdown is-hoverable">
       <div className="mb-2 navbar-link has-text-white">Admin</div>
       <div className="navbar-dropdown has-text-black">
-        {/* <Link to="/inventory"> */}
-        <div className="navbar-item">Inventory</div>
-        {/* </Link> */}
+        <Link to="/orders">
+          <div className="navbar-item">Orders</div>
+        </Link>
         {/* <Link to="/inventory_order_form"> */}
         <div className="navbar-item">New Inv Order</div>
         {/* </Link> */}

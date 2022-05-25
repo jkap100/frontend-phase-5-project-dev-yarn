@@ -95,10 +95,17 @@ const options = {
   zoomControl: true,
 };
 
-export default function Map({ store, setStore }) {
-  const [locations, setLocations] = useState([]);
+export default function Map({
+  store,
+  setStore,
+  locations,
+  setLocations,
+  selected,
+  setSelected,
+}) {
+  // const [locations, setLocations] = useState([]);
   const [markers, setMarkers] = useState([]);
-  const [selected, setSelected] = useState(null);
+  // const [selected, setSelected] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:3000/stores").then((r) => {
