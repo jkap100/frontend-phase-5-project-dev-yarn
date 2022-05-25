@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 
 const buttonVariants = {
@@ -14,13 +14,9 @@ const buttonVariants = {
   },
 };
 
-const handleSelect = (e) => {
-  e.preventDefault();
-  console.log("select");
-};
-
 function Orders({
   locations,
+  setLocations,
   storeLocation,
   setStoreLocation,
   status,
@@ -28,6 +24,23 @@ function Orders({
   orderType,
   setOrderType,
 }) {
+  useEffect(() => {
+    fetch("http://localhost:3000/stores").then((r) => {
+      if (r.ok) {
+        r.json().then(setLocations);
+      } else {
+        r.json().then((error) => console.log(error.errors));
+        // navigate("/login");
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleSelect = (e) => {
+    e.preventDefault();
+    console.log("select");
+  };
+
   return (
     <div className="container">
       <div className="columns">

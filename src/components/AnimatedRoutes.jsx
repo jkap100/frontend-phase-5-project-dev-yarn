@@ -387,6 +387,7 @@ function AnimatedRoutes() {
             element={
               <Orders
                 locations={locations}
+                setLocations={setLocations}
                 storeLocation={storeLocation}
                 setStoreLocation={setStoreLocation}
                 status={status}
