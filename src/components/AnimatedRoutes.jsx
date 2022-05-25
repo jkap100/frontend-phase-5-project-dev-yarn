@@ -64,6 +64,9 @@ function AnimatedRoutes() {
   const [orderType, setOrderType] = useState("");
   const [checkOutData, setCheckOutData] = useState([]);
 
+  const [dueDate, setDueDate] = useState("");
+  const [dueTime, setDueTime] = useState("");
+
   const [isVisible, setIsVisible] = useState(false);
 
   // console.log(pizza);
@@ -91,8 +94,8 @@ function AnimatedRoutes() {
       store_id: store.id,
       crust_id: crustOrder.id,
       sauce_id: sauceOrder.id,
-      due_date: "monday",
-      due_time: 10,
+      // due_date: "monday",
+      // due_time: 10,
       status: "Cart",
       order_type: orderType,
       quantity: 1,
@@ -183,6 +186,7 @@ function AnimatedRoutes() {
         setSauceOrder={setSauceOrder}
         setMeatsOrder={setMeatsOrder}
         setVeggiesOrder={setVeggiesOrder}
+        setIsVisible={setIsVisible}
       />
       <Header />
       <AnimatePresence>
@@ -316,6 +320,10 @@ function AnimatedRoutes() {
                 setCheckOutData={setCheckOutData}
                 isVisible={isVisible}
                 setIsVisible={setIsVisible}
+                dueDate={dueDate}
+                setDueDate={setDueDate}
+                dueTime={dueTime}
+                setDueTime={setDueTime}
               />
             }
           />

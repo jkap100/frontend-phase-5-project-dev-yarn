@@ -36,6 +36,10 @@ function Cart({
   setIsVisible,
   checkOutData,
   setCheckOutData,
+  dueDate,
+  setDueDate,
+  dueTime,
+  setDueTime,
 }) {
   useEffect(() => {
     const headers = {
@@ -78,6 +82,56 @@ function Cart({
   const checkOut = () => {
     console.log("check out");
     setIsVisible(!isVisible);
+  };
+
+  const submitOrder = (e) => {
+    e.preventDefault();
+    console.log(dueDate, dueTime);
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.token}`,
+    };
+
+    const body = {
+      due_date: dueDate,
+      due_time: dueTime,
+      status: "Order Placed",
+    };
+
+    fetch(
+      `http://localhost:3000/carts/?user_id=${localStorage.getItem(
+        "currentUserId"
+      )}`,
+      {
+        method: "GET",
+        headers: headers,
+      }
+    )
+      .then((r) => r.json())
+      .then((r) => {
+        if (r.error) {
+          console.log(r.error);
+        } else {
+          console.log(r.length);
+          // console.log(r.length);
+          for (let i = 0; i < r.length; i++) {
+            fetch(`http://localhost:3000/pizza_orders/${r[i].id}`, {
+              method: "PATCH",
+              headers: headers,
+              body: JSON.stringify(body),
+            })
+              .then((r) => r.json())
+              .then((r) => {
+                if (r.error) {
+                  console.log(r.error);
+                } else {
+                  console.log(r);
+                }
+              });
+          }
+        }
+      });
   };
 
   return (
@@ -142,7 +196,12 @@ function Cart({
             <div className="columns is-mobile">
               <div className="column">
                 <ul className="ml-6">
-                  <li className="">{checkOutData.order_type}</li>
+                  <li id="checkout" className="checkout">
+                    {checkOutData.order_type}
+                  </li>
+                  <li id="checkout" className="checkout">
+                    {checkOutData.store_name}
+                  </li>
                   <li>
                     {checkOutData.first_name} {checkOutData.last_name}
                   </li>
@@ -153,40 +212,60 @@ function Cart({
                 </ul>
               </div>
               <div className="column">
-                <p className="bd-notification is-info">Second nested column</p>
-                <form onSubmit="">
+                <form onSubmit={submitOrder}>
                   <div className="is-expanded">
+                    <label className="label has-text-white ml-3">
+                      When do you want it?
+                    </label>
                     <div className="field is-grouped mr-3 ml-3 is-grouped-multiline mb-4">
                       <p className="control ">
                         <input
                           className="input"
-                          type="text"
-                          name="city"
-                          placeholder="City"
-                          // value={city}
-                          // onChange={(event) => setCity(event.target.value)}
+                          type="date"
+                          name="orderDate"
+                          placeholder=""
+                          value={dueDate}
+                          onChange={(event) => setDueDate(event.target.value)}
                         ></input>
                       </p>
 
                       <p className="control ">
-                        <input
+                        <select
                           className="input"
                           type="text"
-                          name="state"
-                          placeholder="State"
-                          // value={state}
-                          // onChange={(event) => setState(event.target.value)}
-                        ></input>
-                      </p>
-                      <p className="control ">
-                        <input
-                          className="input"
-                          type="text"
-                          name="zip"
-                          placeholder="Zip Code"
-                          // value={zip}
-                          // onChange={(event) => setZip(event.target.value)}
-                        ></input>
+                          name="orderTime"
+                          placeholder=""
+                          value={dueTime}
+                          onChange={(event) => setDueTime(event.target.value)}
+                        >
+                          <option>Select Time</option>
+                          <option>11:30 AM</option>
+                          <option>12:00 PM</option>
+                          <option>12:30 PM</option>
+                          <option>1:00 PM</option>
+                          <option>12:30 PM</option>
+                          <option>1:00 PM</option>
+                          <option>1:30 PM</option>
+                          <option>2:30 PM</option>
+                          <option>3:00 PM</option>
+                          <option>3:30 PM</option>
+                          <option>4:00 PM</option>
+                          <option>4:30 PM</option>
+                          <option>5:00 PM</option>
+                          <option>5:30 PM</option>
+                          <option>5:00 PM</option>
+                          <option>5:30 PM</option>
+                          <option>6:00 PM</option>
+                          <option>6:30 PM</option>
+                          <option>7:00 PM</option>
+                          <option>7:30 PM</option>
+                          <option>8:00 PM</option>
+                          <option>8:30 PM</option>
+                          <option>9:00 PM</option>
+                          <option>9:30 PM</option>
+                          <option>10:00 PM</option>
+                          <option>10:30 PM</option>
+                        </select>
                       </p>
                     </div>
 

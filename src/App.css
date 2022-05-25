@@ -181,3 +181,7 @@ li span.active::before {
 .pointer {
   cursor: pointer;
 }
+
+#checkOut {
+  font-size: 100px;
+}

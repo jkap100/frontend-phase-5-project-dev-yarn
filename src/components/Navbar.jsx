@@ -14,6 +14,7 @@ function Navbar({
   setSauceOrder,
   setMeatsOrder,
   setVeggiesOrder,
+  setIsVisible,
 }) {
   const navigate = useNavigate();
 
@@ -30,6 +31,7 @@ function Navbar({
     setSauceOrder("");
     setMeatsOrder("");
     setVeggiesOrder("");
+    setIsVisible(false);
 
     navigate("/");
     console.log(localStorage);
