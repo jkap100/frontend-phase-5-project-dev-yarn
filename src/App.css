@@ -185,3 +185,7 @@ li span.active::before {
 #checkOut {
   font-size: 100px;
 }
+
+.notAdmin {
+  color: hsl(0, 0%, 21%);
+}

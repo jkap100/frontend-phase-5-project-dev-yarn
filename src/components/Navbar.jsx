@@ -51,6 +51,23 @@ function Navbar({
     console.log(localStorage);
   };
 
+  const adminNav = (
+    <div className="navbar-item has-dropdown is-hoverable">
+      <div className="mb-2 navbar-link has-text-white">Admin</div>
+      <div className="navbar-dropdown has-text-black">
+        {/* <Link to="/inventory"> */}
+        <div className="navbar-item">Inventory</div>
+        {/* </Link> */}
+        {/* <Link to="/inventory_order_form"> */}
+        <div className="navbar-item">New Inv Order</div>
+        {/* </Link> */}
+        {/* <Link to="/orders"> */}
+        <div className="navbar-item">Orders</div>
+        {/* </Link> */}
+      </div>
+    </div>
+  );
+
   return (
     <div>
       <nav
@@ -110,8 +127,8 @@ function Navbar({
                 Veggies
               </div>
             </Link>
-            <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link">More</a>
+            {/* <div className="navbar-item has-dropdown is-hoverable">
+              <div className="mb-2 navbar-link">More</div>
 
               <div className="navbar-dropdown">
                 <a className="navbar-item">About</a>
@@ -120,29 +137,35 @@ function Navbar({
                 <hr className="navbar-divider"></hr>
                 <a className="navbar-item">Report an issue</a>
               </div>
-            </div>
+            </div> */}
+
+            {localStorage.getItem("isAdmin") === "true" ? (
+              adminNav
+            ) : (
+              <div className="notAdmin">Not Admin</div>
+            )}
           </div>
 
           <div className="navbar-end">
             <div className="navbar-item">
               <Link to="/cart">
-                <div className="mt-2 ml-2 has-text-white navbar-item navbar-item">
+                <div className=" mb-2 ml-2 has-text-white navbar-item navbar-item">
                   Cart
                 </div>
               </Link>
               <Link to="/">
-                <div className="mt-2 ml-2 has-text-white navbar-item navbar-item">
+                <div className=" ml-2 mb-2 has-text-white navbar-item navbar-item">
                   Log In
                 </div>
               </Link>
               <Link to="/signup">
-                <div className="mt-2 ml-2 has-text-white navbar-item navbar-item">
+                <div className="mb-2 ml-2 has-text-white navbar-item navbar-item">
                   Sign Up
                 </div>
               </Link>
 
               <div
-                className="mt-2 ml-2 mr-6 has-text-white navbar-item navbar-item pointer"
+                className="mb-2 ml-2 mr-6 has-text-white navbar-item navbar-item pointer"
                 onClick={logOut}
               >
                 Log Out
