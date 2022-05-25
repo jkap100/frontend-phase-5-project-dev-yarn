@@ -64,10 +64,16 @@ function AnimatedRoutes() {
   const [orderType, setOrderType] = useState("");
   const [checkOutData, setCheckOutData] = useState([]);
 
+  const [cardNumber, setCardNumber] = useState("");
+  const [ccv, setCCV] = useState("");
+  const [ccDate, setCCDate] = useState("");
+  const [ccZip, setCCZip] = useState("");
+
   const [dueDate, setDueDate] = useState("");
   const [dueTime, setDueTime] = useState("");
 
   const [isVisible, setIsVisible] = useState(false);
+  const [orderId, setOrderId] = useState("");
 
   // console.log(pizza);
 
@@ -324,6 +330,14 @@ function AnimatedRoutes() {
                 setDueDate={setDueDate}
                 dueTime={dueTime}
                 setDueTime={setDueTime}
+                cardNumber={cardNumber}
+                setCardNumber={setCardNumber}
+                ccv={ccv}
+                setCCV={setCCV}
+                ccDate={ccDate}
+                setCCDate={setCCDate}
+                ccZip={ccZip}
+                setCCZip={setCCZip}
               />
             }
           />

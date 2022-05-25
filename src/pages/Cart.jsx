@@ -40,6 +40,14 @@ function Cart({
   setDueDate,
   dueTime,
   setDueTime,
+  cardNumber,
+  setCardNumber,
+  ccv,
+  setCCV,
+  ccDate,
+  setCCDate,
+  ccZip,
+  setCCZip,
 }) {
   useEffect(() => {
     const headers = {
@@ -97,6 +105,10 @@ function Cart({
       due_date: dueDate,
       due_time: dueTime,
       status: "Order Placed",
+      card_number: cardNumber,
+      ccv: ccv,
+      card_expiration: ccDate,
+      card_zip: ccZip,
     };
 
     fetch(
@@ -127,6 +139,23 @@ function Cart({
                   console.log(r.error);
                 } else {
                   console.log(r);
+                  fetch(
+                    `http://localhost:3000/carts/?user_id=${localStorage.getItem(
+                      "currentUserId"
+                    )}`,
+                    {
+                      method: "GET",
+                      headers: headers,
+                    }
+                  ).then((r) => {
+                    r.json().then((r) => {
+                      if (r.error) {
+                        console.log(r.error);
+                      } else {
+                        setCart(r);
+                      }
+                    });
+                  });
                 }
               });
           }
@@ -207,7 +236,7 @@ function Cart({
                   </li>
                   <li>{checkOutData.street}</li>
                   <li>
-                    {checkOutData.city} {checkOutData.state}, {checkOutData.zip}
+                    {checkOutData.city} {checkOutData.state} {checkOutData.zip}
                   </li>
                 </ul>
               </div>
@@ -279,8 +308,10 @@ function Cart({
                           type="text"
                           name="creditCard"
                           placeholder="Card Number"
-                          // value={cardNumber}
-                          // onChange={(event) => setCardNumber(event.target.value)}
+                          value={cardNumber}
+                          onChange={(event) =>
+                            setCardNumber(event.target.value)
+                          }
                         ></input>
                       </p>
                     </div>
@@ -292,8 +323,8 @@ function Cart({
                           type="text"
                           name="ccv"
                           placeholder="CCV"
-                          // value={ccv}
-                          // onChange={(event) => setCCV(event.target.value)}
+                          value={ccv}
+                          onChange={(event) => setCCV(event.target.value)}
                         ></input>
                       </p>
 
@@ -303,8 +334,8 @@ function Cart({
                           type="date"
                           name="expiration"
                           placeholder="Expiration"
-                          // value={expiration}
-                          // onChange={(event) => setExpiration(event.target.value)}
+                          value={ccDate}
+                          onChange={(event) => setCCDate(event.target.value)}
                         ></input>
                       </p>
                       <p className="control ">
@@ -313,8 +344,8 @@ function Cart({
                           type="text"
                           name="ccZip"
                           placeholder="Zip Code"
-                          // value={cardZip}
-                          // onChange={(event) => setCardZip(event.target.value)}
+                          value={ccZip}
+                          onChange={(event) => setCCZip(event.target.value)}
                         ></input>
                       </p>
                     </div>
