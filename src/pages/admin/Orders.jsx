@@ -39,6 +39,29 @@ function Orders({
   const handleSelect = (e) => {
     e.preventDefault();
     console.log("select");
+    const storeLocationId = storeLocation.split("");
+    console.log(storeLocationId[0]);
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.token}`,
+    };
+
+    fetch(
+      `http://localhost:3000/orders?store_id=${storeLocationId}&order_type=${orderType}&status=${status}`,
+      {
+        method: "GET",
+        headers: headers,
+      }
+    )
+      .then((r) => r.json())
+      .then((r) => {
+        if (r.error) {
+          console.log(r.error);
+        } else {
+          console.log(r);
+        }
+      });
   };
 
   return (
@@ -59,7 +82,9 @@ function Orders({
                 >
                   <option>-</option>
                   {locations.map((l) => (
-                    <option>{l.name}</option>
+                    <option key={l.id}>
+                      {l.id} {l.name}
+                    </option>
                   ))}
                 </select>
               </p>
@@ -74,7 +99,7 @@ function Orders({
                 >
                   <option>-</option>
                   <option>Cart</option>
-                  <option>Ordered</option>
+                  <option>Order Placed</option>
                   <option>Filled</option>
                 </select>
               </p>

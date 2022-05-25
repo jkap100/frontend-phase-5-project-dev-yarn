@@ -209,19 +209,6 @@ function OrderType({
                   </div>
                 </div>
               </form>
-
-              <motion.div className="next" variants={nextVariants}>
-                <div className="mt-4 ml-6">
-                  <motion.button
-                    variants={buttonVariants}
-                    whileHover="hover"
-                    onClick={takeOut}
-                    //   onClick={startOrder}
-                  >
-                    Start Take Out
-                  </motion.button>
-                </div>
-              </motion.div>
             </div>
           </div>
         </div>
