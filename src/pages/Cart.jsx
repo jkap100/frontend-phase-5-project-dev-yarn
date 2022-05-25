@@ -164,6 +164,8 @@ function Cart({
           }
         }
       });
+    setIsVisible(false);
+    alert("Order Received");
   };
 
   return (

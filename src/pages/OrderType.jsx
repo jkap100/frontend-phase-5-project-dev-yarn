@@ -145,7 +145,8 @@ function OrderType({
     }
   };
 
-  const takeOut = () => {
+  const takeOut = (e) => {
+    e.preventDefault();
     setOrderType("Take Out");
     navigate("/crust");
   };
@@ -167,6 +168,48 @@ function OrderType({
           </h3>
           <div className="columns is-mobile">
             <div className="column">
+              <form onSubmit={takeOut}>
+                <div className="is-expanded">
+                  <label className="label mr-3 ml-3 has-text-white">Name</label>
+                  <div className="field is-grouped is-grouped-multiline mb-4 mr-3 ml-3">
+                    <p className="control ">
+                      <input
+                        className="input"
+                        type="text"
+                        name="firstName"
+                        placeholder="First Name"
+                        value={firstName}
+                        onChange={(event) => setFirstName(event.target.value)}
+                      ></input>
+                    </p>
+
+                    <p className="control ">
+                      <input
+                        className="input"
+                        type="text"
+                        name="lastName"
+                        placeholder="Last Name"
+                        value={lastName}
+                        onChange={(event) => setLastName(event.target.value)}
+                      ></input>
+                    </p>
+                  </div>
+
+                  <div className="field ml-3 mb-4">
+                    <p className="control">
+                      {/* <Link to="/crust"> */}
+                      <motion.button
+                        variants={buttonVariants}
+                        whileHover="hover"
+                      >
+                        Start Take Out
+                      </motion.button>
+                      {/* </Link> */}
+                    </p>
+                  </div>
+                </div>
+              </form>
+
               <motion.div className="next" variants={nextVariants}>
                 <div className="mt-4 ml-6">
                   <motion.button

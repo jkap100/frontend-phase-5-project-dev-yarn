@@ -40,7 +40,7 @@ function Login({ username, setUsername, password, setPassword }) {
       .then((response) => response.json())
       .then((result) => {
         if (result.error) {
-          navigate("/login");
+          navigate("/");
           console.error(result.error);
         } else {
           console.log("token", result.token);
@@ -51,6 +51,7 @@ function Login({ username, setUsername, password, setPassword }) {
           if (result.message === "Invalid username or password") {
             console.log(result.message);
             alert("invalid username or password");
+            navigate("/");
           } else {
             localStorage.setItem("currentUserId", result.user.id);
             localStorage.setItem("isAdmin", result.user.admin);
