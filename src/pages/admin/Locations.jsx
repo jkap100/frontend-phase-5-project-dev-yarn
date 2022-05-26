@@ -267,21 +267,23 @@ export default function Locations({
                   }}
                 />
               ))}
-              {locations.map((location) => (
-                <Marker
-                  key={location.id}
-                  position={{ lat: location.lat, lng: location.lng }}
-                  icon={{
-                    url: `../pizza.svg`,
-                    origin: new window.google.maps.Point(0, 0),
-                    anchor: new window.google.maps.Point(17, 17),
-                    scaledSize: new window.google.maps.Size(35, 35),
-                  }}
-                  onClick={() => {
-                    setSelected(location);
-                  }}
-                />
-              ))}
+              {!locations
+                ? null
+                : locations.map((location) => (
+                    <Marker
+                      key={location.id}
+                      position={{ lat: location.lat, lng: location.lng }}
+                      icon={{
+                        url: `../pizza.svg`,
+                        origin: new window.google.maps.Point(0, 0),
+                        anchor: new window.google.maps.Point(17, 17),
+                        scaledSize: new window.google.maps.Size(35, 35),
+                      }}
+                      onClick={() => {
+                        setSelected(location);
+                      }}
+                    />
+                  ))}
               {selected ? (
                 <InfoWindow
                   position={{ lat: selected.lat, lng: selected.lng }}
@@ -307,6 +309,7 @@ export default function Locations({
           </motion.div>
         </div>
         <div className="column">
+          <h3 className="subtitle  has-text-white">Add a New Location</h3>
           <form onSubmit={createStore}>
             <div className="is-expanded">
               <label className="label mr-3 ml-3 has-text-white">

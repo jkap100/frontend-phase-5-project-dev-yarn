@@ -196,21 +196,23 @@ export default function Map({
                   position={{ lat: marker.lat, lng: marker.lng }}
                 /> */}
               {/* ))} */}
-              {locations.map((location) => (
-                <Marker
-                  key={location.id}
-                  position={{ lat: location.lat, lng: location.lng }}
-                  icon={{
-                    url: `../pizza.svg`,
-                    origin: new window.google.maps.Point(0, 0),
-                    anchor: new window.google.maps.Point(17, 17),
-                    scaledSize: new window.google.maps.Size(35, 35),
-                  }}
-                  onClick={() => {
-                    setSelected(location);
-                  }}
-                />
-              ))}
+              {!locations
+                ? null
+                : locations.map((location) => (
+                    <Marker
+                      key={location.id}
+                      position={{ lat: location.lat, lng: location.lng }}
+                      icon={{
+                        url: `../pizza.svg`,
+                        origin: new window.google.maps.Point(0, 0),
+                        anchor: new window.google.maps.Point(17, 17),
+                        scaledSize: new window.google.maps.Size(35, 35),
+                      }}
+                      onClick={() => {
+                        setSelected(location);
+                      }}
+                    />
+                  ))}
               {selected ? (
                 <InfoWindow
                   position={{ lat: selected.lat, lng: selected.lng }}
@@ -241,23 +243,25 @@ export default function Map({
           </h3>
           <div className="ml-6">
             <ul>
-              {locations.map((location) => {
-                return (
-                  <motion.li
-                    key={location.id}
-                    id="mapLi"
-                    onClick={() => selectStore(location)}
-                    whileHover={{
-                      scale: 1.3,
-                      originX: 0,
-                      color: "#f8e112",
-                    }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <span className="active">{location.name}</span>
-                  </motion.li>
-                );
-              })}
+              {!locations
+                ? null
+                : locations.map((location) => {
+                    return (
+                      <motion.li
+                        key={location.id}
+                        id="mapLi"
+                        onClick={() => selectStore(location)}
+                        whileHover={{
+                          scale: 1.3,
+                          originX: 0,
+                          color: "#f8e112",
+                        }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
+                        <span className="active">{location.name}</span>
+                      </motion.li>
+                    );
+                  })}
             </ul>
           </div>
           <h3 id="container" className="mr-6 has-text-white mt-4">

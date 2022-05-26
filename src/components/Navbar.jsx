@@ -136,8 +136,7 @@ function Navbar({
                 Veggies
               </div>
             </Link>
-
-            {isAdmin ? adminNav : null}
+            {isAdmin == "true" ? adminNav : null}
           </div>
 
           <div className="navbar-end">
