@@ -131,8 +131,9 @@ function AnimatedRoutes() {
         } else {
           setPizza(result);
           let orderId = result.id;
+          console.log(result);
 
-          for (let i = 0; i < meatsOrder.length; i++) {
+          for (let i = 0; i < veggiesOrder.length; i++) {
             const vToppings = {
               topping_id: veggiesOrder[i].id,
               pizza_order_id: orderId,

@@ -85,6 +85,8 @@ function Veggies({
     }
   };
 
+  console.log(veggiesOrder);
+
   const startOrder = () => {};
 
   return (
