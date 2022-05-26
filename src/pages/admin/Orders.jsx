@@ -68,7 +68,54 @@ function Orders({
       });
   };
 
-  const orderList = orders.map((o) => <OrderItems key={o.id} orderObj={o} />);
+  const handleFillOrder = (order) => {
+    console.log(order);
+    const storeLocationId = storeLocation.split("");
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.token}`,
+    };
+
+    const body = {
+      status: "Filled",
+    };
+
+    fetch(`http://localhost:3000/pizza_orders/${order.id}`, {
+      method: "PATCH",
+      headers: headers,
+      body: JSON.stringify(body),
+    })
+      .then((r) => r.json())
+      .then((r) => {
+        if (r.error) {
+          console.log(r.error);
+        } else {
+          console.log(r);
+
+          fetch(
+            `http://localhost:3000/orders?store_id=${storeLocationId}&order_type=${orderType}&status=${status}`,
+            {
+              method: "GET",
+              headers: headers,
+            }
+          )
+            .then((r) => r.json())
+            .then((r) => {
+              if (r.error) {
+                console.log(r.error);
+              } else {
+                //   console.log(r);
+                setOrders(r);
+              }
+            });
+        }
+      });
+  };
+
+  const orderList = orders.map((o) => (
+    <OrderItems key={o.id} orderObj={o} handleFillOrder={handleFillOrder} />
+  ));
 
   return (
     <div className="container">

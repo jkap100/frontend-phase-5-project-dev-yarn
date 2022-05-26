@@ -14,7 +14,7 @@ const buttonVariants = {
   },
 };
 
-function orderItems({ orderObj }) {
+function orderItems({ orderObj, handleFillOrder }) {
   const orderToppings = orderObj.pizza_order_toppings.map(
     (t) => `${t.topping}, `
   );
@@ -48,7 +48,7 @@ function orderItems({ orderObj }) {
             <motion.button
               variants={buttonVariants}
               whileHover="hover"
-              //   onClick={() => handleAddToCart(cartObj)}
+              onClick={() => handleFillOrder(orderObj)}
             >
               +
             </motion.button>

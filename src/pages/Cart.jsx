@@ -140,7 +140,7 @@ function Cart({
                 if (r.error) {
                   console.log(r.error);
                 } else {
-                  console.log(r);
+                  // console.log(r);
                   fetch(
                     `http://localhost:3000/carts/?user_id=${localStorage.getItem(
                       "currentUserId"

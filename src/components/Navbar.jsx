@@ -136,17 +136,6 @@ function Navbar({
                 Veggies
               </div>
             </Link>
-            {/* <div className="navbar-item has-dropdown is-hoverable">
-              <div className="mb-2 navbar-link">More</div>
-
-              <div className="navbar-dropdown">
-                <a className="navbar-item">About</a>
-                <a className="navbar-item">Jobs</a>
-                <a className="navbar-item">Contact</a>
-                <hr className="navbar-divider"></hr>
-                <a className="navbar-item">Report an issue</a>
-              </div>
-            </div> */}
 
             {isAdmin ? adminNav : null}
           </div>
