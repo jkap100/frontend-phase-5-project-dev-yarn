@@ -18,6 +18,7 @@ import Cart from "../pages/Cart";
 // import Map from "../pages/Location";
 import Map from "../pages/Map";
 import Orders from "../pages/admin/Orders";
+import Locations from "../pages/admin/Locations";
 
 function AnimatedRoutes() {
   const navigate = useNavigate();
@@ -79,6 +80,17 @@ function AnimatedRoutes() {
   const [status, setStatus] = useState("");
 
   const [orders, setOrders] = useState([]);
+
+  const [lat1, setLat1] = useState("");
+  const [lat2, setLat2] = useState("");
+  const [lng1, setLng1] = useState("");
+  const [lng2, setLng2] = useState("");
+
+  const [storeName, setStoreName] = useState("");
+  const [storeStreet, setStoreStreet] = useState("");
+  const [storeCity, setStoreCity] = useState("");
+  const [storeState, setStoreState] = useState("");
+  const [storeZip, setStoreZip] = useState("");
 
   // console.log(pizza);
 
@@ -400,6 +412,14 @@ function AnimatedRoutes() {
                 setZip={setZip}
                 orderType={orderType}
                 setOrderType={setOrderType}
+                lat1={lat1}
+                setLat1={setLat1}
+                lat2={lat2}
+                setLat2={setLat2}
+                lng1={lng1}
+                setLng1={setLng1}
+                lng2={lng2}
+                setLng2={setLng2}
               />
             }
           />
@@ -417,6 +437,29 @@ function AnimatedRoutes() {
                 setOrderType={setOrderType}
                 orders={orders}
                 setOrders={setOrders}
+              />
+            }
+          />
+          <Route
+            path="/locations"
+            element={
+              <Locations
+                store={store}
+                setStore={setStore}
+                locations={locations}
+                setLocations={setLocations}
+                selected={selected}
+                setSelected={setSelected}
+                storeName={storeName}
+                setStoreName={setStoreName}
+                storeStreet={storeStreet}
+                setStoreStreet={setStoreStreet}
+                storeCity={storeCity}
+                setStoreCity={setStoreCity}
+                storeState={storeState}
+                setStoreState={setStoreState}
+                storeZip={storeZip}
+                setStoreZip={setStoreZip}
               />
             }
           />

@@ -42,8 +42,8 @@ function Orders({
   const handleSelect = (e) => {
     e.preventDefault();
     // console.log("select");
-    const storeLocationId = storeLocation.split("");
-    // console.log(storeLocationId[0]);
+    const storeLocationId = storeLocation.split(" ");
+    console.log(storeLocationId[0]);
 
     const headers = {
       "Content-Type": "application/json",

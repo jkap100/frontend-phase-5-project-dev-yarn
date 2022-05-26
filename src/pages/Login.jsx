@@ -64,10 +64,9 @@ function Login({
             localStorage.setItem("isAdmin", result.user.admin);
             localStorage.setItem("currentUsername", result.user.username);
             localStorage.setItem("currentEmail", result.user.email);
-            // localStorage.setItem("currentUser", true);
+
             console.log(localStorage);
             setIsAdmin(localStorage.getItem("isAdmin"));
-            console.log(isAdmin);
           }
         }
       });

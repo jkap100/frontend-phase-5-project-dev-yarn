@@ -67,11 +67,11 @@ function Navbar({
         <Link to="/orders">
           <div className="navbar-item">Orders</div>
         </Link>
-        {/* <Link to="/inventory_order_form"> */}
-        <div className="navbar-item">New Inv Order</div>
-        {/* </Link> */}
+        <Link to="/locations">
+          <div className="navbar-item">Locations</div>
+        </Link>
         {/* <Link to="/orders"> */}
-        <div className="navbar-item">Orders</div>
+        {/* <div className="navbar-item">Orders</div> */}
         {/* </Link> */}
       </div>
     </div>
@@ -180,53 +180,3 @@ function Navbar({
 }
 
 export default Navbar;
-
-{
-  /* <nav className="navbar" role="navigation" aria-label="main navigation">
-<div className="navbar-brand">
-  <a className="navbar-item" href="https://bulma.io">
-    <img
-      src="https://bulma.io/images/bulma-logo.png"
-      alt="Logo"
-      width="112"
-      height="28"
-    ></img>
-  </a>
-
-  <a
-    role="button"
-    className="navbar-burger burger"
-    aria-label="menu"
-    aria-expanded="false"
-    data-target="navbarBasicExample"
-  >
-    <span aria-hidden="true"></span>
-    <span aria-hidden="true"></span>
-    <span aria-hidden="true"></span>
-  </a>
-</div>
-
-<div id="navbarBasicExample" className="navbar-menu">
-  <div className="navbar-center">
-    <a className="navbar-item">Articles</a>
-    <a className="navbar-item">Projects</a>
-    <a className="navbar-item">Contact</a>
-    <a className="navbar-item">About</a>
-    <div className="navbar-item has-dropdown is-hoverable">
-      <a className="navbar-link">
-        <i className="fas fa-search"></i>
-        Topics
-      </a>
-
-      <div className="navbar-dropdown">
-        <a className="navbar-item">About</a>
-        <a className="navbar-item">Jobs</a>
-        <a className="navbar-item">Contact</a>
-        <hr className="navbar-divider"></hr>
-        <a className="navbar-item">Report an issue</a>
-      </div>
-    </div>
-  </div>
-</div>
-</nav> */
-}

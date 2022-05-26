@@ -60,13 +60,16 @@ function OrderType({
   setZip,
   orderType,
   setOrderType,
+  lat1,
+  setLat1,
+  lat2,
+  setLat2,
+  lng1,
+  setLng1,
+  lng2,
+  setLng2,
 }) {
   const navigate = useNavigate();
-
-  const [lat1, setLat1] = useState("");
-  const [lat2, setLat2] = useState("");
-  const [lng1, setLng1] = useState("");
-  const [lng2, setLng2] = useState("");
 
   useEffect(() => {
     const headers = {
