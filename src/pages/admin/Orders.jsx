@@ -69,48 +69,51 @@ function Orders({
   };
 
   const handleFillOrder = (order) => {
-    console.log(order);
-    const storeLocationId = storeLocation.split("");
+    if (order.status == "Cart") {
+      alert("Still in cart");
+    } else {
+      const storeLocationId = storeLocation.split("");
 
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.token}`,
-    };
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      };
 
-    const body = {
-      status: "Filled",
-    };
+      const body = {
+        status: "Filled",
+      };
 
-    fetch(`http://localhost:3000/pizza_orders/${order.id}`, {
-      method: "PATCH",
-      headers: headers,
-      body: JSON.stringify(body),
-    })
-      .then((r) => r.json())
-      .then((r) => {
-        if (r.error) {
-          console.log(r.error);
-        } else {
-          console.log(r);
+      fetch(`http://localhost:3000/pizza_orders/${order.id}`, {
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify(body),
+      })
+        .then((r) => r.json())
+        .then((r) => {
+          if (r.error) {
+            console.log(r.error);
+          } else {
+            console.log(r);
 
-          fetch(
-            `http://localhost:3000/orders?store_id=${storeLocationId}&order_type=${orderType}&status=${status}`,
-            {
-              method: "GET",
-              headers: headers,
-            }
-          )
-            .then((r) => r.json())
-            .then((r) => {
-              if (r.error) {
-                console.log(r.error);
-              } else {
-                //   console.log(r);
-                setOrders(r);
+            fetch(
+              `http://localhost:3000/orders?store_id=${storeLocationId}&order_type=${orderType}&status=${status}`,
+              {
+                method: "GET",
+                headers: headers,
               }
-            });
-        }
-      });
+            )
+              .then((r) => r.json())
+              .then((r) => {
+                if (r.error) {
+                  console.log(r.error);
+                } else {
+                  //   console.log(r);
+                  setOrders(r);
+                }
+              });
+          }
+        });
+    }
   };
 
   const orderList = orders.map((o) => (
