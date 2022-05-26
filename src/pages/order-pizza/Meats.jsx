@@ -124,21 +124,19 @@ function Meats({
                       </ul>
                     </div>
 
-                    {meatsOrder && (
-                      <motion.div className="next" variants={nextVariants}>
-                        <Link to="/veggies">
-                          <div className="mt-4 ml-6">
-                            <motion.button
-                              variants={buttonVariants}
-                              whileHover="hover"
-                              onClick={startOrder}
-                            >
-                              Next
-                            </motion.button>
-                          </div>
-                        </Link>
-                      </motion.div>
-                    )}
+                    <motion.div className="next" variants={nextVariants}>
+                      <Link to="/veggies">
+                        <div className="mt-4 ml-6">
+                          <motion.button
+                            variants={buttonVariants}
+                            whileHover="hover"
+                            onClick={startOrder}
+                          >
+                            Next
+                          </motion.button>
+                        </div>
+                      </Link>
+                    </motion.div>
                   </motion.div>
                 </div>
               </div>

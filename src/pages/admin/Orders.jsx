@@ -133,6 +133,7 @@ function Orders({
                   Select
                 </motion.button>
               </p>
+              <hr></hr>
             </div>
           </form>
           <div className="columns is-mobile">
@@ -171,6 +172,8 @@ function Orders({
                       <td className="has-text-white is-vcentered"></td>
                       <td className="has-text-white is-vcentered"></td>
                       <td className="has-text-white is-vcentered"></td>
+                      <td className="has-text-white is-vcentered"></td>
+                      <td className="has-text-white is-vcentered"></td>
                       <td className="has-text-white is-vcentered">
                         {/* <motion.button
                           variants={buttonVariants}
@@ -182,9 +185,7 @@ function Orders({
                       </td>
 
                       <td className="has-text-white is-vcentered"></td>
-                      <td className="has-text-white has-text-centered is-vcentered">
-                        Total
-                      </td>
+                      <td className="has-text-white has-text-centered is-vcentered"></td>
                       <td className="has-text-white is-vcentered">
                         {/* ${totalPrice.toLocaleString("en-US")} */}
                       </td>
