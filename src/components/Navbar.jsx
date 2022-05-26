@@ -25,6 +25,8 @@ function Navbar({
   setLocations,
   setStatus,
   setOrderType,
+  isAdmin,
+  setIsAdmin,
 }) {
   const navigate = useNavigate();
 
@@ -52,7 +54,9 @@ function Navbar({
     setLocations("");
     setStatus("");
     setOrderType("");
+    setIsAdmin(false);
     navigate("/");
+
     console.log(localStorage);
   };
 
@@ -144,11 +148,7 @@ function Navbar({
               </div>
             </div> */}
 
-            {localStorage.getItem("isAdmin") === "true" ? (
-              adminNav
-            ) : (
-              <div className="notAdmin">Not Admin</div>
-            )}
+            {isAdmin ? adminNav : null}
           </div>
 
           <div className="navbar-end">

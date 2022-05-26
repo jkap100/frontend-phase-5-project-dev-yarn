@@ -22,7 +22,8 @@ import Orders from "../pages/admin/Orders";
 function AnimatedRoutes() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [error, setErrors] = useState("");
+
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -207,6 +208,8 @@ function AnimatedRoutes() {
         setLocations={setLocations}
         setStatus={setStatus}
         setOrderType={setOrderType}
+        isAdmin={isAdmin}
+        setIsAdmin={setIsAdmin}
       />
       {window.location.pathname == "/" ||
       window.location.pathname == "/signup" ? null : (
@@ -226,6 +229,8 @@ function AnimatedRoutes() {
                 setUsername={setUsername}
                 password={password}
                 setPassword={setPassword}
+                isAdmin={isAdmin}
+                setIsAdmin={setIsAdmin}
               />
             }
           />

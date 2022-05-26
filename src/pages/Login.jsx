@@ -19,7 +19,14 @@ const buttonVariants = {
   },
 };
 
-function Login({ username, setUsername, password, setPassword }) {
+function Login({
+  username,
+  setUsername,
+  password,
+  setPassword,
+  isAdmin,
+  setIsAdmin,
+}) {
   const navigate = useNavigate();
 
   const handleLogin = (event) => {
@@ -59,6 +66,8 @@ function Login({ username, setUsername, password, setPassword }) {
             localStorage.setItem("currentEmail", result.user.email);
             // localStorage.setItem("currentUser", true);
             console.log(localStorage);
+            setIsAdmin(localStorage.getItem("isAdmin"));
+            console.log(isAdmin);
           }
         }
       });
