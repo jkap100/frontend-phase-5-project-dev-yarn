@@ -22,6 +22,9 @@ function Navbar({
   setCCZip,
   setDueDate,
   setDueTime,
+  setLocations,
+  setStatus,
+  setOrderType,
 }) {
   const navigate = useNavigate();
 
@@ -46,7 +49,9 @@ function Navbar({
     setCCZip("");
     setDueDate("");
     setDueTime("");
-
+    setLocations("");
+    setStatus("");
+    setOrderType("");
     navigate("/");
     console.log(localStorage);
   };

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Navigate, Routes, Route, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./Navbar";
 import NavbarBottom from "./NavbarBottom";
@@ -19,7 +20,7 @@ import Map from "../pages/Map";
 import Orders from "../pages/admin/Orders";
 
 function AnimatedRoutes() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const [error, setErrors] = useState("");
 
@@ -126,6 +127,7 @@ function AnimatedRoutes() {
       .then((result) => {
         if (result.error) {
           console.error(result.error);
+          navigate("login");
         } else {
           setPizza(result);
           let orderId = result.id;
@@ -201,6 +203,9 @@ function AnimatedRoutes() {
         setCCZip={setCCZip}
         setDueDate={setDueDate}
         setDueTime={setDueTime}
+        setLocations={setLocations}
+        setStatus={setStatus}
+        setOrderType={setOrderType}
       />
       {window.location.pathname == "/" ||
       window.location.pathname == "/signup" ? null : (

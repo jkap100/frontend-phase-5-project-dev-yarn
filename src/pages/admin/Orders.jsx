@@ -87,11 +87,13 @@ function Orders({
                   onChange={(e) => setStoreLocation(e.target.value)}
                 >
                   <option>-</option>
-                  {locations.map((l) => (
-                    <option key={l.id}>
-                      {l.id} {l.name}
-                    </option>
-                  ))}
+                  {locations
+                    ? locations.map((l) => (
+                        <option key={l.id}>
+                          {l.id} {l.name}
+                        </option>
+                      ))
+                    : null}
                 </select>
               </p>
               <label className="is-vcentered ml-4 mr-2">Status</label>
