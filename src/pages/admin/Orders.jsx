@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
+import OrderItems from "../../components/OrderItems";
 
 const buttonVariants = {
   hover: {
@@ -67,12 +68,14 @@ function Orders({
       });
   };
 
+  const orderList = orders.map((o) => <OrderItems key={o.id} orderObj={o} />);
+
   return (
     <div className="container">
-      <div className="columns">
+      <div className="columns mb-6">
         <div className="column">
           {/* <p className="bd-notification is-info">First column</p> */}
-          <form>
+          <form onSubmit={handleSelect}>
             <div className="field is-grouped">
               <label className="is-vcentered mr-2">Location</label>
               <p className="control">
@@ -125,7 +128,7 @@ function Orders({
                   className="ml-4"
                   variants={buttonVariants}
                   whileHover="hover"
-                  onClick={handleSelect}
+                  //   onClick={handleSelect}
                 >
                   Select
                 </motion.button>
@@ -133,12 +136,68 @@ function Orders({
             </div>
           </form>
           <div className="columns is-mobile">
-            <div className="column">
-              <p className="bd-notification is-info">
-                First nested column First nested column First nested column
-                First nested column First nested column First nested column
-                First nested column First nested column
-              </p>
+            <div className="column mb-4">
+              <div className="bd-notification is-info mb-4">
+                <table id="table-background" className="table is-fullwidth">
+                  <thead className="mb-6">
+                    <tr className="has-text-white mb-6">
+                      <th className="price has-text-white">Due Date</th>
+                      <th className="price has-text-white">Due Time</th>
+                      <th className="cart-image has-text-white">Name</th>
+                      <th className="product has-text-white">Status</th>
+                      <th className="category has-text-white">Order Type</th>
+                      <th className="Total has-text-white">Crust</th>
+                      <th className="has-text-centered has-text-white">
+                        Sauce
+                      </th>
+                      <th className="price has-text-white">Toppings</th>
+                      <th className="qty has-text-centered has-text-white">
+                        Quantity
+                      </th>
+
+                      <th className="has-text-centered has-text-white">
+                        Total
+                      </th>
+                      <th className="has-text-centered has-text-white">
+                        Fill Order
+                      </th>
+                    </tr>
+                  </thead>
+                  {/* {cartItems} */}
+                  {orderList}
+
+                  <tfoot>
+                    <tr>
+                      <td className="has-text-white is-vcentered"></td>
+                      <td className="has-text-white is-vcentered"></td>
+                      <td className="has-text-white is-vcentered"></td>
+                      <td className="has-text-white is-vcentered">
+                        {/* <motion.button
+                          variants={buttonVariants}
+                          whileHover="hover"
+                          // onClick={checkOut}
+                        >
+                          Check Out
+                        </motion.button> */}
+                      </td>
+
+                      <td className="has-text-white is-vcentered"></td>
+                      <td className="has-text-white has-text-centered is-vcentered">
+                        Total
+                      </td>
+                      <td className="has-text-white is-vcentered">
+                        {/* ${totalPrice.toLocaleString("en-US")} */}
+                      </td>
+                      <td className="has-text-centered is-vcentered">
+                        {/* <button onClick={() => handleAddToCart(cartObj)}>+</button> */}
+                      </td>
+                      <td className="has-text-centered is-vcentered">
+                        {/* <button onClick={() => handeleRemoveFromCart(cartObj)}>-</button> */}
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
             </div>
             {/* <div class="column">
               <p class="bd-notification is-info">Second nested column</p>
