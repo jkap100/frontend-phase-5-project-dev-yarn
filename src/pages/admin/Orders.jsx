@@ -41,9 +41,9 @@ function Orders({
 
   const handleSelect = (e) => {
     e.preventDefault();
-    console.log("select");
+    // console.log("select");
     const storeLocationId = storeLocation.split("");
-    console.log(storeLocationId[0]);
+    // console.log(storeLocationId[0]);
 
     const headers = {
       "Content-Type": "application/json",
@@ -62,7 +62,7 @@ function Orders({
         if (r.error) {
           console.log(r.error);
         } else {
-          console.log(r);
+          //   console.log(r);
           setOrders(r);
         }
       });

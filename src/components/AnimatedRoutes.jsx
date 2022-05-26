@@ -116,7 +116,7 @@ function AnimatedRoutes() {
       state: state,
       zip: zip,
     };
-    console.log(body);
+    // console.log(body);
 
     fetch(`http://localhost:3000/pizza_orders`, {
       method: "POST",

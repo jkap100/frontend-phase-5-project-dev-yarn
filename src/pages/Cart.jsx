@@ -82,7 +82,7 @@ function Cart({
   ));
 
   cart.map((c) => setCheckOutData(c));
-  console.log(checkOutData);
+  // console.log(checkOutData);
 
   let totalPrice = 0;
   const pizzaPrice = cart.map((c) => {
