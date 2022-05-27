@@ -82,13 +82,13 @@ const buttonVariants = {
 const libraries = ["places"];
 
 const pdx = {
-  name: "Portland",
+  name: "OR",
   lat: 45.5008182,
   lng: -122.6683848,
 };
 
 const sea = {
-  name: "Seattle",
+  name: "WA",
   lat: 47.6205785,
   lng: -122.3504881,
 };
@@ -122,7 +122,7 @@ export default function Map({
   console.log(mapLocation);
 
   useEffect(() => {
-    fetch("http://localhost:3000/stores").then((r) => {
+    fetch(`http://localhost:3000/stores_by_state?state=OR`).then((r) => {
       if (r.ok) {
         r.json().then(setLocations);
       } else {
@@ -140,7 +140,7 @@ export default function Map({
 
   const panTo = React.useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
+    mapRef.current.setZoom(12);
   }, []);
 
   const onMapClick = React.useCallback((e) => {
@@ -163,12 +163,34 @@ export default function Map({
     setStore(store);
   };
 
-  if (mapLocation == "Portland") {
+  if (mapLocation == "OR") {
     setMapLocation(pdx);
-  } else if (mapLocation == "Seattle") {
+  } else if (mapLocation == "WA") {
     setMapLocation(sea);
   }
 
+  const updateLocation = (e) => {
+    e.preventDefault();
+    setMapLocation(e.target.value);
+    setLocations([]);
+    setStore("");
+  };
+  const fetchLocation = (e) => {
+    e.preventDefault();
+
+    console.log(mapLocation);
+
+    fetch(
+      `http://localhost:3000/stores_by_state?state=${mapLocation.name}`
+    ).then((r) => {
+      if (r.ok) {
+        r.json().then(setLocations);
+      } else {
+        r.json().then((error) => console.log(error.errors));
+        // navigate("/login");
+      }
+    });
+  };
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
@@ -211,21 +233,24 @@ export default function Map({
               // }}
               onClick={onMapClick}
             >
-              <div className="field is-grouped ml-1 mt-1">
-                <p className="control">
-                  <select
-                    className="input"
-                    type="text"
-                    name="location"
-                    value={mapLocation}
-                    onChange={(e) => setMapLocation(e.target.value)}
-                  >
-                    <option>Select City</option>
-                    <option>{pdx.name}</option>
-                    <option>{sea.name}</option>
-                  </select>
-                </p>
-              </div>
+              <form onSubmit={fetchLocation}>
+                <div className="field is-grouped ml-1 mt-1">
+                  <p className="control">
+                    <select
+                      className="input"
+                      type="text"
+                      name="location"
+                      value={mapLocation}
+                      onChange={(e) => updateLocation(e)}
+                    >
+                      <option>Select State</option>
+                      <option>{pdx.name}</option>
+                      <option>{sea.name}</option>
+                    </select>
+                  </p>
+                </div>
+                <button className="button ml-1">Get Locations</button>
+              </form>
               {/* {markers.map((marker) => (
                 <Marker
                   key={marker.time.toISOString()}

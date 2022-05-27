@@ -187,6 +187,7 @@ export default function Locations({
         time: new Date(),
       },
     ]);
+    mapRef.current = e;
   }, []);
 
   const onRemoveMarkers = () => {
@@ -225,7 +226,7 @@ export default function Locations({
     const body = {
       name: storeName,
       street: storeStreet,
-      city: storeCity,
+      city: storeCity.trim(),
       state: storeState,
       open: storeOpen,
       close: storeClose,

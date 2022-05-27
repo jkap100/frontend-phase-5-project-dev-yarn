@@ -21,7 +21,7 @@ import Orders from "../pages/admin/Orders";
 import Locations from "../pages/admin/Locations";
 
 const pdx = {
-  name: "Portland",
+  name: "OR",
   lat: 45.5008182,
   lng: -122.6683848,
 };
