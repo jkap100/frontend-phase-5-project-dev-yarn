@@ -85,9 +85,16 @@ const mapContainerStyle = {
   height: "30vw",
 };
 
-const center = {
+const pdx = {
+  name: "Portland",
   lat: 45.5008182,
   lng: -122.6683848,
+};
+
+const sea = {
+  name: "Seattle",
+  lat: 47.6205785,
+  lng: -122.3504881,
 };
 
 const options = {
@@ -119,6 +126,8 @@ export default function Locations({
   setStoreClose,
   storePhone,
   setStorePhone,
+  mapLocation,
+  setMapLocation,
 }) {
   Geocode.setApiKey(process.env.REACT_APP_MAP_API);
   // const [locations, setLocations] = useState([]);
@@ -180,6 +189,18 @@ export default function Locations({
     ]);
   }, []);
 
+  const onRemoveMarkers = () => {
+    setMarkers([]);
+    setStoreName("");
+    setStoreStreet("");
+    setStoreCity("");
+    setStoreState("");
+    setStoreZip("");
+    setStoreOpen("");
+    setStoreClose("");
+    setStorePhone("");
+  };
+
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
     mapRef.current = map;
@@ -236,6 +257,12 @@ export default function Locations({
       });
   };
 
+  if (mapLocation == "Portland") {
+    setMapLocation(pdx);
+  } else if (mapLocation == "Seattle") {
+    setMapLocation(sea);
+  }
+
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
@@ -264,7 +291,7 @@ export default function Locations({
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
               zoom={11}
-              center={center}
+              center={{ lat: mapLocation.lat, lng: mapLocation.lng }}
               options={options}
               onLoad={onMapLoad}
               // onClick={(e) => {
@@ -279,6 +306,24 @@ export default function Locations({
               // }}
               onClick={onMapClick}
             >
+              <div className="field is-grouped ml-1 mt-1">
+                <p className="control">
+                  <select
+                    className="input"
+                    type="text"
+                    name="location"
+                    value={mapLocation}
+                    onChange={(e) => setMapLocation(e.target.value)}
+                  >
+                    <option>Select City</option>
+                    <option>{pdx.name}</option>
+                    <option>{sea.name}</option>
+                  </select>
+                </p>
+              </div>
+              <button className="button ml-1 mt-1" onClick={onRemoveMarkers}>
+                Clear Markers
+              </button>
               {markers.map((marker) => (
                 <Marker
                   key={marker.time.toISOString()}
@@ -353,17 +398,6 @@ export default function Locations({
                     onChange={(event) => setStoreName(event.target.value)}
                   ></input>
                 </p>
-
-                {/* <p className="control ">
-                  <input
-                    className="input"
-                    type="text"
-                    name="lastName"
-                    placeholder="Last Name"
-                    // value={lastName}
-                    // onChange={(event) => setLastName(event.target.value)}
-                  ></input>
-                </p> */}
               </div>
 
               <div className="field mr-3 ml-3">

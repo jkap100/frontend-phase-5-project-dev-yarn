@@ -81,14 +81,21 @@ const buttonVariants = {
 
 const libraries = ["places"];
 
+const pdx = {
+  name: "Portland",
+  lat: 45.5008182,
+  lng: -122.6683848,
+};
+
+const sea = {
+  name: "Seattle",
+  lat: 47.6205785,
+  lng: -122.3504881,
+};
+
 const mapContainerStyle = {
   width: "100%",
   height: "30vw",
-};
-
-const center = {
-  lat: 45.5008182,
-  lng: -122.6683848,
 };
 
 const options = {
@@ -104,10 +111,15 @@ export default function Map({
   setLocations,
   selected,
   setSelected,
+  mapLocation,
+  setMapLocation,
 }) {
   // const [locations, setLocations] = useState([]);
   const [markers, setMarkers] = useState([]);
+
   // const [selected, setSelected] = useState(null);
+
+  console.log(mapLocation);
 
   useEffect(() => {
     fetch("http://localhost:3000/stores").then((r) => {
@@ -151,6 +163,12 @@ export default function Map({
     setStore(store);
   };
 
+  if (mapLocation == "Portland") {
+    setMapLocation(pdx);
+  } else if (mapLocation == "Seattle") {
+    setMapLocation(sea);
+  }
+
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
@@ -178,7 +196,7 @@ export default function Map({
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
               zoom={11}
-              center={center}
+              center={{ lat: mapLocation.lat, lng: mapLocation.lng }}
               options={options}
               onLoad={onMapLoad}
               // onClick={(e) => {
@@ -193,6 +211,21 @@ export default function Map({
               // }}
               onClick={onMapClick}
             >
+              <div className="field is-grouped ml-1 mt-1">
+                <p className="control">
+                  <select
+                    className="input"
+                    type="text"
+                    name="location"
+                    value={mapLocation}
+                    onChange={(e) => setMapLocation(e.target.value)}
+                  >
+                    <option>Select City</option>
+                    <option>{pdx.name}</option>
+                    <option>{sea.name}</option>
+                  </select>
+                </p>
+              </div>
               {/* {markers.map((marker) => (
                 <Marker
                   key={marker.time.toISOString()}

@@ -20,6 +20,12 @@ import Map from "../pages/Map";
 import Orders from "../pages/admin/Orders";
 import Locations from "../pages/admin/Locations";
 
+const pdx = {
+  name: "Portland",
+  lat: 45.5008182,
+  lng: -122.6683848,
+};
+
 function AnimatedRoutes() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -94,6 +100,8 @@ function AnimatedRoutes() {
   const [storeOpen, setStoreOpen] = useState("");
   const [storeClose, setStoreClose] = useState("");
   const [storePhone, setStorePhone] = useState("");
+
+  const [mapLocation, setMapLocation] = useState(pdx);
 
   // console.log(pizza);
 
@@ -392,6 +400,8 @@ function AnimatedRoutes() {
                 setLocations={setLocations}
                 selected={selected}
                 setSelected={setSelected}
+                mapLocation={mapLocation}
+                setMapLocation={setMapLocation}
               />
             }
           />
@@ -469,6 +479,8 @@ function AnimatedRoutes() {
                 setStoreClose={setStoreClose}
                 storePhone={storePhone}
                 setStorePhone={setStorePhone}
+                mapLocation={mapLocation}
+                setMapLocation={setMapLocation}
               />
             }
           />
