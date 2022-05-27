@@ -118,18 +118,7 @@ export default function Locations({
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
   // const [selected, setSelected] = useState(null);
-  console.log(markers);
-
-  //   Geocode.fromLatLng("selected.lat", "selected.lng").then(
-  //     (response) => {
-  //       const address = response.results[0].formatted_address;
-  //       console.log(address);
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  console.log(selected);
+  //   console.log(markers);
 
   if (!selected) {
     console.log("no marker");
@@ -143,6 +132,8 @@ export default function Locations({
         setStoreCity(a[1]);
         setStoreState(a2.split(" ")[1]);
         setStoreZip(a2.split(" ")[2]);
+        setLat(selected.lat);
+        setLng(selected.lng);
         // console.log(storeStreet);
         // console.log(storeCity);
         // console.log(storeState);
@@ -153,6 +144,8 @@ export default function Locations({
       }
     );
   }
+  console.log(lat);
+  console.log(lng);
 
   //   Geocode.fromLatLng(markers.lat, markers.lng).then(
   //     (response) => {
@@ -208,7 +201,41 @@ export default function Locations({
 
   const createStore = (e) => {
     e.preventDefault();
-    console.log("new store");
+    console.log(storeName);
+    console.log(storeStreet);
+    console.log(storeCity);
+    console.log(storeZip);
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.token}`,
+    };
+
+    const body = {
+      name: storeName,
+      street: storeStreet,
+      city: storeCity,
+      state: storeState,
+      open: "10:30 AM",
+      close: "11:00 PM",
+      phone: "503-245-6700",
+      lat: lat,
+      lng: lng,
+    };
+
+    fetch(`http://localhost:3000/stores`, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body),
+    })
+      .then((r) => r.json())
+      .then((r) => {
+        if (r.error) {
+          console.log(r.error);
+        } else {
+          console.log("store created");
+        }
+      });
   };
 
   if (loadError) return "Error";
