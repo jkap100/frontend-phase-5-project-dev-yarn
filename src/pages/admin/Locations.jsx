@@ -25,8 +25,6 @@ import "@reach/combobox/styles.css";
 import { motion } from "framer-motion";
 import Geocode from "react-geocode";
 
-import MotionVariants from "../../components/MotionVariants";
-
 const mapVariants = {
   hidden: {
     opacity: 0,
@@ -115,6 +113,12 @@ export default function Locations({
   setStoreState,
   storeZip,
   setStoreZip,
+  storeOpen,
+  setStoreOpen,
+  storeClose,
+  setStoreClose,
+  storePhone,
+  setStorePhone,
 }) {
   Geocode.setApiKey(process.env.REACT_APP_MAP_API);
   // const [locations, setLocations] = useState([]);
@@ -202,9 +206,9 @@ export default function Locations({
       street: storeStreet,
       city: storeCity,
       state: storeState,
-      open: "10:30 AM",
-      close: "11:00 PM",
-      phone: "503-245-6700",
+      open: storeOpen,
+      close: storeClose,
+      phone: storePhone,
       lat: lat,
       lng: lng,
     };
@@ -220,6 +224,14 @@ export default function Locations({
           console.log(r.error);
         } else {
           console.log("store created");
+          setStoreName("");
+          setStoreStreet("");
+          setStoreCity("");
+          setStoreState("");
+          setStoreZip("");
+          setStoreOpen("");
+          setStoreClose("");
+          setStorePhone("");
         }
       });
   };
@@ -402,6 +414,41 @@ export default function Locations({
                 </p>
               </div>
 
+              <label className="label has-text-white ml-4">Store Info</label>
+              <div className="field is-grouped mr-3 ml-3 is-grouped-multiline mb-4">
+                <p className="control ">
+                  <input
+                    className="input"
+                    type="text"
+                    name="open"
+                    placeholder="Open"
+                    value={storeOpen}
+                    onChange={(event) => setStoreOpen(event.target.value)}
+                  ></input>
+                </p>
+
+                <p className="control ">
+                  <input
+                    className="input"
+                    type="text"
+                    name="close"
+                    placeholder="Close"
+                    value={storeClose}
+                    onChange={(event) => setStoreClose(event.target.value)}
+                  ></input>
+                </p>
+                <p className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="storePhone"
+                    placeholder="Phone"
+                    value={storePhone}
+                    onChange={(event) => setStorePhone(event.target.value)}
+                  ></input>
+                </p>
+              </div>
+
               <div className="field ml-3 mb-4">
                 <p className="control">
                   {/* <Link to="/crust"> */}
@@ -452,13 +499,13 @@ function Search({ panTo }) {
         }}
       >
         <ComboboxInput
-          className=""
+          className="input"
           value={value}
           onChange={(e) => {
             setValue(e.target.value);
           }}
           disabled={!ready}
-          placeholder="Enter an Address"
+          placeholder="Search For Location"
         />
         <ComboboxPopover className="has-text-black">
           {status === "OK" &&

@@ -91,6 +91,9 @@ function AnimatedRoutes() {
   const [storeCity, setStoreCity] = useState("");
   const [storeState, setStoreState] = useState("");
   const [storeZip, setStoreZip] = useState("");
+  const [storeOpen, setStoreOpen] = useState("");
+  const [storeClose, setStoreClose] = useState("");
+  const [storePhone, setStorePhone] = useState("");
 
   // console.log(pizza);
 
@@ -460,6 +463,12 @@ function AnimatedRoutes() {
                 setStoreState={setStoreState}
                 storeZip={storeZip}
                 setStoreZip={setStoreZip}
+                storeOpen={storeOpen}
+                setStoreOpen={setStoreOpen}
+                storeClose={storeClose}
+                setStoreClose={setStoreClose}
+                storePhone={storePhone}
+                setStorePhone={setStorePhone}
               />
             }
           />
