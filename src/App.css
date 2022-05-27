@@ -189,3 +189,13 @@ li span.active::before {
 .notAdmin {
   color: hsl(0, 0%, 21%);
 }
+
+.search {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 400px;
+  z-index: 10;
+}

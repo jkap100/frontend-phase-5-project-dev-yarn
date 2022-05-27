@@ -6,22 +6,26 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-// import usePlacesAutocomplete, {
-//   getGeocode,
-//   getLatLng,
-// } from "use-places-autocomplete";
-// import {
-//   Combobox,
-//   ComboboxInput,
-//   ComboboxPopover,
-//   ComboboxList,
-//   ComboboxOption,
-// } from "@reach/combobox";
+
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@reach/combobox";
+
 import { formatRelative } from "date-fns";
 import "@reach/combobox/styles.css";
 // import MapStyles from "../components/MapStyles";
 import { motion } from "framer-motion";
 import Geocode from "react-geocode";
+
+import MotionVariants from "../../components/MotionVariants";
 
 const mapVariants = {
   hidden: {
@@ -117,8 +121,6 @@ export default function Locations({
   const [markers, setMarkers] = useState([]);
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
-  // const [selected, setSelected] = useState(null);
-  //   console.log(markers);
 
   if (!selected) {
     console.log("no marker");
@@ -134,28 +136,12 @@ export default function Locations({
         setStoreZip(a2.split(" ")[2]);
         setLat(selected.lat);
         setLng(selected.lng);
-        // console.log(storeStreet);
-        // console.log(storeCity);
-        // console.log(storeState);
-        // console.log(storeZip);
       },
       (error) => {
         console.error(error);
       }
     );
   }
-  console.log(lat);
-  console.log(lng);
-
-  //   Geocode.fromLatLng(markers.lat, markers.lng).then(
-  //     (response) => {
-  //       const address = response.results[0].formatted_address;
-  //       console.log(address);
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
 
   useEffect(() => {
     fetch("http://localhost:3000/stores").then((r) => {
@@ -176,7 +162,7 @@ export default function Locations({
 
   const panTo = React.useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
+    mapRef.current.setZoom(16);
   }, []);
 
   const onMapClick = React.useCallback((e) => {
@@ -261,6 +247,8 @@ export default function Locations({
             animate="visible"
             exit="exit"
           >
+            <Search panTo={panTo} />
+
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
               zoom={11}
@@ -425,50 +413,60 @@ export default function Locations({
               </div>
             </div>
           </form>
-          {/* <h3 id="container" className="mr-6 has-text-white">
-            Select Location
-          </h3>
-          <div className="ml-6">
-            <ul>
-              {locations.map((location) => {
-                return (
-                  <motion.li
-                    key={location.id}
-                    id="mapLi"
-                    onClick={() => selectStore(location)}
-                    whileHover={{
-                      scale: 1.3,
-                      originX: 0,
-                      color: "#f8e112",
-                    }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <span className="active">{location.name}</span>
-                  </motion.li>
-                );
-              })}
-            </ul>
-          </div>
-          <h3 id="container" className="mr-6 has-text-white mt-4">
-            Your Location: {store.name}
-          </h3>
-          {store.name && (
-            <motion.div className="next" variants={nextVariants}>
-              <Link to="/order_type">
-                <div className="mt-4 ml-6">
-                  <motion.button
-                    variants={buttonVariants}
-                    whileHover="hover"
-                    // onClick={startOrder}
-                  >
-                    Next
-                  </motion.button>
-                </div>
-              </Link>
-            </motion.div>
-          )} */}
         </div>
       </div>
     </motion.div>
+  );
+}
+
+function Search({ panTo }) {
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      location: { lat: () => 45.5008182, lng: () => -122.6683848 },
+      radius: 200 * 1000,
+    },
+  });
+
+  return (
+    <div className="search">
+      <Combobox
+        onSelect={async (address) => {
+          setValue(address, false);
+          clearSuggestions();
+
+          try {
+            const results = await getGeocode({ address });
+            const { lat, lng } = await getLatLng(results[0]);
+            // console.log(lat, lng);
+            panTo({ lat, lng });
+          } catch (error) {
+            console.log("error");
+          }
+          //   console.log(address);
+        }}
+      >
+        <ComboboxInput
+          className=""
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+          disabled={!ready}
+          placeholder="Enter an Address"
+        />
+        <ComboboxPopover className="has-text-black">
+          {status === "OK" &&
+            data.map(({ id, description }) => (
+              <ComboboxOption key={id} value={description} />
+            ))}
+        </ComboboxPopover>
+      </Combobox>
+    </div>
   );
 }
