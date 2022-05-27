@@ -193,7 +193,7 @@ li span.active::before {
 .search {
   position: absolute;
   top: 1rem;
-  left: 50%;
+  left: 33%;
   transform: translateX(-50%);
   width: 100%;
   max-width: 400px;
