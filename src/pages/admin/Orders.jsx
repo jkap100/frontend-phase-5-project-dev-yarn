@@ -26,18 +26,22 @@ function Orders({
   setOrderType,
   orders,
   setOrders,
+  storeState,
+  setStoreState,
 }) {
   useEffect(() => {
-    fetch("http://localhost:3000/stores").then((r) => {
-      if (r.ok) {
-        r.json().then(setLocations);
-      } else {
-        r.json().then((error) => console.log(error.errors));
-        // navigate("/login");
+    fetch(`http://localhost:3000/stores_by_state?state=${storeState}`).then(
+      (r) => {
+        if (r.ok) {
+          r.json().then(setLocations);
+        } else {
+          r.json().then((error) => console.log(error.errors));
+          // navigate("/login");
+        }
       }
-    });
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [storeState]);
 
   const handleSelect = (e) => {
     e.preventDefault();
@@ -120,6 +124,11 @@ function Orders({
     <OrderItems key={o.id} orderObj={o} handleFillOrder={handleFillOrder} />
   ));
 
+  const handleStoreState = (e) => {
+    console.log("state");
+    setStoreState(e.target.value);
+  };
+
   return (
     <div className="container">
       <div className="columns mb-6">
@@ -127,6 +136,29 @@ function Orders({
           {/* <p className="bd-notification is-info">First column</p> */}
           <form onSubmit={handleSelect}>
             <div className="field is-grouped">
+              <label className="is-vcentered mr-2">Region</label>
+              <p className="control">
+                <select
+                  className="input"
+                  type="text"
+                  name="location"
+                  value={storeState}
+                  onChange={handleStoreState}
+                >
+                  <option>-</option>
+                  <option>OR</option>
+                  <option>WA</option>
+                  <option>CA</option>
+                  <option>CO</option>
+                  {/* {locations
+                    ? locations.map((l) => (
+                        <option key={l.id}>
+                          {l.id} {l.state}
+                        </option>
+                      ))
+                    : null} */}
+                </select>
+              </p>
               <label className="is-vcentered mr-2">Location</label>
               <p className="control">
                 <select

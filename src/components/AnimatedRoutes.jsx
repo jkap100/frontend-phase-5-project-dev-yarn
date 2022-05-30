@@ -234,12 +234,12 @@ function AnimatedRoutes() {
         isAdmin={isAdmin}
         setIsAdmin={setIsAdmin}
       />
-      {window.location.pathname == "/" ||
-      window.location.pathname == "/signup" ? null : (
+      {window.location.pathname === "/" ||
+      window.location.pathname === "/signup" ? null : (
         <Header />
       )}
-      {window.location.pathname == "/" ||
-      window.location.pathname == "/signup" ? (
+      {window.location.pathname === "/" ||
+      window.location.pathname === "/signup" ? (
         <LoginHeader />
       ) : null}
       <AnimatePresence>
@@ -450,6 +450,8 @@ function AnimatedRoutes() {
                 setOrderType={setOrderType}
                 orders={orders}
                 setOrders={setOrders}
+                storeState={storeState}
+                setStoreState={setStoreState}
               />
             }
           />
