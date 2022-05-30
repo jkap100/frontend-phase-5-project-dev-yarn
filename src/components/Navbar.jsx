@@ -70,6 +70,9 @@ function Navbar({
         <Link to="/locations">
           <div className="navbar-item">Locations</div>
         </Link>
+        <Link to="/toppings">
+          <div className="navbar-item">Toppings</div>
+        </Link>
         {/* <Link to="/orders"> */}
         {/* <div className="navbar-item">Orders</div> */}
         {/* </Link> */}

@@ -131,7 +131,7 @@ export default function Map({
 
   // const [selected, setSelected] = useState(null);
 
-  console.log(mapLocation);
+  // console.log(mapLocation);
 
   useEffect(() => {
     fetch(

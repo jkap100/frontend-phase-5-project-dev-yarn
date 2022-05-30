@@ -384,15 +384,12 @@ export default function Locations({
                 >
                   <div className="has-text-center">
                     <h1 className="has-text-black">
-                      <strong>{selected.name}</strong>
+                      <strong>{storeStreet}</strong>
                     </h1>
-                    <h4 className="has-text-black">
-                      <strong>{selected.street}</strong>
-                    </h4>
 
-                    <p className="has-text-black">{selected.city}</p>
-                    <p className="has-text-black">{selected.state}</p>
-                    <p className="has-text-black">{selected.phone}</p>
+                    <p className="has-text-black">
+                      {storeCity} {storeState} {storeZip}
+                    </p>
                   </div>
                 </InfoWindow>
               ) : null}

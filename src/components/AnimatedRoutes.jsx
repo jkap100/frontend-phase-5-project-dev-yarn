@@ -19,6 +19,7 @@ import Cart from "../pages/Cart";
 import Map from "../pages/Map";
 import Orders from "../pages/admin/Orders";
 import Locations from "../pages/admin/Locations";
+import Toppings from "../pages/admin/Toppings";
 
 const pdx = {
   name: "OR",
@@ -483,6 +484,21 @@ function AnimatedRoutes() {
                 setStorePhone={setStorePhone}
                 mapLocation={mapLocation}
                 setMapLocation={setMapLocation}
+              />
+            }
+          />
+          <Route
+            path="/toppings"
+            element={
+              <Toppings
+                crusts={crusts}
+                setCrusts={setCrusts}
+                sauces={sauces}
+                setSauces={setSauces}
+                meats={meats}
+                setMeats={setMeats}
+                veggies={veggies}
+                setVeggies={setVeggies}
               />
             }
           />
