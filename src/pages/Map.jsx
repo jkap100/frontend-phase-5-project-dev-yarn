@@ -93,6 +93,18 @@ const sea = {
   lng: -122.3504881,
 };
 
+const norCal = {
+  name: "CA",
+  lat: 37.766824,
+  lng: -122.287706,
+};
+
+const den = {
+  name: "CO",
+  lat: 39.7539156,
+  lng: -105.0011007,
+};
+
 const mapContainerStyle = {
   width: "100%",
   height: "30vw",
@@ -167,6 +179,10 @@ export default function Map({
     setMapLocation(pdx);
   } else if (mapLocation == "WA") {
     setMapLocation(sea);
+  } else if (mapLocation == "CA") {
+    setMapLocation(norCal);
+  } else if (mapLocation == "CO") {
+    setMapLocation(den);
   }
 
   const updateLocation = (e) => {
@@ -243,9 +259,11 @@ export default function Map({
                       value={mapLocation}
                       onChange={(e) => updateLocation(e)}
                     >
-                      <option>Select State</option>
+                      <option>Select Region</option>
                       <option>{pdx.name}</option>
                       <option>{sea.name}</option>
+                      <option>{norCal.name}</option>
+                      <option>{den.name}</option>
                     </select>
                   </p>
                 </div>

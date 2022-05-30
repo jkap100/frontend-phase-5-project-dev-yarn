@@ -86,15 +86,27 @@ const mapContainerStyle = {
 };
 
 const pdx = {
-  name: "Portland",
+  name: "OR",
   lat: 45.5008182,
   lng: -122.6683848,
 };
 
 const sea = {
-  name: "Seattle",
+  name: "WA",
   lat: 47.6205785,
   lng: -122.3504881,
+};
+
+const norCal = {
+  name: "CA",
+  lat: 37.766824,
+  lng: -122.287706,
+};
+
+const den = {
+  name: "CO",
+  lat: 39.7539156,
+  lng: -105.0011007,
 };
 
 const options = {
@@ -258,10 +270,14 @@ export default function Locations({
       });
   };
 
-  if (mapLocation == "Portland") {
+  if (mapLocation == "OR") {
     setMapLocation(pdx);
-  } else if (mapLocation == "Seattle") {
+  } else if (mapLocation == "WA") {
     setMapLocation(sea);
+  } else if (mapLocation == "CA") {
+    setMapLocation(norCal);
+  } else if (mapLocation == "CO") {
+    setMapLocation(den);
   }
 
   if (loadError) return "Error";
@@ -319,6 +335,8 @@ export default function Locations({
                     <option>Select City</option>
                     <option>{pdx.name}</option>
                     <option>{sea.name}</option>
+                    <option>{norCal.name}</option>
+                    <option>{den.name}</option>
                   </select>
                 </p>
               </div>
