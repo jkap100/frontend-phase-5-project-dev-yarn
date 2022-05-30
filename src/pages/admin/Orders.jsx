@@ -73,7 +73,7 @@ function Orders({
   };
 
   const handleFillOrder = (order) => {
-    if (order.status == "Cart") {
+    if (order.status === "Cart") {
       alert("Still in cart");
     } else {
       const storeLocationId = storeLocation.split("");
@@ -273,12 +273,8 @@ function Orders({
                       <td className="has-text-white is-vcentered">
                         {/* ${totalPrice.toLocaleString("en-US")} */}
                       </td>
-                      <td className="has-text-centered is-vcentered">
-                        {/* <button onClick={() => handleAddToCart(cartObj)}>+</button> */}
-                      </td>
-                      <td className="has-text-centered is-vcentered">
-                        {/* <button onClick={() => handeleRemoveFromCart(cartObj)}>-</button> */}
-                      </td>
+                      <td className="has-text-centered is-vcentered"></td>
+                      <td className="has-text-centered is-vcentered"></td>
                     </tr>
                   </tfoot>
                 </table>

@@ -179,11 +179,11 @@ export default function Map({
 
   if (mapLocation == "OR") {
     setMapLocation(pdx);
-  } else if (mapLocation == "WA") {
+  } else if (mapLocation === "WA") {
     setMapLocation(sea);
-  } else if (mapLocation == "CA") {
+  } else if (mapLocation === "CA") {
     setMapLocation(norCal);
-  } else if (mapLocation == "CO") {
+  } else if (mapLocation === "CO") {
     setMapLocation(den);
   }
 
