@@ -134,7 +134,9 @@ export default function Map({
   console.log(mapLocation);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/stores_by_state?state=OR`).then((r) => {
+    fetch(
+      `http://localhost:3000/stores_by_state?state=${mapLocation.name}`
+    ).then((r) => {
       if (r.ok) {
         r.json().then(setLocations);
       } else {
@@ -143,7 +145,7 @@ export default function Map({
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [mapLocation]);
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAP_API,
@@ -191,22 +193,22 @@ export default function Map({
     setLocations([]);
     setStore("");
   };
-  const fetchLocation = (e) => {
-    e.preventDefault();
+  // const fetchLocation = (e) => {
+  //   e.preventDefault();
 
-    console.log(mapLocation);
+  //   console.log(mapLocation);
 
-    fetch(
-      `http://localhost:3000/stores_by_state?state=${mapLocation.name}`
-    ).then((r) => {
-      if (r.ok) {
-        r.json().then(setLocations);
-      } else {
-        r.json().then((error) => console.log(error.errors));
-        // navigate("/login");
-      }
-    });
-  };
+  //   fetch(
+  //     `http://localhost:3000/stores_by_state?state=${mapLocation.name}`
+  //   ).then((r) => {
+  //     if (r.ok) {
+  //       r.json().then(setLocations);
+  //     } else {
+  //       r.json().then((error) => console.log(error.errors));
+  //       // navigate("/login");
+  //     }
+  //   });
+  // };
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
@@ -249,7 +251,7 @@ export default function Map({
               // }}
               onClick={onMapClick}
             >
-              <form onSubmit={fetchLocation}>
+              <form onSubmit="">
                 <div className="field is-grouped ml-1 mt-1">
                   <p className="control">
                     <select
@@ -267,7 +269,7 @@ export default function Map({
                     </select>
                   </p>
                 </div>
-                <button className="button ml-1">Get Locations</button>
+                {/* <button className="button ml-1">Get Locations</button> */}
               </form>
               {/* {markers.map((marker) => (
                 <Marker
