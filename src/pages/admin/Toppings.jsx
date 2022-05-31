@@ -2,13 +2,53 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+const mapVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: { delay: 1.5, duration: 1.5 },
+  },
+  exit: {
+    x: "-100vh",
+    transition: { ease: "easeInOut" },
+  },
+};
+
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    x: "100vw",
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { type: "spring", delay: 0.5 },
+  },
+  exit: {
+    x: "-100vh",
+    transition: { ease: "easeInOut" },
+  },
+};
+
+const nextVariants = {
+  hidden: {
+    x: "-100vw",
+  },
+  visible: {
+    x: 0,
+    transition: { type: "spring", stiffness: 120 },
+  },
+};
+
 const buttonVariants = {
   hover: {
     scale: 1.1,
     textShadow: "0px 0px 8px rgb(255,255,255)",
     boxShadow: "0px 0px 8px rgb(255,255,255)",
     transition: {
-      duration: 0.7,
+      duration: 0.3,
       repeat: Infinity,
       repeatType: "reverse",
     },
@@ -271,7 +311,13 @@ const Toppings = ({
   return (
     <div className="container">
       <div className="columns">
-        <div className="column">
+        <motion.div
+          className="column"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
           <h3 className="bd-notification is-info">
             Toppings (click to delete)
           </h3>
@@ -280,10 +326,18 @@ const Toppings = ({
               <h3 className="bd-notification is-info">Crust</h3>
               <ul>
                 {crusts.map((crust) => (
-                  <li onClick={() => deleteCrust(crust)}>
+                  <motion.li
+                    onClick={() => deleteCrust(crust)}
+                    whileHover={{
+                      scale: 1.3,
+                      originX: 0,
+                      color: "#f8e112",
+                    }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
                     {crust.name}
                     {/* <button onClick={(c) => deleteCrust(c)}></button> */}
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </div>
@@ -291,7 +345,17 @@ const Toppings = ({
               <h3 className="bd-notification is-info">Sauce</h3>
               <ul>
                 {sauces.map((sauce) => (
-                  <li onClick={() => deleteSauce(sauce)}>{sauce.name}</li>
+                  <motion.li
+                    onClick={() => deleteSauce(sauce)}
+                    whileHover={{
+                      scale: 1.3,
+                      originX: 0,
+                      color: "#f8e112",
+                    }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    {sauce.name}
+                  </motion.li>
                 ))}
               </ul>
             </div>
@@ -299,7 +363,17 @@ const Toppings = ({
               <h3 className="bd-notification is-info">Meats</h3>
               <ul>
                 {meats.map((meat) => (
-                  <li onClick={() => deleteTopping(meat)}>{meat.name}</li>
+                  <motion.li
+                    onClick={() => deleteTopping(meat)}
+                    whileHover={{
+                      scale: 1.3,
+                      originX: 0,
+                      color: "#f8e112",
+                    }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    {meat.name}
+                  </motion.li>
                 ))}
               </ul>
             </div>
@@ -307,13 +381,29 @@ const Toppings = ({
               <h3 className="bd-notification is-info">Veggies</h3>
               <ul>
                 {veggies.map((veggie) => (
-                  <li onClick={() => deleteTopping(veggie)}>{veggie.name}</li>
+                  <motion.li
+                    onClick={() => deleteTopping(veggie)}
+                    whileHover={{
+                      scale: 1.3,
+                      originX: 0,
+                      color: "#f8e112",
+                    }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    {veggie.name}
+                  </motion.li>
                 ))}
               </ul>
             </div>
           </div>
-        </div>
-        <div className="column is-one-third">
+        </motion.div>
+        <motion.div
+          className="column is-one-third"
+          variants={mapVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
           <h3 className="bd-notification is-danger">Add a Topping</h3>
           <form onSubmit={orderTopping}>
             <div className="field">
@@ -367,7 +457,7 @@ const Toppings = ({
               <p className="bd-notification is-danger">Auto</p>
             </div> */}
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
