@@ -80,10 +80,12 @@ const Toppings = ({
 
   const deleteCrust = (c) => {
     console.log(c);
+
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.token}`,
     };
+
     fetch(`http://localhost:3000/crusts/${c.id}`, {
       method: "DELETE",
       headers: headers,
@@ -105,11 +107,80 @@ const Toppings = ({
     });
   };
 
+  const deleteSauce = (s) => {
+    console.log(s);
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.token}`,
+    };
+
+    fetch(`http://localhost:3000/sauces/${s.id}`, {
+      method: "DELETE",
+      headers: headers,
+    }).then((r) => {
+      if (r.ok) {
+        console.log("deleted");
+
+        fetch("http://localhost:3000/sauces").then((r) => {
+          if (r.ok) {
+            r.json().then(setSauces);
+          } else {
+            r.json().then((error) => console.log(error.errors));
+            // navigate("/login");
+          }
+        });
+      } else {
+        r.json().then((error) => console.log(error.errors));
+      }
+    });
+  };
+
+  const deleteTopping = (t) => {
+    console.log(t);
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.token}`,
+    };
+
+    fetch(`http://localhost:3000/toppings/${t.id}`, {
+      method: "DELETE",
+      headers: headers,
+    }).then((r) => {
+      if (r.ok) {
+        console.log("deleted");
+
+        fetch("http://localhost:3000/meats").then((r) => {
+          if (r.ok) {
+            r.json().then(setMeats);
+          } else {
+            r.json().then((error) => console.log(error.errors));
+            // navigate("/login");
+          }
+        });
+
+        fetch("http://localhost:3000/veggies").then((r) => {
+          if (r.ok) {
+            r.json().then(setVeggies);
+          } else {
+            r.json().then((error) => console.log(error.errors));
+            // navigate("/login");
+          }
+        });
+      } else {
+        r.json().then((error) => console.log(error.errors));
+      }
+    });
+  };
+
   return (
     <div className="container">
       <div className="columns">
         <div className="column">
-          <h3 className="bd-notification is-info">Toppings</h3>
+          <h3 className="bd-notification is-info">
+            Toppings (click to delete)
+          </h3>
           <div className="columns is-mobile">
             <div className="column">
               <h3 className="bd-notification is-info">Crust</h3>
@@ -126,7 +197,7 @@ const Toppings = ({
               <h3 className="bd-notification is-info">Sauce</h3>
               <ul>
                 {sauces.map((sauce) => (
-                  <li>{sauce.name}</li>
+                  <li onClick={() => deleteSauce(sauce)}>{sauce.name}</li>
                 ))}
               </ul>
             </div>
@@ -134,7 +205,7 @@ const Toppings = ({
               <h3 className="bd-notification is-info">Meats</h3>
               <ul>
                 {meats.map((meat) => (
-                  <li>{meat.name}</li>
+                  <li onClick={() => deleteTopping(meat)}>{meat.name}</li>
                 ))}
               </ul>
             </div>
@@ -142,7 +213,7 @@ const Toppings = ({
               <h3 className="bd-notification is-info">Veggies</h3>
               <ul>
                 {veggies.map((veggie) => (
-                  <li>{veggie.name}</li>
+                  <li onClick={() => deleteTopping(veggie)}>{veggie.name}</li>
                 ))}
               </ul>
             </div>
