@@ -24,6 +24,10 @@ const Toppings = ({
   setVeggies,
   meats,
   setMeats,
+  topping,
+  setTopping,
+  toppingType,
+  setToppingType,
 }) => {
   useEffect(() => {
     fetch("http://localhost:3000/crusts").then((r) => {
@@ -75,7 +79,97 @@ const Toppings = ({
 
   const orderTopping = (e) => {
     e.preventDefault();
-    console.log("order");
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.token}`,
+    };
+
+    const body = {
+      name: topping,
+    };
+
+    if (toppingType === "Crust") {
+      fetch(`http://localhost:3000/crusts`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+      })
+        .then((r) => r.json())
+        .then((r) => {
+          if (r.error) {
+            console.log(r.error);
+          } else {
+            setToppingType("");
+            setTopping("");
+            fetch("http://localhost:3000/crusts").then((r) => {
+              if (r.ok) {
+                r.json().then(setCrusts);
+              } else {
+                r.json().then((error) => console.log(error.errors));
+                // navigate("/login");
+              }
+            });
+          }
+        });
+    } else if (toppingType === "Sauce") {
+      fetch(`http://localhost:3000/sauces`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+      })
+        .then((r) => r.json())
+        .then((r) => {
+          if (r.error) {
+            console.log(r.error);
+          } else {
+            setToppingType("");
+            setTopping("");
+            fetch("http://localhost:3000/sauces").then((r) => {
+              if (r.ok) {
+                r.json().then(setSauces);
+              } else {
+                r.json().then((error) => console.log(error.errors));
+                // navigate("/login");
+              }
+            });
+          }
+        });
+    } else if (toppingType === "Meat" || toppingType === "Veggies") {
+      fetch(`http://localhost:3000/toppings`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({
+          name: topping,
+          category: toppingType,
+        }),
+      })
+        .then((r) => r.json())
+        .then((r) => {
+          if (r.error) {
+            console.log(r.error);
+          } else {
+            setToppingType("");
+            setTopping("");
+            fetch("http://localhost:3000/meats").then((r) => {
+              if (r.ok) {
+                r.json().then(setMeats);
+              } else {
+                r.json().then((error) => console.log(error.errors));
+                // navigate("/login");
+              }
+            });
+            fetch("http://localhost:3000/veggies").then((r) => {
+              if (r.ok) {
+                r.json().then(setVeggies);
+              } else {
+                r.json().then((error) => console.log(error.errors));
+                // navigate("/login");
+              }
+            });
+          }
+        });
+    }
   };
 
   const deleteCrust = (c) => {
@@ -230,8 +324,8 @@ const Toppings = ({
                   type="text"
                   name="topping"
                   placeholder="Topping"
-                  // value={username}
-                  //   onChange={(event) => setUsername(event.target.value)}
+                  value={topping}
+                  onChange={(event) => setTopping(event.target.value)}
                 ></input>
               </p>
             </div>
@@ -242,15 +336,14 @@ const Toppings = ({
                   className="input"
                   type="text"
                   name=""
-
-                  //   value={password}
-                  //   onChange={(event) => setPassword(event.target.value)}
+                  value={toppingType}
+                  onChange={(event) => setToppingType(event.target.value)}
                 >
                   <option>Select Type</option>
                   <option>Crust</option>
                   <option>Sauce</option>
                   <option>Meat</option>
-                  <option>Veggie</option>
+                  <option>Veggies</option>
                 </select>
               </p>
             </div>

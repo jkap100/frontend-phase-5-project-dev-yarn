@@ -49,22 +49,18 @@ function AnimatedRoutes() {
   const [zip, setZip] = useState("");
 
   //CRUST
-  const [crust, setCrust] = useState([]);
   const [crusts, setCrusts] = useState([]);
   const [crustOrder, setCrustOrder] = useState([]);
 
   //SAUCE
-  const [sauce, setSauce] = useState([]);
   const [sauces, setSauces] = useState([]);
   const [sauceOrder, setSauceOrder] = useState([]);
 
   //MEATS
-  const [meat, setMeat] = useState([]);
   const [meats, setMeats] = useState([]);
   const [meatsOrder, setMeatsOrder] = useState([]);
 
   //VEGGIES
-  const [veggie, setVeggie] = useState([]);
   const [veggies, setVeggies] = useState([]);
   const [veggiesOrder, setVeggiesOrder] = useState([]);
 
@@ -107,6 +103,9 @@ function AnimatedRoutes() {
   const [storePhone, setStorePhone] = useState("");
 
   const [mapLocation, setMapLocation] = useState(pdx);
+
+  const [topping, setTopping] = useState("");
+  const [toppingType, setToppingType] = useState("");
 
   // console.log(pizza);
 
@@ -155,7 +154,7 @@ function AnimatedRoutes() {
       .then((response) => response.json())
       .then((result) => {
         if (result.error) {
-          console.error(result.error);
+          console.log(result.error);
           navigate("login");
         } else {
           setPizza(result);
@@ -178,7 +177,7 @@ function AnimatedRoutes() {
               .then((response) => response.json())
               .then((result) => {
                 if (result.error) {
-                  console.error(result.error);
+                  console.log(result.error);
                 } else {
                 }
               });
@@ -200,7 +199,7 @@ function AnimatedRoutes() {
               .then((response) => response.json())
               .then((result) => {
                 if (result.error) {
-                  console.error(result.error);
+                  console.log(result.error);
                 } else {
                 }
               });
@@ -503,6 +502,10 @@ function AnimatedRoutes() {
                 setMeats={setMeats}
                 veggies={veggies}
                 setVeggies={setVeggies}
+                topping={topping}
+                setTopping={setTopping}
+                toppingType={toppingType}
+                setToppingType={setToppingType}
               />
             }
           />
