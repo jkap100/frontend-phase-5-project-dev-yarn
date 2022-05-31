@@ -49,18 +49,22 @@ function AnimatedRoutes() {
   const [zip, setZip] = useState("");
 
   //CRUST
+  const [crust, setCrust] = useState([]);
   const [crusts, setCrusts] = useState([]);
   const [crustOrder, setCrustOrder] = useState([]);
 
   //SAUCE
+  const [sauce, setSauce] = useState([]);
   const [sauces, setSauces] = useState([]);
   const [sauceOrder, setSauceOrder] = useState([]);
 
   //MEATS
+  const [meat, setMeat] = useState([]);
   const [meats, setMeats] = useState([]);
   const [meatsOrder, setMeatsOrder] = useState([]);
 
   //VEGGIES
+  const [veggie, setVeggie] = useState([]);
   const [veggies, setVeggies] = useState([]);
   const [veggiesOrder, setVeggiesOrder] = useState([]);
 
