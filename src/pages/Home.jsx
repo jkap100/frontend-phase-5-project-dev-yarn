@@ -29,32 +29,6 @@ const containerVariants = {
   },
 };
 
-const startOrder = () => {
-  console.log("order");
-
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.token}`,
-  };
-
-  const body = {
-    user_id: "",
-    address_id: "",
-  };
-
-  fetch("http://localhost:3000/pizza_orders", {
-    method: "POST",
-    headers: headers,
-    body: JSON.stringify(body),
-  }).then((r) => {
-    if (r.ok) {
-      alert("Added to cart");
-    } else {
-      r.json().then((err) => console.log(err.errors));
-    }
-  });
-};
-
 function Home() {
   return (
     <motion.div
@@ -67,11 +41,7 @@ function Home() {
       <h2>Welcome and Enjoy</h2>
       <p>All Pizza's are $10 + $1.50 per topping</p>
       <Link to="/map">
-        <motion.button
-          variants={buttonVariants}
-          whileHover="hover"
-          onClick={startOrder}
-        >
+        <motion.button variants={buttonVariants} whileHover="hover">
           Create Your Pizza
         </motion.button>
       </Link>

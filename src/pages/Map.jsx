@@ -251,7 +251,7 @@ export default function Map({
               // }}
               onClick={onMapClick}
             >
-              <form onSubmit="">
+              <form>
                 <div className="field is-grouped ml-1 mt-1">
                   <p className="control">
                     <select
