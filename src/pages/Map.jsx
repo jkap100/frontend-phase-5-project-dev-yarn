@@ -177,7 +177,7 @@ export default function Map({
     setStore(store);
   };
 
-  if (mapLocation == "OR") {
+  if (mapLocation === "OR") {
     setMapLocation(pdx);
   } else if (mapLocation === "WA") {
     setMapLocation(sea);

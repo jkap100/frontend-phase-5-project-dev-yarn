@@ -21,7 +21,7 @@ import {
 
 import { formatRelative } from "date-fns";
 import "@reach/combobox/styles.css";
-// import MapStyles from "../components/MapStyles";
+// import MapStyles from "../components/MapStyles"; s
 import { motion } from "framer-motion";
 import Geocode from "react-geocode";
 
@@ -270,7 +270,7 @@ export default function Locations({
       });
   };
 
-  if (mapLocation == "OR") {
+  if (mapLocation === "OR") {
     setMapLocation(pdx);
   } else if (mapLocation === "WA") {
     setMapLocation(sea);
